@@ -1,0 +1,10 @@
+@use 'sass:math';
+
+@function rem ($size) {
+    @if (unitless($size)) {
+        @return math.div($size, 16)+rem;
+    }
+    @else {
+        @error 'The input contains units, do not include units';
+    }
+}
