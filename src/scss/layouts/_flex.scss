@@ -1,0 +1,11 @@
+@use '../globals/colors' as colors;
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    &__navbar {
+        background-color: colors.$primary;
+        padding: 10px 30px;
+        color: white;
+    }
+}
