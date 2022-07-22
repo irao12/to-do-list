@@ -1,7 +1,7 @@
 @use '../util/functions' as f;
 @use '../globals/colors' as colors;
 
-%align-center {
+%flex-align-center {
     display: flex;
     align-items: center;
 }
@@ -9,13 +9,34 @@
 .flex {
     display: flex;
     flex-direction: column;
+    height: 100vh;
 
     &__navbar {
-        @extend %align-center;
-        font-size: f.rem(24);
+        @extend %flex-align-center;
+        gap: f.rem(6);
+        
         height: f.rem(100);
         background-color: colors.$primary;
-        padding: 10px 20px;
+        padding: 10px 10px;
+
         color: white;
+    }
+
+    &__main {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+
+        &--projects {
+            flex-shrink: 0;
+
+            background-color: rgb(241, 241, 241);
+            width: f.rem(300);
+            height: 100%;
+            padding: f.rem(10) f.rem(20);
+        }
+        &--tasks {
+            padding: f.rem(10) f.rem(20);
+        }
     }
 }
