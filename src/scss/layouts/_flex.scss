@@ -1,11 +1,21 @@
+@use '../util/functions' as f;
 @use '../globals/colors' as colors;
+
+%align-center {
+    display: flex;
+    align-items: center;
+}
 
 .flex {
     display: flex;
     flex-direction: column;
+
     &__navbar {
+        @extend %align-center;
+        font-size: f.rem(24);
+        height: f.rem(100);
         background-color: colors.$primary;
-        padding: 10px 30px;
+        padding: 10px 20px;
         color: white;
     }
 }
