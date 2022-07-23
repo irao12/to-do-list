@@ -1,5 +1,9 @@
 @use 'functions' as f;
 
+* {
+    line-height: 1.5;
+}
+
 .logo-text {
     font-size: f.rem(36);
     font-weight: 700;
