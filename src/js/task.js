@@ -1,4 +1,4 @@
-const todo = (title, desc, dueDate, priority) => {
+export const task = (title, desc, dueDate, priority) => {
     //private
     let _title = title;
     let _desc = desc;
@@ -21,3 +21,4 @@ const todo = (title, desc, dueDate, priority) => {
         setTitle, setDesc, setDueDate, setPriority
     };
 }
+
