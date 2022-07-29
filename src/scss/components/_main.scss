@@ -1,6 +1,6 @@
 @use '../base/functions' as f;
 @use '../base/colors' as colors;
-@use '../base/' as b;
+@use '../base/breakpoints' as b;
 
 .main {
     display: flex;
@@ -22,6 +22,9 @@
             padding-bottom: f.rem(5);
 
             height: f.rem(40);
+            @include b.breakpoints-up(large) {
+                height: f.rem(50);
+            }
         }
 
         @include b.breakpoints-up(medium){
@@ -38,6 +41,9 @@
             padding-bottom: f.rem(5);
 
             height: f.rem(40);
+            @include b.breakpoints-up(large) {
+                height: f.rem(50);
+            }
         }
 
     }

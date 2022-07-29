@@ -1,6 +1,7 @@
 @use '../base/functions' as f;
 @use '../base/colors' as colors;
 @use '../base/fonts' as fonts;
+@use '../base/breakpoints' as b;
 
 .add-button {
     font-size: f.rem(35);
@@ -20,6 +21,7 @@
 }
 
 .add-project {
+    font-size: f.rem(32);
     border-radius: f.rem(8);
 
     color: black;
@@ -27,6 +29,10 @@
     
     &:hover {
         background-color: colors.$darker-gray;
+    }
+
+    @include b.breakpoints-up(large){
+        font-size: f.rem(40);
     }
 }
 

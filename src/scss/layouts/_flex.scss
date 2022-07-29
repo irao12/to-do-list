@@ -1,5 +1,6 @@
 @use '../base/functions' as f; 
 @use '../base/colors' as colors;
+@use '../base/breakpoints' as b;
 
 %flex-align-center {
     display: flex;
@@ -22,6 +23,13 @@
         &--logo {
             @extend %flex-align-center;
             display: flex;
+
+            img {
+                height: f.rem(40);
+                @include b.breakpoints-up(large) {
+                    height: f.rem(48);
+                }
+            }
         }
     }
 

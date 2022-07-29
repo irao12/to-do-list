@@ -1,6 +1,7 @@
 @use '../base/functions' as f;
 @use '../base/fonts' as fonts;
 @use '../base/colors' as colors;
+@use '../base/breakpoints' as b;
 
 .modal {
     display: none;
@@ -45,7 +46,7 @@
                 position: relative;
 
                 .name-section{
-                    margin-bottom: f.rem(30);
+                    margin-bottom: f.rem(10);
                     input {
                         width: 100%;
                         height: f.rem(40);
@@ -53,6 +54,10 @@
                         margin-top: f.rem(8);
                         font-size: f.rem(16);
                         border-radius: f.rem(4);
+
+                        @include b.breakpoints-up(medium) {
+                            margin-bottom: f.rem(30);
+                        }
                     }
 
                     .invalid {
@@ -68,11 +73,15 @@
 
                 .modal-buttons {
                     display: flex;
+                    flex-direction: column;
                     justify-content: flex-end;
-                    gap: f.rem(20);
-                    position: absolute;
-                    right: f.rem(10);
-                    bottom: f.rem(15);
+                    gap: f.rem(10);
+                    position: relative;
+
+                    @include b.breakpoints-up(medium) {
+                        flex-direction: row;
+                        gap: f.rem(20);
+                    }
                 }
             }
         }
