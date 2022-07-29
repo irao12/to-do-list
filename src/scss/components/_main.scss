@@ -1,0 +1,30 @@
+@use '../base/functions' as f;
+@use '../base/colors' as colors;
+
+.main {
+    display: flex;
+    height: 100%;
+
+    &__projects {
+        flex-shrink: 0;
+        background-color: colors.$light-gray;
+        width: f.rem(300);
+        height: 100%;
+        padding: f.rem(10) f.rem(20);
+
+        h1 {
+            border-bottom: 2px solid colors.$underline-color;
+            padding-bottom: f.rem(5);
+        }
+    }
+
+    &__tasks {
+        width: 100%;
+        padding: f.rem(10) f.rem(30);
+
+        h1 {
+            border-bottom: 2px solid colors.$underline-color;
+            padding-bottom: f.rem(5);
+        }
+    }
+}
