@@ -21,4 +21,3 @@ export const task = (title, desc, dueDate, priority) => {
         setTitle, setDesc, setDueDate, setPriority
     };
 }
-
