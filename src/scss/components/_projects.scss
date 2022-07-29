@@ -1,0 +1,24 @@
+@use '../base/functions' as f;
+@use '../base/colors' as colors;
+@use '../base/breakpoints' as b;
+
+.project-div {
+    width: 100%;
+    margin-top: f.rem(10);
+    padding: f.rem(10);
+    display: inline-block;
+    overflow-wrap: break-word;
+
+    font-size: f.rem(18);
+
+    @include b.breakpoints-up(large) {
+        font-size: f.rem(24);
+    }
+
+    cursor: pointer;
+
+    &:hover{
+        background-color: colors.$darker-gray;
+        border-radius: f.rem(8);
+    }
+}
