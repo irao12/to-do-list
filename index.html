@@ -22,6 +22,8 @@
                     <h1>Projects</h1>
                     <button class="add-button add-project">+</button>
                 </div>    
+                <div class="project-list">
+                </div>
             </div>
             <div class="main__tasks">
                 <div class="tasks-header">
@@ -31,22 +33,23 @@
         </main>
     </div>
     <div class="modal">
-        <div class="addProjectModal">
+        <div class="add-project-modal">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1>Add a project</h1>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form class="add-project-form">
                         <div class="form-div">
-                            <div class="form-section">
-                                <label for="project-name">Name</label>
-                                <input type="text" id="project-name" maxlength="20" required>
+                            <div class="form-section name-section">
+                                <label for="project-name-input">Name</label>
+                                <br>
+                                <input type="text" id="project-name-input" maxlength="20" required>
                             </div>
                             
                             <div class="modal-buttons">
-                                <button class="cancel-button">Cancel</button>
-                                <button class="confirm-project-button">Add project</button>
+                                <button class="cancel-button" type="button">Cancel</button>
+                                <button class="confirm-project-button" type="button">Add project</button>
                             </div>
                         </div>
                     </form>
