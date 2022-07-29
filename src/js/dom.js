@@ -1,4 +1,6 @@
 const dom = () => {
+    const projectList = document.querySelector('.project-list');
+
     const modal = document.querySelector('.modal');
     const addProjectButton = document.querySelector('.add-project');
     const addProjectModal = document.querySelector('.add-project-modal');
@@ -9,6 +11,7 @@ const dom = () => {
     const confirmProjectButton = document.querySelector('.confirm-project-button')
 
     return {
+        projectList,
         addProjectButton, cancelProjectButton, confirmProjectButton,
         modal, addProjectModal, addProjectForm, projectNameInput, projectNameFormSection
     }

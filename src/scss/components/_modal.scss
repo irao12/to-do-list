@@ -12,7 +12,7 @@
     background-color: rgba(0, 0, 0, 0.267);
 }
 
-.addProjectModal {
+.add-project-modal {
     height: 100%;
     width: 100%;
 
@@ -32,6 +32,7 @@
         .modal-header {
             width: 100%;
             border-bottom: 2px solid colors.$underline-color;
+            margin-bottom: f.rem(20);
         }
 
         .modal-body {
@@ -41,26 +42,37 @@
             .form-div {
                 width: 100%;
                 height: f.rem(200);
+                position: relative;
 
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                gap: f.rem(40);
-
-                .form-section{
+                .name-section{
+                    margin-bottom: f.rem(30);
                     input {
                         width: 100%;
                         height: f.rem(40);
                         padding: f.rem(8);
                         margin-top: f.rem(8);
                         font-size: f.rem(16);
+                        border-radius: f.rem(4);
+                    }
+
+                    .invalid {
+                        border: f.rem(2) solid colors.$error-color;
+                        
+                    }
+
+                    .error{
+                        margin-top: f.rem(10);
+                        color: colors.$error-color;
                     }
                 }
 
                 .modal-buttons {
                     display: flex;
                     justify-content: flex-end;
-                    gap: f.rem(20)
+                    gap: f.rem(20);
+                    position: absolute;
+                    right: f.rem(10);
+                    bottom: f.rem(15);
                 }
             }
         }
