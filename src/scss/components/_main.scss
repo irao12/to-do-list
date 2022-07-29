@@ -1,14 +1,16 @@
 @use '../base/functions' as f;
 @use '../base/colors' as colors;
+@use '../base/' as b;
 
 .main {
     display: flex;
     height: 100%;
 
     &__projects {
+        display: none;
         flex-shrink: 0;
         background-color: colors.$light-gray;
-        width: f.rem(300);
+        width: min(40%, f.rem(350));
         height: 100%;
         padding: f.rem(10) f.rem(20);
 
@@ -20,6 +22,10 @@
             padding-bottom: f.rem(5);
 
             height: f.rem(40);
+        }
+
+        @include b.breakpoints-up(medium){
+            display: block;
         }
     }
 

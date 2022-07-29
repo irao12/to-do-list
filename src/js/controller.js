@@ -3,10 +3,12 @@ import './task.js'
 import displayController from './display.js'
 
 const controller = () => {
-    const addProject = document.querySelector('.add-project');
-    addProject.addEventListener('click', () => {
-        displayController.displayModal();
+    const addProjectButton = document.querySelector('.add-project');
+
+    addProjectButton.addEventListener('click', () => {
+        displayController.displayAddProject();
     });
+
 }
 
 export default controller();

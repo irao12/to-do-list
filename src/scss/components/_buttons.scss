@@ -1,5 +1,6 @@
 @use '../base/functions' as f;
 @use '../base/colors' as colors;
+@use '../base/fonts' as fonts;
 
 .add-button {
     font-size: f.rem(35);
@@ -26,6 +27,40 @@
     
     &:hover {
         background-color: colors.$darker-gray;
+    }
+}
+
+.modal-buttons{
+    button {
+        border: 0;
+        border-radius: f.rem(8);
+        padding: f.rem(15) f.rem(35);
+        font-family: fonts.$main-font;
+        font-size: f.rem(15);
+        cursor: pointer;
+    }
+
+    .cancel-button {
+        background-color: colors.$darker-gray;
+
+        &:hover {
+            background-color: colors.$light-gray;
+        }
+
+        &:active {
+            background-color: colors.$darker-gray;
+        }
+    }
+    .confirm-project-button {
+        background-color: colors.$primary;
+        color: white;
+
+        &:hover{
+            background-color: rgb(66, 108, 185);
+        }
+        &:active {
+            background-color: colors.$primary;
+        }
     }
 }
 
