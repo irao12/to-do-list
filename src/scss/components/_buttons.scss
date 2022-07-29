@@ -1,0 +1,32 @@
+@use '../base/functions' as f;
+@use '../base/colors' as colors;
+
+.add-button {
+    font-size: f.rem(35);
+    width: f.rem(35);
+    height: f.rem(35);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+    border: none;
+
+    cursor: pointer;
+
+    
+}
+
+.add-project {
+    border-radius: f.rem(8);
+
+    color: black;
+    background-color: colors.$light-gray;
+    
+    &:hover {
+        background-color: colors.$darker-gray;
+    }
+}
+
+

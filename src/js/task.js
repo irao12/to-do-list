@@ -1,4 +1,4 @@
-export const task = (title, desc, dueDate, priority) => {
+const task = (title, desc, dueDate, priority) => {
     //private
     let _title = title;
     let _desc = desc;
@@ -21,3 +21,5 @@ export const task = (title, desc, dueDate, priority) => {
         setTitle, setDesc, setDueDate, setPriority
     };
 }
+
+export default task;
