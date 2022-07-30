@@ -4,11 +4,14 @@
 @use '../base/breakpoints' as b;
 
 .modal {
-    display: none;
+    display: block;
+    opacity: 0;
+    pointer-events: none;
     position: fixed;
     height: 100vh;
     width: 100vw;
     top: 0;
+    transition: opacity 150ms ease-in-out;
 
     background-color: rgba(0, 0, 0, 0.267);
 }
@@ -17,14 +20,17 @@
     height: 100%;
     width: 100%;
 
-    display: none;
+    display: flex;
+    opacity: 0;
     justify-content: center;
     align-items: center;
+
+    transition: opacity 150ms ease-in-out;
 
     .modal-content {
         font-family: fonts.$main-font;
         width: min(80%, f.rem(550));
-        height: f.rem(320);
+        height: f.rem(350);
         background-color: white;
         padding: f.rem(30);
         font-weight: normal;
@@ -33,7 +39,7 @@
         .modal-header {
             width: 100%;
             border-bottom: 2px solid colors.$underline-color;
-            margin-bottom: f.rem(20);
+            margin-bottom: f.rem(10);
         }
 
         .modal-body {
@@ -56,17 +62,15 @@
                         border-radius: f.rem(4);
 
                         @include b.breakpoints-up(medium) {
-                            margin-bottom: f.rem(30);
+                            margin-bottom: f.rem(10);
                         }
                     }
 
                     .invalid {
                         border: f.rem(2) solid colors.$error-color;
-                        
                     }
 
                     .error{
-                        margin-top: f.rem(10);
                         color: colors.$error-color;
                     }
                 }
@@ -78,9 +82,12 @@
                     gap: f.rem(10);
                     position: relative;
 
+                    margin-top: f.rem(20);
+
                     @include b.breakpoints-up(medium) {
                         flex-direction: row;
                         gap: f.rem(20);
+                        margin-top: f.rem(40);
                     }
                 }
             }
@@ -88,11 +95,8 @@
     }
 }
 
-.active-block {
-    display: block;
-}
-
-.active-flex {
-    display: flex;
+.active {
+    opacity: 1;
+    pointer-events: auto;
 }
 

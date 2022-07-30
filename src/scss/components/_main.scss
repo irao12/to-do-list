@@ -7,12 +7,12 @@
     height: 100%;
 
     &__projects {
-        display: none;
+        display: block;
         flex-shrink: 0;
         background-color: colors.$light-gray;
         width: min(40%, f.rem(350));
         height: 100%;
-        padding: f.rem(10) f.rem(20);
+        padding: f.rem(20) f.rem(20);
 
         .project-header {
             display: flex;
@@ -32,19 +32,28 @@
         }
     }
 
-    &__tasks {
+    &__tasks-section {
         width: 100%;
-        padding: f.rem(10) f.rem(30);
+        display: flex;
+        justify-content: center;
 
-        .tasks-header {
-            border-bottom: 2px solid colors.$underline-color;
-            padding-bottom: f.rem(5);
-
-            height: f.rem(40);
-            @include b.breakpoints-up(large) {
-                height: f.rem(50);
+        .main__tasks {
+            width: min(100%, f.rem(750));
+            padding: f.rem(20) f.rem(30);
+        
+            .tasks-header {
+                width: 100%;
+                border-bottom: 2px solid colors.$underline-color;
+                padding-bottom: f.rem(5);
+        
+                height: f.rem(40);
+    
+                @include b.breakpoints-up(large) {
+                    height: f.rem(50);
+                }
             }
         }
-
     }
+
+    
 }

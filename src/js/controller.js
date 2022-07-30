@@ -5,6 +5,7 @@ import account from './account.js'
 import displayController from './display.js'
 
 const controller = () => {
+
     const isValidProjectName = () => {
         // if name is empty, thje result will be "" which is not truthy
         return dom.projectNameInput.value;
@@ -25,6 +26,8 @@ const controller = () => {
             account.addProject(currProject);
             displayController.removeAddProject();
             displayController.refreshProjects();
+            const currAccProject = account.getCurrProject();
+            if (!currAccProject) account.setCurrProject(currProject);
         }
         else {
             displayController.displayProjectNameError();
