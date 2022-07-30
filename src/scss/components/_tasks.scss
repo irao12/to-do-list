@@ -24,13 +24,9 @@
             justify-content: center;
         }
 
-        .add-task-text {
-            font-size: f.rem(18);
-        }
-
         &:hover {
             background-color: colors.$light-gray;
-            border-radius: f.rem(12);
+            border-radius: f.rem(8);
 
             .add-task-button {
                 background-color: colors.$primary;

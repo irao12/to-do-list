@@ -12,7 +12,13 @@ const displayController = () => {
         projects.forEach((project)=>{
             const projectDiv = document.createElement('div');
             projectDiv.classList.add('project-div');
-            projectDiv.textContent = project.getName();
+
+
+            const projectName = document.createElement('h2');
+            projectName.textContent = project.getName();
+
+            projectDiv.appendChild(projectName);
+
             projectDiv.addEventListener('click', refreshTasks);
             projectList.appendChild(projectDiv);
         });
@@ -42,7 +48,7 @@ const displayController = () => {
 
         const addTaskButton = document.createElement('div');
         addTaskButton.classList.add('add-task-button');
-        const addTaskText = document.createElement('div');
+        const addTaskText = document.createElement('h2');
         addTaskText.classList.add('add-task-text');
         addTaskButton.textContent ='+';
         addTaskText.textContent = 'Add task';

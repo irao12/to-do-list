@@ -20,7 +20,15 @@ h1 {
     font-weight: 500;
 
     @include b.breakpoints-up(large) {
-        font-size: f.rem(26);
+        font-size: f.rem(24);
     }
+}
 
+h2 {
+    font-size: f.rem(18);
+    font-weight: 500;
+
+    @include b.breakpoints-up(large) {
+        font-size: f.rem(20);
+    }
 }
