@@ -33,6 +33,8 @@ const controller = () => {
             displayController.displayProjectNameError();
         }
     });
+
+    dom.cancelTaskButton.addEventListener('click', displayController.removeAddTask)
 }
 
 export default controller();

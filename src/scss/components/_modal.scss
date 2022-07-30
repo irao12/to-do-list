@@ -11,21 +11,25 @@
     height: 100vh;
     width: 100vw;
     top: 0;
-    transition: opacity 150ms ease-in-out;
+    transition: opacity 200ms ease-in-out;
 
     background-color: rgba(0, 0, 0, 0.267);
 }
 
 .add-project-modal {
-    height: 100%;
-    width: 100%;
+    height: 0;
+    width: 0;
 
-    display: flex;
     opacity: 0;
+    display: flex;
+    pointer-events: none;
     justify-content: center;
     align-items: center;
 
-    transition: opacity 150ms ease-in-out;
+    &.active {
+        height: 100%;
+        width: 100%;
+    }
 
     .modal-content {
         font-family: fonts.$main-font;
@@ -95,8 +99,65 @@
     }
 }
 
+.add-task-modal {
+    height: 0;
+    width: 0;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    pointer-events: none;
+
+    &.active {
+        height: 100%;
+        width: 100%;
+    }
+
+    .modal-content {
+        font-family: fonts.$main-font;
+        width: min(80%, f.rem(550));
+        height: f.rem(350);
+        background-color: white;
+        padding: f.rem(30);
+        font-weight: normal;
+        border-radius: f.rem(12);
+    }
+
+    .modal-header {
+        width: 100%;
+        border-bottom: 2px solid colors.$underline-color;
+        margin-bottom: f.rem(10);
+    }
+
+    .modal-body {
+        width: 100%;
+        padding-top: f.rem(20);
+
+        .form-div {
+            .modal-buttons {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                gap: f.rem(10);
+                position: relative;
+            
+                margin-top: f.rem(20);
+            
+                @include b.breakpoints-up(medium) {
+                    flex-direction: row;
+                    gap: f.rem(20);
+                    margin-top: f.rem(40);
+                }
+            }
+        }
+    }
+}
+
 .active {
     opacity: 1;
     pointer-events: auto;
 }
+
 

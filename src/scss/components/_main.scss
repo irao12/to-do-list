@@ -7,7 +7,7 @@
     height: 100%;
 
     &__projects {
-        display: block;
+        display: none;
         flex-shrink: 0;
         background-color: colors.$light-gray;
         width: min(40%, f.rem(350));

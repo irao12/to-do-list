@@ -49,7 +49,7 @@ const displayController = () => {
 
         addNewTask.appendChild(addTaskButton);
         addNewTask.appendChild(addTaskText);
-
+        addNewTask.addEventListener('click', displayAddTask);
         taskList.appendChild(addNewTask);
     }
 
@@ -86,9 +86,20 @@ const displayController = () => {
         }
     }
 
+    const displayAddTask = () => {
+        displayModal();
+        dom.addTaskModal.classList.add('active');
+    }
+
+    const removeAddTask = () => {
+        removeModal();
+        dom.addTaskModal.classList.remove('active');
+    }
+
     return {
         refreshProjects, refreshTasks,
-        displayAddProject, removeAddProject, displayProjectNameError
+        displayAddProject, removeAddProject, displayProjectNameError,
+        displayAddTask, removeAddTask
     }
 }
 

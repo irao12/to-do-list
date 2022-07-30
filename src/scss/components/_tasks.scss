@@ -1,0 +1,42 @@
+@use '../base/functions' as f;
+@use '../base/colors' as colors;
+@use '../base/breakpoints' as b;
+
+.task-list {
+    margin-top: f.rem(10);
+    .add-new-task {
+        padding: f.rem(10) f.rem(5) f.rem(10);
+        width: 100%;
+        display: flex;
+        align-self: center;
+
+        cursor: pointer;
+
+        .add-task-button {
+            font-size: f.rem(28);
+            margin-right: f.rem(10);
+            width: f.rem(30);
+            height: f.rem(30);
+            border-radius: 50%;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-task-text {
+            font-size: f.rem(18);
+        }
+
+        &:hover {
+            background-color: colors.$light-gray;
+            border-radius: f.rem(12);
+
+            .add-task-button {
+                background-color: colors.$primary;
+                color: white;
+                border-radius: 50%;
+            }
+        }
+    }
+}
