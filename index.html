@@ -47,14 +47,14 @@
                 <div class="modal-body">
                     <form class="add-project-form">
                         <div class="form-div">
-                            <div class="form-section name-section">
-                                <label for="project-name-input">Name</label>
+                            <div class="form-section project-title-section">
+                                <label for="project-title-input">Title</label>
                                 <br>
-                                <input type="text" id="project-name-input" maxlength="20" required>
+                                <input type="text" id="project-title-input" maxlength="20">
                             </div>
                             
                             <div class="modal-buttons">
-                                <button class="cancel-button" type="button">Cancel</button>
+                                <button class="cancel-button" type="reset">Cancel</button>
                                 <button class="confirm-project-button" type="button">Add project</button>
                             </div>
                         </div>
@@ -70,9 +70,28 @@
                 <div class="modal-body">
                     <form class="add-task-form">
                         <div class="form-div">
-                            <div class="form-section"></div>
+                            <div class="form-section">
+                                <label for="form-task-title">Title</label>
+                                <input type="text" id="form-task-title" name="form-task-title" class="form-task-title" maxlength="20">
+                            </div>
+                            <div class="form-section">
+                                <label for="form-task-desc">Description</label>
+                                <textarea name="form-task-desc" id="form-task-desc" class="form-task-desc" maxlength="400"></textarea>
+                            </div>
+                            <div class="form-section">
+                                <label for="form-due-date">Due Date</label>
+                                <input type="date" id="form-due-date" name="form-due-date" value="">
+                            </div>
+                            <div class="form-section">
+                                <label for="form-priority">Priority</label>
+                                <select name="form-priority" id="form-priority">
+                                    <option value="low">Low</option>
+                                    <option value="med">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
                             <div class="modal-buttons">
-                                <button type="button" class="cancel-button">Cancel</button>
+                                <button type="reset" class="cancel-button">Cancel</button>
                                 <button type="button" class="confirm-task-button">Add task</button>
                             </div>
                         </div>
