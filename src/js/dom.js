@@ -15,6 +15,8 @@ const dom = () => {
     const addTaskModal = document.querySelector('.add-task-modal');
     const addTaskForm = document.querySelector('.add-task-form');
 
+    const taskTitleInput = document.querySelector('#form-task-title')
+    const taskTitleFormSection = document.querySelector('task-title-section')
     const cancelTaskButton = document.querySelector('.add-task-modal .cancel-button');
     const confirmTaskButton = document.querySelector('.confirm-task-button');
 
@@ -23,7 +25,7 @@ const dom = () => {
         addProjectButton, cancelProjectButton, confirmProjectButton,
         modal, addProjectModal, addProjectForm, projectTitleInput, projectTitleFormSection,
         addTaskModal, addTaskForm,
-        cancelTaskButton, confirmTaskButton
+        cancelTaskButton, confirmTaskButton, taskTitleInput, taskTitleFormSection
     }
 }
 

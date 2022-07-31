@@ -19,7 +19,10 @@ const displayController = () => {
 
             projectDiv.appendChild(projectTitle);
 
-            projectDiv.addEventListener('click', refreshTasks);
+            projectDiv.addEventListener('click', ()=>{
+                account.setCurrProject(project)
+                refreshTasks();
+            });
             projectList.appendChild(projectDiv);
         });
     }
@@ -27,6 +30,7 @@ const displayController = () => {
     const displayTask = (task) => {
         const taskList = dom.taskList;
         const newTask = document.createElement('div');
+        newTask.classList.add('task-div');
         const taskTitle = document.createElement('h2');
         taskTitle.textContent = task.getTitle();
         newTask.appendChild(taskTitle);
@@ -46,13 +50,13 @@ const displayController = () => {
         const addNewTask = document.createElement('div');
         addNewTask.classList.add('add-new-task');
 
+        const addTaskText = document.createElement('h2');
+        addTaskText.textContent = 'Add task';
+        addTaskText.classList.add('add-task-text');
         const addTaskButton = document.createElement('div');
         addTaskButton.classList.add('add-task-button');
-        const addTaskText = document.createElement('h2');
-        addTaskText.classList.add('add-task-text');
         addTaskButton.textContent ='+';
-        addTaskText.textContent = 'Add task';
-
+        
         addNewTask.appendChild(addTaskButton);
         addNewTask.appendChild(addTaskText);
         addNewTask.addEventListener('click', displayAddTask);
@@ -73,6 +77,7 @@ const displayController = () => {
 
     const removeAddProject = () => {
         removeModal();
+        dom.addProjectForm.reset();
         dom.addProjectModal.classList.remove('active');
         if (document.querySelector('.error')){
             dom.projectTitleInput.classList.remove('invalid');
@@ -98,6 +103,7 @@ const displayController = () => {
 
     const removeAddTask = () => {
         removeModal();
+        dom.addTaskForm.reset();
         dom.addTaskModal.classList.remove('active');
     }
 

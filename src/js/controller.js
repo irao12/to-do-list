@@ -11,6 +11,10 @@ const controller = () => {
         return dom.projectTitleInput.value;
     }
 
+    const isValidTaskTitle = () => {
+        return dom.taskTitleInput.value;
+    }
+
     dom.addProjectButton.addEventListener('click', () => {
         displayController.displayAddProject();
     });
@@ -35,6 +39,18 @@ const controller = () => {
     });
 
     dom.cancelTaskButton.addEventListener('click', displayController.removeAddTask)
+
+    dom.confirmTaskButton.addEventListener('click', ()=>{
+        if (isValidTaskTitle()) {
+            const taskTitle = dom.taskTitleInput.value;
+            const currTask = task(taskTitle);
+            const currProject = account.getCurrProject();
+
+            currProject.addTask(currTask);
+            displayController.removeAddTask();
+            displayController.refreshTasks();
+        }
+    })
 }
 
 export default controller();

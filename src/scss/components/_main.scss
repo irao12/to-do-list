@@ -18,7 +18,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid colors.$underline-color;
+            border-bottom: f.rem(3) solid colors.$underline-color;
             padding-bottom: f.rem(5);
 
             height: f.rem(40);

@@ -37,4 +37,13 @@
             }
         }
     }
+
+    .task-div {
+        padding: f.rem(10);
+
+        border-bottom: f.rem(2) solid colors.$lighter-underline-color;
+        margin-bottom: f.rem(20);
+
+        cursor: pointer;
+    }
 }
