@@ -17,11 +17,13 @@
             margin-right: f.rem(10);
             width: f.rem(30);
             height: f.rem(30);
-            border-radius: 50%;
+            border-radius: 40%;
             
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+
+            padding-top: f.rem(2.5);
         }
 
         &:hover {

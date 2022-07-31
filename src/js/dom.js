@@ -7,8 +7,8 @@ const dom = () => {
     const addProjectModal = document.querySelector('.add-project-modal');
     const addProjectForm = document.querySelector('.add-project-form');
 
-    const projectNameFormSection = document.querySelector('.name-section');
-    const projectNameInput = document.querySelector('#project-name-input');
+    const projectTitleFormSection = document.querySelector('.project-title-section');
+    const projectTitleInput = document.querySelector('#project-title-input');
     const cancelProjectButton = document.querySelector('.add-project-modal .cancel-button');
     const confirmProjectButton = document.querySelector('.confirm-project-button');
 
@@ -21,7 +21,7 @@ const dom = () => {
     return {
         projectList, taskList,
         addProjectButton, cancelProjectButton, confirmProjectButton,
-        modal, addProjectModal, addProjectForm, projectNameInput, projectNameFormSection,
+        modal, addProjectModal, addProjectForm, projectTitleInput, projectTitleFormSection,
         addTaskModal, addTaskForm,
         cancelTaskButton, confirmTaskButton
     }

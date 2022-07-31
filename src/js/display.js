@@ -14,10 +14,10 @@ const displayController = () => {
             projectDiv.classList.add('project-div');
 
 
-            const projectName = document.createElement('h2');
-            projectName.textContent = project.getName();
+            const projectTitle = document.createElement('h2');
+            projectTitle.textContent = project.getTitle();
 
-            projectDiv.appendChild(projectName);
+            projectDiv.appendChild(projectTitle);
 
             projectDiv.addEventListener('click', refreshTasks);
             projectList.appendChild(projectDiv);
@@ -28,7 +28,7 @@ const displayController = () => {
         const taskList = dom.taskList;
         const newTask = document.createElement('div');
         const taskTitle = document.createElement('h2');
-        taskName.textContent = task.getTitle();
+        taskTitle.textContent = task.getTitle();
         newTask.appendChild(taskTitle);
         taskList.appendChild(newTask);
     }
@@ -73,22 +73,21 @@ const displayController = () => {
 
     const removeAddProject = () => {
         removeModal();
-        dom.addProjectForm.reset();
         dom.addProjectModal.classList.remove('active');
         if (document.querySelector('.error')){
-            dom.projectNameInput.classList.remove('invalid');
+            dom.projectTitleInput.classList.remove('invalid');
             document.querySelector('.error').remove();
         }
     }
 
-    const displayProjectNameError = () => {
-        const projectNameInput = dom.projectNameInput;
-        projectNameInput.classList.add('invalid');
+    const displayProjectTitleError = () => {
+        const projectTitleInput = dom.projectTitleInput;
+        projectTitleInput.classList.add('invalid');
         if (!document.querySelector('.error')){
             const error = document.createElement('div');
             error.classList.add('error');
-            error.textContent = 'Please enter a name';
-            dom.projectNameFormSection.appendChild(error);
+            error.textContent = 'Please enter a title';
+            dom.projectTitleFormSection.appendChild(error);
         }
     }
 
@@ -104,7 +103,7 @@ const displayController = () => {
 
     return {
         refreshProjects, refreshTasks,
-        displayAddProject, removeAddProject, displayProjectNameError,
+        displayAddProject, removeAddProject, displayProjectTitleError,
         displayAddTask, removeAddTask
     }
 }

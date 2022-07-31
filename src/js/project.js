@@ -1,13 +1,13 @@
-const project = (name) => {
+const project = (title) => {
     // private
-    let _name = name;
+    let _title = title;
     const _list = [];
     // public
-    const getName = () => {
-        return _name;
+    const getTitle = () => {
+        return _title;
     };
-    const setName = (name) => {
-        _name = name;
+    const setTitle = (title) => {
+        _title = title;
     };
     const getList = () => {
         return _list;
@@ -17,7 +17,7 @@ const project = (name) => {
     };
 
     return {
-        getName, setName,
+        getTitle, setTitle,
         getList,
         addTask
     };

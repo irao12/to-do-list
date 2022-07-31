@@ -6,9 +6,9 @@ import displayController from './display.js'
 
 const controller = () => {
 
-    const isValidProjectName = () => {
-        // if name is empty, thje result will be "" which is not truthy
-        return dom.projectNameInput.value;
+    const isValidProjectTitle = () => {
+        // if title is empty, thje result will be "" which is not truthy
+        return dom.projectTitleInput.value;
     }
 
     dom.addProjectButton.addEventListener('click', () => {
@@ -20,9 +20,9 @@ const controller = () => {
     });
 
     dom.confirmProjectButton.addEventListener('click', ()=>{
-        if(isValidProjectName()){
-            const projectName = dom.projectNameInput.value;
-            const currProject = project(projectName);
+        if(isValidProjectTitle()){
+            const projectTitle = dom.projectTitleInput.value;
+            const currProject = project(projectTitle);
             account.addProject(currProject);
             displayController.removeAddProject();
             displayController.refreshProjects();
@@ -30,7 +30,7 @@ const controller = () => {
             if (!currAccProject) account.setCurrProject(currProject);
         }
         else {
-            displayController.displayProjectNameError();
+            displayController.displayProjectTitleError();
         }
     });
 
