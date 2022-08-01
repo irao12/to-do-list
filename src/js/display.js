@@ -48,6 +48,7 @@ const displayController = () => {
             let taskDueDateText;
             
             // If the date is in the past, show overdue
+            console.log(taskDueDate);
             if (isPast(taskDueDate)) {
                 taskDueDateText = "Overdue";
             }

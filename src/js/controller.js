@@ -3,7 +3,7 @@ import task from './task.js'
 import dom from './dom.js'
 import account from './account.js'
 import displayController from './display.js'
-import {endOfToday} from 'date-fns'
+import {endOfDay} from 'date-fns'
 
 const controller = () => {
     const formatDate = (date) => {
@@ -79,7 +79,7 @@ const controller = () => {
             // set the due date as a Date Object referring to the end of the day
             // set the due date as "" if no due date was inputted
             const taskDueDate = dom.taskDueDateInput.value ? 
-                                endOfToday(new Date(formattedDate)) : "";
+                                endOfDay(new Date(formattedDate)) : "";
 
             const taskPriority = dom.taskPriorityInput.value;
 
