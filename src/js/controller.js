@@ -15,6 +15,12 @@ const controller = () => {
         return dom.taskTitleInput.value;
     }
 
+    const isValidTaskDate = () => {
+        const dueDate = new Date(dom.taskDueDateInput.value);
+        if (dueDate !='Invalid Date') return true;
+        return false;
+    }
+
     dom.addProjectButton.addEventListener('click', () => {
         displayController.displayAddProject();
     });
@@ -41,9 +47,15 @@ const controller = () => {
     dom.cancelTaskButton.addEventListener('click', displayController.removeAddTask)
 
     dom.confirmTaskButton.addEventListener('click', ()=>{
-        if (isValidTaskTitle()) {
+        if (isValidTaskTitle() && isValidTaskDate()) {
             const taskTitle = dom.taskTitleInput.value;
-            const currTask = task(taskTitle);
+            const taskDesc = dom.taskDescInput.value;
+            const taskDueDate = dom.taskDueDateInput.value ? 
+                                new Date(dom.taskDueDateInput.value) : "";
+            const taskPriority = dom.taskPriorityInput.value;
+
+            const currTask = task(taskTitle, taskDesc, taskDueDate, taskPriority);
+
             const currProject = account.getCurrProject();
 
             currProject.addTask(currTask);
@@ -51,7 +63,18 @@ const controller = () => {
             displayController.refreshTasks();
         }
         else {
-            displayController.displayTaskTitleError();
+            if (!isValidTaskTitle())
+                displayController.displayTaskTitleError();
+            else {
+                displayController.removeTaskTitleError();
+            }
+
+            if (!isValidTaskDate()){
+                displayController.displayTaskDateError();
+            }
+            else {
+                displayController.removeTaskDateError();
+            }
         }
     })
 }

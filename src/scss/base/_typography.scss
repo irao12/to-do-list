@@ -3,6 +3,7 @@
 
 * {
     line-height: 1.5;
+    font-weight: 400;
 }
 
 .logo-text {
@@ -26,9 +27,16 @@ h1 {
 
 h2 {
     font-size: f.rem(18);
-    font-weight: 500;
 
     @include b.breakpoints-up(large) {
         font-size: f.rem(20);
+    }
+}
+
+h3 {
+    font-size: f.rem(13);
+
+    @include b.breakpoints-up(large) {
+        font-size: f.rem(15);
     }
 }

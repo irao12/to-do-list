@@ -119,11 +119,15 @@
     .modal-content {
         font-family: fonts.$main-font;
         width: min(80%, f.rem(550));
-        height: f.rem(670);
+        height: f.rem(750);
         background-color: white;
         padding: f.rem(30);
         font-weight: normal;
         border-radius: f.rem(12);
+
+        @include b.breakpoints-up (large) {
+            height: f.rem(700);
+        }
     }
 
     .modal-header {

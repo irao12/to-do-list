@@ -2,6 +2,8 @@ import dom from './dom.js'
 import account from './account.js'
 import task from './task.js';
 
+import {format} from 'date-fns';
+
 const displayController = () => {
 
     // methods
@@ -33,7 +35,20 @@ const displayController = () => {
         newTask.classList.add('task-div');
         const taskTitle = document.createElement('h2');
         taskTitle.textContent = task.getTitle();
-        newTask.appendChild(taskTitle);
+
+        const details = document.createElement('div');
+        details.classList.add('task-details');
+
+        details.appendChild(taskTitle);
+
+        if (task.getDueDate()){
+            const taskDueDateText = format(task.getDueDate(), 'MMM dd');
+            const dueDate = document.createElement('h3');
+            dueDate.textContent = taskDueDateText;
+            details.appendChild(dueDate);
+        }        
+
+        newTask.appendChild(details);
         taskList.appendChild(newTask);
     }
 
@@ -99,12 +114,38 @@ const displayController = () => {
     const displayTaskTitleError = () => {
         const taskTitleInput = dom.taskTitleInput;
         taskTitleInput.classList.add('invalid');
-        if (!document.querySelector('.error')){
+        if (!document.querySelector('.task-title-section .error')){
             const error = document.createElement('div');
             error.classList.add('error');
             error.textContent = 'Please enter a title';
-            console.log(dom.taskTitleFormSection)
+
             dom.taskTitleFormSection.appendChild(error);
+        }
+    }
+
+    const removeTaskTitleError = () => {
+        if (document.querySelector('.task-title-section .error')){
+            dom.taskTitleInput.classList.remove('invalid');
+            document.querySelector('.task-title-section .error').remove();
+        }
+    }
+
+    const displayTaskDateError = () => {
+        const taskDateInput = dom.taskDueDateInput;
+        taskDateInput.classList.add('invalid');
+        if (!document.querySelector('.task-due-date-section .error')){
+            const error = document.createElement('div');
+            error.classList.add('error');
+            error.textContent = 'Please enter a valid date';
+
+            dom.taskDueDateFormSection.appendChild(error);
+        }
+    }
+
+    const removeTaskDateError = () => {
+        if (document.querySelector('.task-due-date-section .error')){
+            dom.taskDueDateInput.classList.remove('invalid');
+            document.querySelector('.task-due-date-section .error').remove();
         }
     }
 
@@ -117,16 +158,16 @@ const displayController = () => {
         removeModal();
         dom.addTaskForm.reset();
         dom.addTaskModal.classList.remove('active');
-        if (document.querySelector('.error')){
-            dom.taskTitleInput.classList.remove('invalid');
-            document.querySelector('.error').remove();
-        }
+        
+        removeTaskTitleError();
+        removeTaskDateError();
     }
 
     return {
         refreshProjects, refreshTasks,
         displayAddProject, removeAddProject, displayProjectTitleError,
-        displayAddTask, removeAddTask, displayTaskTitleError
+        displayAddTask, removeAddTask, displayTaskTitleError, displayTaskDateError,
+        removeTaskDateError, removeTaskTitleError
     }
 }
 
