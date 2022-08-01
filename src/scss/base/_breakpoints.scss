@@ -1,18 +1,18 @@
 @use './functions' as f;
 
-// small: 0px - 400px
-// medium: 400px - 900px
+// small: 0px - 500px
+// medium: 500px - 900px
 // large: 900px - 1440px
 // xlarge: 1440px - 
 
 $breakpoints-up: (
-    "medium": f.rem(400),
+    "medium": f.rem(500),
     "large" : f.rem(900),
     "xlarge" : f.rem(1440)
 );
 
 $breakpoints-down: (
-    "small" : f.rem(399.98),
+    "small" : f.rem(499.98),
     "medium": f.rem(899.98),
     "large" : f.rem(1399.98),
 );

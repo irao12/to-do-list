@@ -210,6 +210,32 @@
     }
 }
 
+.confirm-project-deletion-modal {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+
+    .modal-content {
+        width: min(f.rem(550), 80%);
+        height: f.rem(250);
+        background-color: white;
+        border-radius: f.rem(10);
+        padding: f.rem(50) f.rem(40);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .modal-buttons {
+            align-self: flex-end;
+        }
+    }
+}
+
 .active {
     opacity: 1;
     pointer-events: auto;

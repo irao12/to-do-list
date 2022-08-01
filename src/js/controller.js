@@ -126,6 +126,8 @@ const controller = () => {
             dom.taskDueDateInput.classList.remove('inactive');
         }
     });
+
+    dom.cancelProjectDeletionButton.addEventListener('click', displayController.removeConfirmProjectDeletion);
 }
 
 export default controller();

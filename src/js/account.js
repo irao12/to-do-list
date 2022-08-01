@@ -7,9 +7,17 @@ const account = () => {
     const getCurrProject = () =>{return _currProject;}
 
     const setCurrProject = (newProject) => {_currProject = newProject;}
+
+    const removeProject = (project) => {
+        const projectIndex = _myProjects.indexOf(project);
+        if (_currProject === project) {
+            _currProject = undefined;
+        }
+        _myProjects.splice(projectIndex, 1);
+    }
     
     return {
-        getCurrProject, setCurrProject, addProject, _myProjects
+        getCurrProject, setCurrProject, addProject, removeProject, _myProjects
     }
 }
 

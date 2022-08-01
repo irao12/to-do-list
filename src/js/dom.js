@@ -12,6 +12,12 @@ const dom = () => {
     const cancelProjectButton = document.querySelector('.add-project-modal .cancel-button');
     const confirmProjectButton = document.querySelector('.confirm-project-button');
 
+    const confirmProjectDeletionModal = document.querySelector('.confirm-project-deletion-modal');
+    const CPDmodalContent = document.querySelector('.confirm-project-deletion-modal .modal-content');
+    const delConfirmationMessage = document.querySelector('.del-confirmation-msg');
+    const cancelProjectDeletionButton = document.querySelector('.confirm-project-deletion-modal .cancel-button');
+    const confirmProjectDeletionButton = document.querySelector('.confirm-project-deletion-modal .confirm-deletion-button');
+
     const addTaskModal = document.querySelector('.add-task-modal');
     const addTaskForm = document.querySelector('.add-task-form');
 
@@ -32,7 +38,8 @@ const dom = () => {
         addTaskModal, addTaskForm,
         cancelTaskButton, confirmTaskButton, taskTitleInput, taskTitleFormSection,
         taskDescInput, taskDueDateInput, taskPriorityInput, taskDueDateFormSection,
-        taskToggleDueDate
+        taskToggleDueDate, confirmProjectDeletionModal, CPDmodalContent, delConfirmationMessage,
+        cancelProjectDeletionButton, confirmProjectDeletionButton
     }
 }
 
