@@ -16,7 +16,7 @@ const dom = () => {
     const addTaskForm = document.querySelector('.add-task-form');
 
     const taskTitleInput = document.querySelector('#form-task-title')
-    const taskTitleFormSection = document.querySelector('task-title-section')
+    const taskTitleFormSection = document.querySelector('.task-title-section')
     const cancelTaskButton = document.querySelector('.add-task-modal .cancel-button');
     const confirmTaskButton = document.querySelector('.confirm-task-button');
 

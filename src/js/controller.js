@@ -50,6 +50,9 @@ const controller = () => {
             displayController.removeAddTask();
             displayController.refreshTasks();
         }
+        else {
+            displayController.displayTaskTitleError();
+        }
     })
 }
 

@@ -80,7 +80,7 @@ const displayController = () => {
         dom.addProjectForm.reset();
         dom.addProjectModal.classList.remove('active');
         if (document.querySelector('.error')){
-            dom.projectTitleInput.classList.remove('invalid');
+            dom.taskTitleInput.classList.remove('invalid');
             document.querySelector('.error').remove();
         }
     }
@@ -96,6 +96,18 @@ const displayController = () => {
         }
     }
 
+    const displayTaskTitleError = () => {
+        const taskTitleInput = dom.taskTitleInput;
+        taskTitleInput.classList.add('invalid');
+        if (!document.querySelector('.error')){
+            const error = document.createElement('div');
+            error.classList.add('error');
+            error.textContent = 'Please enter a title';
+            console.log(dom.taskTitleFormSection)
+            dom.taskTitleFormSection.appendChild(error);
+        }
+    }
+
     const displayAddTask = () => {
         displayModal();
         dom.addTaskModal.classList.add('active');
@@ -105,12 +117,16 @@ const displayController = () => {
         removeModal();
         dom.addTaskForm.reset();
         dom.addTaskModal.classList.remove('active');
+        if (document.querySelector('.error')){
+            dom.taskTitleInput.classList.remove('invalid');
+            document.querySelector('.error').remove();
+        }
     }
 
     return {
         refreshProjects, refreshTasks,
         displayAddProject, removeAddProject, displayProjectTitleError,
-        displayAddTask, removeAddTask
+        displayAddTask, removeAddTask, displayTaskTitleError
     }
 }
 

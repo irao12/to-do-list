@@ -150,12 +150,22 @@
                 label {
                     margin-bottom: f.rem(5);
                 }
+
+                .invalid {
+                    border: f.rem(2) solid colors.$error-color;
+                }
+
+                .error{
+                    color: colors.$error-color;
+                }
             }
 
             input, textarea, select{
                 font-size: f.rem(16);
                 font-family: fonts.$main-font;
                 padding: f.rem(8);
+                border-radius: f.rem(4);
+                border-width: f.rem(2);
             }
 
             input.form-task-title {
