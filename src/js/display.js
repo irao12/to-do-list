@@ -7,26 +7,27 @@ import {format, isPast, isToday, isThisWeek, isThisYear} from 'date-fns';
 const displayController = () => {
 
     // methods
+    const displayProject = (project) => {
+        const projectDiv = document.createElement('div');
+        projectDiv.classList.add('project-div');
+
+        const projectTitle = document.createElement('h2');
+        projectTitle.textContent = project.getTitle();
+
+        projectDiv.appendChild(projectTitle);
+
+        projectDiv.addEventListener('click', ()=>{
+            account.setCurrProject(project)
+            refreshTasks();
+        });
+        projectList.appendChild(projectDiv);
+    }
+
     const refreshProjects = () => {
         const projects = account._myProjects;
         const projectList = dom.projectList;
         projectList.innerHTML = '';
-        projects.forEach((project)=>{
-            const projectDiv = document.createElement('div');
-            projectDiv.classList.add('project-div');
-
-
-            const projectTitle = document.createElement('h2');
-            projectTitle.textContent = project.getTitle();
-
-            projectDiv.appendChild(projectTitle);
-
-            projectDiv.addEventListener('click', ()=>{
-                account.setCurrProject(project)
-                refreshTasks();
-            });
-            projectList.appendChild(projectDiv);
-        });
+        projects.forEach(displayProject);
     }
 
     const displayTask = (task) => {
