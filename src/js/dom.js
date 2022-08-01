@@ -20,6 +20,7 @@ const dom = () => {
     const taskDescInput = document.querySelector('#form-task-desc');
     const taskDueDateInput = document.querySelector('#form-due-date');
     const taskDueDateFormSection = document.querySelector('.task-due-date-section')
+    const taskToggleDueDate = document.querySelector('.due-date-toggle')
     const taskPriorityInput = document.querySelector('#form-priority');
     const cancelTaskButton = document.querySelector('.add-task-modal .cancel-button');
     const confirmTaskButton = document.querySelector('.confirm-task-button');
@@ -30,7 +31,8 @@ const dom = () => {
         modal, addProjectModal, addProjectForm, projectTitleInput, projectTitleFormSection,
         addTaskModal, addTaskForm,
         cancelTaskButton, confirmTaskButton, taskTitleInput, taskTitleFormSection,
-        taskDescInput, taskDueDateInput, taskPriorityInput, taskDueDateFormSection
+        taskDescInput, taskDueDateInput, taskPriorityInput, taskDueDateFormSection,
+        taskToggleDueDate
     }
 }
 

@@ -118,7 +118,6 @@ const displayController = () => {
             const error = document.createElement('div');
             error.classList.add('error');
             error.textContent = 'Please enter a title';
-
             dom.taskTitleFormSection.appendChild(error);
         }
     }
@@ -138,7 +137,7 @@ const displayController = () => {
             error.classList.add('error');
             error.textContent = 'Please enter a valid date';
 
-            dom.taskDueDateFormSection.appendChild(error);
+            dom.taskDueDateFormSection.insertBefore(error, dom.taskToggleDueDate);
         }
     }
 
@@ -161,6 +160,9 @@ const displayController = () => {
         
         removeTaskTitleError();
         removeTaskDateError();
+
+        dom.taskToggleDueDate.textContent = "Remove Due Date";
+        dom.taskDueDateInput.classList.remove('inactive')
     }
 
     return {

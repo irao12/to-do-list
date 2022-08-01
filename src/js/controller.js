@@ -16,6 +16,9 @@ const controller = () => {
     }
 
     const isValidTaskDate = () => {
+        if (dom.taskDueDateInput.classList.contains('inactive'))
+            return true;
+            
         const dueDate = new Date(dom.taskDueDateInput.value);
         if (dueDate !='Invalid Date') return true;
         return false;
@@ -76,7 +79,20 @@ const controller = () => {
                 displayController.removeTaskDateError();
             }
         }
-    })
+    });
+
+    dom.taskToggleDueDate.addEventListener('click', () => {
+        const toggleButton = dom.taskToggleDueDate;
+        if (toggleButton.textContent === 'Remove Due Date'){
+            toggleButton.textContent = 'Add Due Date';
+            dom.taskDueDateInput.value = '';
+            dom.taskDueDateInput.classList.add('inactive');
+        }
+        else if (toggleButton.textContent === 'Add Due Date') {
+            toggleButton.textContent = 'Remove Due Date';
+            dom.taskDueDateInput.classList.remove('inactive');
+        }
+    });
 }
 
 export default controller();

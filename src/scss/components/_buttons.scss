@@ -33,6 +33,29 @@
     }
 }
 
+button.due-date-toggle {
+    width: min(f.rem(200), 100%);
+    height: f.rem(50);
+    background-color: colors.$darker-gray;
+    border: none;
+    border-radius: f.rem(8);
+
+    font-family: fonts.$main-font;
+    font-size: f.rem(15);
+    margin: 0 auto;
+    margin-top: f.rem(10);
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: colors.$light-gray;
+    }
+    
+    &:active {
+        background-color: colors.$darker-gray;
+    }
+}
+
 .modal-buttons{
     button {
         border: 0;
