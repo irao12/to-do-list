@@ -2,7 +2,7 @@ import dom from './dom.js'
 import account from './account.js'
 import task from './task.js';
 
-import {format, isPast, isToday, isThisWeek, isThisYear} from 'date-fns';
+import {format, isPast, isToday, isTomorrow, isThisWeek, isThisYear} from 'date-fns';
 
 const displayController = () => {
 
@@ -48,13 +48,14 @@ const displayController = () => {
             let taskDueDateText;
             
             // If the date is in the past, show overdue
-            console.log(taskDueDate);
             if (isPast(taskDueDate)) {
                 taskDueDateText = "Overdue";
             }
             // if the date is today, show today
             else if (isToday(taskDueDate)) 
                 taskDueDateText = "Today";
+            else if (isTomorrow(taskDueDate)) 
+                taskDueDateText = "Tomorrow";
             // if the date is in the current week, show the weekday
             else if (isThisWeek(taskDueDate))
                 taskDueDateText = format(task.getDueDate(), 'EEEE');
