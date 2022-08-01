@@ -17,8 +17,7 @@ const controller = () => {
 
     const isValidTaskDate = () => {
         if (dom.taskDueDateInput.classList.contains('inactive'))
-            return true;
-            
+        return true;
         const dueDate = new Date(dom.taskDueDateInput.value);
         if (dueDate !='Invalid Date') return true;
         return false;
@@ -62,6 +61,7 @@ const controller = () => {
             const currProject = account.getCurrProject();
 
             currProject.addTask(currTask);
+            currProject.sortTasks();
             displayController.removeAddTask();
             displayController.refreshTasks();
         }
