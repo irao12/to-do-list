@@ -29,7 +29,7 @@ const project = (title) => {
             else {
                 const taskADueDate = taskA.getDueDate();
                 const taskBDueDate = taskB.getDueDate();
-                console.log(taskADueDate, taskBDueDate)
+
                 if (!taskADueDate && taskBDueDate) return 1;
                 else if (!taskBDueDate && taskADueDate) return -1;
                 else if (!taskADueDate && !taskBDueDate) return 0;

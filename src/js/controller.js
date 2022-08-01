@@ -3,8 +3,14 @@ import task from './task.js'
 import dom from './dom.js'
 import account from './account.js'
 import displayController from './display.js'
+import {endOfToday} from 'date-fns'
 
 const controller = () => {
+    const formatDate = (date) => {
+        const dateArray = date.split("-");
+        dateArray.push(dateArray.shift());
+        return dateArray.join('-');
+    }
 
     const isValidProjectTitle = () => {
         // if title is empty, thje result will be "" which is not truthy
@@ -52,8 +58,14 @@ const controller = () => {
         if (isValidTaskTitle() && isValidTaskDate()) {
             const taskTitle = dom.taskTitleInput.value;
             const taskDesc = dom.taskDescInput.value;
+
+            let formattedDate;
+            if (dom.taskDueDateInput.value) {
+                formattedDate = formatDate(dom.taskDueDateInput.value);
+            }
             const taskDueDate = dom.taskDueDateInput.value ? 
-                                new Date(dom.taskDueDateInput.value) : "";
+                                endOfToday(new Date(formattedDate)) : "";
+
             const taskPriority = dom.taskPriorityInput.value;
 
             const currTask = task(taskTitle, taskDesc, taskDueDate, taskPriority);
@@ -65,6 +77,7 @@ const controller = () => {
             displayController.removeAddTask();
             displayController.refreshTasks();
         }
+        
         else {
             if (!isValidTaskTitle())
                 displayController.displayTaskTitleError();

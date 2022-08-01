@@ -2,7 +2,7 @@ import dom from './dom.js'
 import account from './account.js'
 import task from './task.js';
 
-import {format} from 'date-fns';
+import {format, isPast, isToday, isThisWeek, isThisYear} from 'date-fns';
 
 const displayController = () => {
 
@@ -42,7 +42,23 @@ const displayController = () => {
         details.appendChild(taskTitle);
 
         if (task.getDueDate()){
-            const taskDueDateText = format(task.getDueDate(), 'MMM dd');
+            const taskDueDate = task.getDueDate();
+            let taskDueDateText;
+            
+            console.log(taskDueDate);
+            if (isPast(taskDueDate)) {
+                taskDueDateText = "Overdue";
+            }
+            else if (isToday(taskDueDate)) 
+                taskDueDateText = "Today";
+            else if (isThisWeek(taskDueDate))
+                taskDueDateText = format(task.getDueDate(), 'EEEE');
+            else if (isThisYear(taskDueDate))
+                taskDueDateText = format(task.getDueDate(), 'MMM dd');
+            else {
+                taskDueDateText = format(task.getDueDate(), 'MMM dd yyyy');
+            }
+
             const dueDate = document.createElement('h3');
             dueDate.textContent = taskDueDateText;
             details.appendChild(dueDate);
