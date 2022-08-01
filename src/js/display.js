@@ -45,16 +45,20 @@ const displayController = () => {
             const taskDueDate = task.getDueDate();
             let taskDueDateText;
             
-            console.log(taskDueDate);
+            // If the date is in the past, show overdue
             if (isPast(taskDueDate)) {
                 taskDueDateText = "Overdue";
             }
+            // if the date is today, show today
             else if (isToday(taskDueDate)) 
                 taskDueDateText = "Today";
+            // if the date is in the current week, show the weekday
             else if (isThisWeek(taskDueDate))
                 taskDueDateText = format(task.getDueDate(), 'EEEE');
+            // if the date is in the current year, show the month and day
             else if (isThisYear(taskDueDate))
                 taskDueDateText = format(task.getDueDate(), 'MMM dd');
+            // otherwise, show the full date
             else {
                 taskDueDateText = format(task.getDueDate(), 'MMM dd yyyy');
             }
