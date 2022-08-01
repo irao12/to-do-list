@@ -111,11 +111,15 @@ const controller = () => {
 
     dom.taskToggleDueDate.addEventListener('click', () => {
         const toggleButton = dom.taskToggleDueDate;
-        
+
         if (toggleButton.textContent === 'Remove Due Date'){
             toggleButton.textContent = 'Add Due Date';
             dom.taskDueDateInput.value = '';
             dom.taskDueDateInput.classList.add('inactive');
+            if (dom.taskDueDateInput.classList.contains('invalid')){
+                dom.taskDueDateInput.classList.remove('invalid');
+                document.querySelector('.task-due-date-section .error').remove();
+            }
         }
         else if (toggleButton.textContent === 'Add Due Date') {
             toggleButton.textContent = 'Remove Due Date';

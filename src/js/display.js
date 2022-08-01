@@ -8,6 +8,7 @@ const displayController = () => {
 
     // methods
     const displayProject = (project) => {
+        const projectList = dom.projectList;
         const projectDiv = document.createElement('div');
         projectDiv.classList.add('project-div');
 
