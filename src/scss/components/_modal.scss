@@ -1,344 +1,345 @@
-@use '../base/functions' as f;
-@use '../base/fonts' as fonts;
-@use '../base/colors' as colors;
-@use '../base/breakpoints' as b;
+@use "../base/functions" as f;
+@use "../base/fonts" as fonts;
+@use "../base/colors" as colors;
+@use "../base/breakpoints" as b;
 
 .modal {
-    opacity: 0;
-    pointer-events: none;
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    top: 0;
-    transition: opacity 200ms ease-in-out;
+	opacity: 0;
+	pointer-events: none;
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	transition: opacity 200ms ease-in-out;
 
-    background-color: rgba(0, 0, 0, 0.267);
+	background-color: rgba(0, 0, 0, 0.267);
 }
 
 .add-project-modal {
-    height: 0;
-    width: 0;
+	height: 0;
+	width: 0;
 
-    opacity: 0;
-    display: flex;
-    pointer-events: none;
-    justify-content: center;
-    align-items: center;
+	opacity: 0;
+	display: flex;
+	pointer-events: none;
+	justify-content: center;
+	align-items: center;
 
-    &.active {
-        height: 100%;
-        width: 100%;
-    }
+	&.active {
+		height: 100%;
+		width: 100%;
+	}
 
-    .modal-content {
-        font-family: fonts.$main-font;
-        width: min(80%, f.rem(550));
-        height: f.rem(350);
-        background-color: white;
-        padding: f.rem(30);
-        font-weight: normal;
-        border-radius: f.rem(12);
+	.modal-content {
+		font-family: fonts.$main-font;
+		width: min(80%, f.rem(550));
+		height: f.rem(350);
+		background-color: white;
+		padding: f.rem(30);
+		font-weight: normal;
+		border-radius: f.rem(12);
 
-        .modal-header {
-            width: 100%;
-            border-bottom: 2px solid colors.$underline-color;
-            margin-bottom: f.rem(10);
-        }
+		.modal-header {
+			width: 100%;
+			border-bottom: 2px solid colors.$underline-color;
+			margin-bottom: f.rem(10);
+		}
 
-        .modal-body {
-            width: 100%;
-            padding-top: f.rem(20);
+		.modal-body {
+			width: 100%;
+			padding-top: f.rem(20);
 
-            .form-div {
-                width: 100%;
-                height: f.rem(200);
-                position: relative;
+			.form-div {
+				width: 100%;
+				height: f.rem(200);
+				position: relative;
 
-                .project-title-section{
-                    margin-bottom: f.rem(10);
-                    input {
-                        width: 100%;
-                        height: f.rem(40);
-                        padding: f.rem(8);
-                        margin-top: f.rem(8);
-                        font-size: f.rem(16);
-                        font-family: fonts.$main-font;
-                        border-radius: f.rem(4);
-                        border-color: colors.$primary;
+				.project-title-section {
+					margin-bottom: f.rem(10);
+					input {
+						width: 100%;
+						height: f.rem(40);
+						padding: f.rem(8);
+						margin-top: f.rem(8);
+						font-size: f.rem(16);
+						font-family: fonts.$main-font;
+						border-radius: f.rem(4);
+						border-color: colors.$primary;
 
-                        @include b.breakpoints-up(medium) {
-                            margin-bottom: f.rem(10);
-                        }
-                    }
+						@include b.breakpoints-up(medium) {
+							margin-bottom: f.rem(10);
+						}
+					}
 
-                    .invalid {
-                        border: f.rem(2) solid colors.$error-color;
-                    }
+					.invalid {
+						border: f.rem(2) solid colors.$error-color;
+					}
 
-                    .error{
-                        color: colors.$error-color;
-                    }
-                }
+					.error {
+						color: colors.$error-color;
+					}
+				}
 
-                .modal-buttons {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
-                    gap: f.rem(10);
-                    position: relative;
+				.modal-buttons {
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-end;
+					gap: f.rem(10);
+					position: relative;
 
-                    margin-top: f.rem(20);
+					margin-top: f.rem(20);
 
-                    @include b.breakpoints-up(medium) {
-                        flex-direction: row;
-                        gap: f.rem(20);
-                        margin-top: f.rem(40);
-                    }
-                }
-            }
-        }
-    }
+					@include b.breakpoints-up(medium) {
+						flex-direction: row;
+						gap: f.rem(20);
+						margin-top: f.rem(40);
+					}
+				}
+			}
+		}
+	}
 }
 
 .add-task-modal {
-    height: 0;
-    width: 0;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	height: 0;
+	width: 0;
 
-    opacity: 0;
-    pointer-events: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-    &.active {
-        height: 100%;
-        width: 100%;
-    }
+	opacity: 0;
+	pointer-events: none;
 
-    .modal-content {
-        font-family: fonts.$main-font;
-        width: min(80%, f.rem(550));
-        height: f.rem(750);
-        background-color: white;
-        padding: f.rem(30);
-        font-weight: normal;
-        border-radius: f.rem(12);
-    }
+	&.active {
+		height: 100%;
+		width: 100%;
+	}
 
-    .modal-header {
-        width: 100%;
-        border-bottom: 2px solid colors.$underline-color;
-        margin-bottom: f.rem(10);
-    }
+	.modal-content {
+		font-family: fonts.$main-font;
+		width: min(80%, f.rem(550));
+		height: f.rem(750);
+		background-color: white;
+		padding: f.rem(30);
+		font-weight: normal;
+		border-radius: f.rem(12);
+	}
 
-    .modal-body {
-        width: 100%;
+	.modal-header {
+		width: 100%;
+		border-bottom: 2px solid colors.$underline-color;
+		margin-bottom: f.rem(10);
+	}
 
-        .form-div {
+	.modal-body {
+		width: 100%;
 
-            input:focus, textarea:focus, select:focus{
-                outline-color: colors.$primary;
-            }
+		.form-div {
+			input:focus,
+			textarea:focus,
+			select:focus {
+				outline-color: colors.$primary;
+			}
 
-            .form-section{
-                padding: f.rem(10) 0;
-                display: flex;
-                flex-direction: column;
+			.form-section {
+				padding: f.rem(10) 0;
+				display: flex;
+				flex-direction: column;
 
-                label {
-                    margin-bottom: f.rem(5);
-                }
+				label {
+					margin-bottom: f.rem(5);
+				}
 
-                .inactive {
-                    color: colors.$darker-gray;
-                    border-color: colors.$darker-gray;
-                    border-style: solid;
-                    pointer-events: none;
-                }
+				.inactive {
+					color: colors.$darker-gray;
+					border-color: colors.$darker-gray;
+					border-style: solid;
+					pointer-events: none;
+				}
 
-                .invalid {
-                    border: f.rem(2) solid colors.$error-color;
-                }
+				.invalid {
+					border: f.rem(2) solid colors.$error-color;
+				}
 
-                .error{
-                    color: colors.$error-color;
-                }
-            }
+				.error {
+					color: colors.$error-color;
+				}
+			}
 
-            input, textarea, select{
-                font-size: f.rem(16);
-                font-family: fonts.$main-font;
-                padding: f.rem(8);
-                border-radius: f.rem(4);
-                border-width: f.rem(2);
-            }
+			input,
+			textarea,
+			select {
+				font-size: f.rem(16);
+				font-family: fonts.$main-font;
+				padding: f.rem(8);
+				border-radius: f.rem(4);
+				border-width: f.rem(2);
+			}
 
-            input.form-task-title {
-                height: f.rem(40);
-                padding: f.rem(8);
-                font-family: fonts.$main-font;
-            }
+			input.form-task-title {
+				height: f.rem(40);
+				padding: f.rem(8);
+				font-family: fonts.$main-font;
+			}
 
-            textarea.form-task-desc {
-                height: f.rem(120);
-                overflow: auto;
-                resize: none;
-            }
+			textarea.form-task-desc {
+				height: f.rem(120);
+				overflow: auto;
+				resize: none;
+			}
 
-            .modal-buttons {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                gap: f.rem(10);
-                position: relative;
-            
-                margin-top: f.rem(20);
-            
-                @include b.breakpoints-up(medium) {
-                    flex-direction: row;
-                    gap: f.rem(20);
-                    margin-top: f.rem(40);
-                }
-            }
-        }
+			.modal-buttons {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-end;
+				gap: f.rem(10);
+				position: relative;
 
-        @include b.breakpoints-up(medium){
-            padding-top: f.rem(10);
-        }
-    }
+				margin-top: f.rem(20);
+
+				@include b.breakpoints-up(medium) {
+					flex-direction: row;
+					gap: f.rem(20);
+					margin-top: f.rem(40);
+				}
+			}
+		}
+
+		@include b.breakpoints-up(medium) {
+			padding-top: f.rem(10);
+		}
+	}
 }
 
 .confirm-project-deletion-modal {
-    height: 0;
-    width: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
+	height: 0;
+	width: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	pointer-events: none;
 
-    &.active {
-        height: 100%;
-        width: 100%;
-    }
+	&.active {
+		height: 100%;
+		width: 100%;
+	}
 
-    .modal-content {
-        width: min(f.rem(550), 80%);
-        height: f.rem(300);
-        background-color: white;
-        border-radius: f.rem(10);
-        padding: f.rem(50) f.rem(40);
-        text-align: center;
+	.modal-content {
+		width: min(f.rem(550), 80%);
+		height: f.rem(300);
+		background-color: white;
+		border-radius: f.rem(10);
+		padding: f.rem(50) f.rem(40);
+		text-align: center;
 
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        gap: f.rem(25);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+		gap: f.rem(25);
 
-        .modal-buttons {
-            align-self: center;
+		.modal-buttons {
+			align-self: center;
 
-            display: flex;
-            flex-direction: column;
-            gap: f.rem(15);
+			display: flex;
+			flex-direction: column;
+			gap: f.rem(15);
 
-            @include b.breakpoints-up(medium) {
-                flex-direction: row;
-                justify-content: center;
-            }
-        }
-    }
+			@include b.breakpoints-up(medium) {
+				flex-direction: row;
+				justify-content: center;
+			}
+		}
+	}
 }
 
 .confirm-task-deletion-modal {
-    height: 0;
-    width: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
+	height: 0;
+	width: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	pointer-events: none;
 
-    &.active {
-        height: 100%;
-        width: 100%;
-    }
+	&.active {
+		height: 100%;
+		width: 100%;
+	}
 
-    .modal-content {
-        width: min(f.rem(550), 80%);
-        height: f.rem(300);
-        background-color: white;
-        border-radius: f.rem(10);
-        padding: f.rem(50) f.rem(40);
-        text-align: center;
+	.modal-content {
+		width: min(f.rem(550), 80%);
+		height: f.rem(300);
+		background-color: white;
+		border-radius: f.rem(10);
+		padding: f.rem(50) f.rem(40);
+		text-align: center;
 
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        gap: f.rem(25);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+		gap: f.rem(25);
 
-        .modal-buttons {
-            align-self: center;
+		.modal-buttons {
+			align-self: center;
 
-            display: flex;
-            flex-direction: column;
-            gap: f.rem(15);
+			display: flex;
+			flex-direction: column;
+			gap: f.rem(15);
 
-            @include b.breakpoints-up(medium) {
-                flex-direction: row;
-                justify-content: center;
-            }
-        }
-    }
+			@include b.breakpoints-up(medium) {
+				flex-direction: row;
+				justify-content: center;
+			}
+		}
+	}
 }
 
 .task-details-modal {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-    .modal-content{
-        position: relative;
+	.modal-content {
+		position: relative;
 
-        width: min(f.rem(550), 80%);
-        height: f.rem(550);
+		width: min(f.rem(550), 80%);
+		height: f.rem(550);
 
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        gap: f.rem(20);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+		gap: f.rem(20);
 
-        background-color: white;
-        border-radius: f.rem(10);
-        padding: f.rem(50) f.rem(40);
-        text-align: left;
+		background-color: white;
+		border-radius: f.rem(10);
+		padding: f.rem(50) f.rem(40);
+		text-align: left;
 
-        .task-close-button {
-            position: absolute;
-            top: f.rem(10);
-            right: f.rem(20);
-            font-weight: 700;
-            font-size: f.rem(25);
+		.task-close-button {
+			position: absolute;
+			top: f.rem(10);
+			right: f.rem(20);
+			font-weight: 700;
+			font-size: f.rem(25);
 
-            cursor: pointer;
-        }
+			cursor: pointer;
+		}
 
-        .task-desc {
-            max-width: 100%;
-            word-wrap: break-word;
-        }
-    }
+		.task-desc {
+			max-width: 100%;
+			word-wrap: break-word;
+		}
+	}
 }
 
 .active {
-    opacity: 1;
-    pointer-events: auto;
+	opacity: 1;
+	pointer-events: auto;
 }
-
-

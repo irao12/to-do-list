@@ -1,86 +1,85 @@
-@use '../base/functions' as f;
-@use '../base/colors' as colors;
-@use '../base/breakpoints' as b;
+@use "../base/functions" as f;
+@use "../base/colors" as colors;
+@use "../base/breakpoints" as b;
 
 .task-list {
-    .add-new-task {
-        padding: f.rem(10) f.rem(5) f.rem(10);
-        width: 100%;
-        display: flex;
-        align-self: center;
+	.add-new-task {
+		padding: f.rem(10) f.rem(5) f.rem(10);
+		width: 100%;
+		display: flex;
+		align-self: center;
 
-        cursor: pointer;
+		cursor: pointer;
 
-        .add-task-button {
-            font-size: f.rem(28);
-            margin-right: f.rem(10);
-            width: f.rem(30);
-            height: f.rem(30);
-            border-radius: 40%;
-            color: colors.$primary;
-            
-            display: flex;
-            justify-content: center;
-            align-items: center;
+		.add-task-button {
+			font-size: f.rem(28);
+			margin-right: f.rem(10);
+			width: f.rem(30);
+			height: f.rem(30);
+			border-radius: 40%;
+			color: colors.$primary;
 
-            padding-top: f.rem(2.5);
-        }
+			display: flex;
+			justify-content: center;
+			align-items: center;
 
+			padding-top: f.rem(2.5);
+		}
 
-        &:hover {
-            background-color: colors.$light-gray;
-            border-radius: f.rem(8);
+		&:hover {
+			background-color: colors.$light-gray;
+			border-radius: f.rem(8);
 
-            .add-task-button {
-                background-color: colors.$primary;
-                color: white;
-                border-radius: 50%;
-            }
-        }
-    }
+			.add-task-button {
+				background-color: colors.$primary;
+				color: white;
+				border-radius: 50%;
+			}
+		}
+	}
 
-    .task-div {
-        padding: f.rem(10) f.rem(5);
-        height: f.rem(90);
-        border-bottom: f.rem(2) solid colors.$lighter-underline-color;
+	.task-div {
+		padding: f.rem(10) f.rem(5);
+		height: f.rem(90);
+		border-bottom: f.rem(2) solid colors.$lighter-underline-color;
 
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 
-        cursor: pointer;
+		cursor: pointer;
 
-        .task-details {
-            padding: f.rem(10);
-            &:hover {
-                background-color: colors.$light-gray;
-                border-radius: f.rem(4);
-            }
-        }
+		.task-details {
+			padding: f.rem(10);
+			&:hover {
+				background-color: colors.$light-gray;
+				border-radius: f.rem(4);
+			}
+		}
 
-        h3 {
-            color: rgb(136, 136, 136);
-        }
+		h3 {
+			color: rgb(136, 136, 136);
+		}
 
-        .delete-task-button {
-            opacity: 1;
-            width: f.rem(35);
-            height: f.rem(35);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: f.rem(4);
+		.delete-task-button {
+			opacity: 1;
+			width: f.rem(35);
+			height: f.rem(35);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: f.rem(4);
 
-            margin-right: f.rem(10);
+			margin-right: f.rem(10);
 
-            @include b.breakpoints-up(large) {
-                opacity: 0;
-            }
+			@include b.breakpoints-up(large) {
+				opacity: 0;
+			}
 
-            &:hover {
-                background-color: colors.$light-gray;
-                border-radius: f.rem(4);
-            }
-        }
-    }
+			&:hover {
+				background-color: colors.$light-gray;
+				border-radius: f.rem(4);
+			}
+		}
+	}
 }

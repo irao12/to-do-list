@@ -1,143 +1,143 @@
-@use '../base/functions' as f;
-@use '../base/colors' as colors;
-@use '../base/fonts' as fonts;
-@use '../base/breakpoints' as b;
+@use "../base/functions" as f;
+@use "../base/colors" as colors;
+@use "../base/fonts" as fonts;
+@use "../base/breakpoints" as b;
 
 .project-toggle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: f.rem(15);
-    width: f.rem(35);
-    height: f.rem(35);
-    cursor: pointer;
-    position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: f.rem(15);
+	width: f.rem(35);
+	height: f.rem(35);
+	cursor: pointer;
+	position: relative;
 
-    .close {
-        opacity: 0;
-        position: absolute;
-        transform: scale(0);
-        fill: white;
-    }
+	.close {
+		opacity: 0;
+		position: absolute;
+		transform: scale(0);
+		fill: white;
+	}
 
-    .menu {
-        display: flex;
-        justify-content: center;
-        position: absolute;
-        fill: white;
-        rect {
-            rx: f.rem(7);
-        }
-    }
+	.menu {
+		display: flex;
+		justify-content: center;
+		position: absolute;
+		fill: white;
+		rect {
+			rx: f.rem(7);
+		}
+	}
 
-    .close, .menu {
-        transition: all 200ms ease-in-out;
-    }
+	.close,
+	.menu {
+		transition: all 200ms ease-in-out;
+	}
 
-    &.open{
-        .close {
-            transform: scale(1);
-            opacity: 1;
-            position: relative;
-        }
-        .menu {
-            transform: scale(0);
-            opacity: 0;
-            position: absolute;
-        }
-    }
+	&.open {
+		.close {
+			transform: scale(1);
+			opacity: 1;
+			position: relative;
+		}
+		.menu {
+			transform: scale(0);
+			opacity: 0;
+			position: absolute;
+		}
+	}
 
-    @include b.breakpoints-up(medium) {
-        display: none;
-    }
+	@include b.breakpoints-up(medium) {
+		display: none;
+	}
 }
 
 .add-button {
-    font-size: f.rem(35);
-    width: f.rem(35);
-    height: f.rem(35);
+	font-size: f.rem(35);
+	width: f.rem(35);
+	height: f.rem(35);
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-    border: none;
+	border: none;
 
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .add-project {
-    font-size: f.rem(32);
-    border-radius: f.rem(8);
+	font-size: f.rem(32);
+	border-radius: f.rem(8);
 
-    color: black;
-    background-color: colors.$light-gray;
-    
-    &:hover {
-        background-color: colors.$darker-gray;
-    }
+	color: black;
+	background-color: colors.$light-gray;
 
-    @include b.breakpoints-up(large){
-        font-size: f.rem(40);
-    }
+	&:hover {
+		background-color: colors.$darker-gray;
+	}
+
+	@include b.breakpoints-up(large) {
+		font-size: f.rem(40);
+	}
 }
 
 button.due-date-toggle {
-    width: min(f.rem(200), 100%);
-    height: f.rem(50);
-    background-color: colors.$darker-gray;
-    border: none;
-    border-radius: f.rem(8);
+	width: min(f.rem(200), 100%);
+	height: f.rem(50);
+	background-color: colors.$darker-gray;
+	border: none;
+	border-radius: f.rem(8);
 
-    font-family: fonts.$main-font;
-    font-size: f.rem(15);
-    margin: 0 auto;
-    margin-top: f.rem(10);
+	font-family: fonts.$main-font;
+	font-size: f.rem(15);
+	margin: 0 auto;
+	margin-top: f.rem(10);
 
-    cursor: pointer;
+	cursor: pointer;
 
-    &:hover {
-        background-color: colors.$light-gray;
-    }
-    
-    &:active {
-        background-color: colors.$darker-gray;
-    }
+	&:hover {
+		background-color: colors.$light-gray;
+	}
+
+	&:active {
+		background-color: colors.$darker-gray;
+	}
 }
 
-.modal-buttons{
-    button {
-        border: 0;
-        border-radius: f.rem(8);
-        padding: f.rem(15) f.rem(35);
-        font-family: fonts.$main-font;
-        font-size: f.rem(15);
-        cursor: pointer;
-    }
+.modal-buttons {
+	button {
+		border: 0;
+		border-radius: f.rem(8);
+		padding: f.rem(15) f.rem(35);
+		font-family: fonts.$main-font;
+		font-size: f.rem(15);
+		cursor: pointer;
+	}
 
-    .cancel-button {
-        background-color: colors.$darker-gray;
+	.cancel-button {
+		background-color: colors.$darker-gray;
 
-        &:hover {
-            background-color: colors.$light-gray;
-        }
+		&:hover {
+			background-color: colors.$light-gray;
+		}
 
-        &:active {
-            background-color: colors.$darker-gray;
-        }
-    }
-    .confirm-project-button, .confirm-task-button, .confirm-deletion-button {
-        background-color: colors.$primary;
-        color: white;
+		&:active {
+			background-color: colors.$darker-gray;
+		}
+	}
+	.confirm-project-button,
+	.confirm-task-button,
+	.confirm-deletion-button {
+		background-color: colors.$primary;
+		color: white;
 
-        &:hover{
-            background-color: rgb(66, 108, 185);
-        }
-        &:active {
-            background-color: colors.$primary;
-        }
-    }
+		&:hover {
+			background-color: rgb(66, 108, 185);
+		}
+		&:active {
+			background-color: colors.$primary;
+		}
+	}
 }
-
-
-
