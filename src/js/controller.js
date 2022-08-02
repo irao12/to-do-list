@@ -129,6 +129,17 @@ const controller = () => {
 
     dom.cancelProjectDeletionButton.addEventListener('click', displayController.removeConfirmProjectDeletion);
     dom.cancelTaskDeletionButton.addEventListener('click', displayController.removeConfirmTaskDeletion)
+
+    dom.projectToggle.addEventListener('click', ()=>{
+        if (dom.projectSection.classList.contains('open')){
+            dom.projectSection.classList.remove('open');
+            dom.projectToggle.classList.remove('open');
+        }
+        else {
+            dom.projectSection.classList.add('open');
+            dom.projectToggle.classList.add('open');
+        }
+    });
 }
 
 export default controller();

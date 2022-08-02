@@ -7,12 +7,23 @@
     height: 100%;
 
     &__projects {
-        display: none;
+        display: block;
+
         flex-shrink: 0;
         background-color: colors.$light-gray;
-        width: min(40%, f.rem(350));
+        width: 100%;
         height: 100%;
         padding: f.rem(20) f.rem(20);
+
+        position: absolute;
+        transform: translateX(-100%);
+        opacity: 0;
+        pointer-events: none;
+
+        transition: 
+            transform 150ms ease-in-out,
+            opacity 150ms ease-in-out,
+            width 150ms ease-in-out;
 
         .project-header {
             display: flex;
@@ -27,8 +38,23 @@
             }
         }
 
+        &.open {
+            position: relative;
+            width: 100%;
+            transform: translateX(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         @include b.breakpoints-up(medium){
-            display: block;
+            &, &.uncollapsed{
+                width: min(40%, f.rem(350));
+                position: relative;
+                transform: translateX(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            
         }
     }
 
@@ -36,10 +62,15 @@
         width: 100%;
         display: flex;
         justify-content: center;
+        
 
         .main__tasks {
             width: min(100%, f.rem(750));
             padding: f.rem(20) f.rem(30);
+
+            transition: 
+                flex-grow 1000ms cubic-bezier(1, -0.06, 1, -0.14)
+            ;
         
             .tasks-header {
                 width: 100%;

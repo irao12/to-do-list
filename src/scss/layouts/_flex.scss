@@ -15,9 +15,10 @@
     &__navbar {
         @extend %flex-align-center;
         display: flex;
+        justify-content: space-between;
         height: f.rem(100);
         background-color: colors.$primary;
-        padding: 10px 20px;
+        padding: 10px 10px;
         color: white;
 
         &--logo {

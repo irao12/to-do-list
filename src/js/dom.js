@@ -1,4 +1,6 @@
 const dom = () => {
+    const projectToggle = document.querySelector('.project-toggle');
+    const projectSection = document.querySelector('.main__projects');
     const projectList = document.querySelector('.project-list');
     const taskList = document.querySelector('.task-list');
 
@@ -38,7 +40,7 @@ const dom = () => {
     const confirmTaskDeletionButton = document.querySelector('.confirm-task-deletion-modal .confirm-deletion-button');
 
     return {
-        projectList, taskList,
+        projectToggle, projectSection, projectList, taskList,
         addProjectButton, cancelProjectButton, confirmProjectButton,
         modal, addProjectModal, addProjectForm, projectTitleInput, projectTitleFormSection,
         addTaskModal, addTaskForm,

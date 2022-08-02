@@ -3,6 +3,55 @@
 @use '../base/fonts' as fonts;
 @use '../base/breakpoints' as b;
 
+.project-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: f.rem(15);
+    width: f.rem(35);
+    height: f.rem(35);
+    cursor: pointer;
+    position: relative;
+
+    .close {
+        opacity: 0;
+        position: absolute;
+        transform: scale(0);
+        fill: white;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        fill: white;
+        rect {
+            rx: f.rem(7);
+        }
+    }
+
+    .close, .menu {
+        transition: all 200ms ease-in-out;
+    }
+
+    &.open{
+        .close {
+            transform: scale(1);
+            opacity: 1;
+            position: relative;
+        }
+        .menu {
+            transform: scale(0);
+            opacity: 0;
+            position: absolute;
+        }
+    }
+
+    @include b.breakpoints-up(medium) {
+        display: none;
+    }
+}
+
 .add-button {
     font-size: f.rem(35);
     width: f.rem(35);
@@ -89,5 +138,6 @@ button.due-date-toggle {
         }
     }
 }
+
 
 
