@@ -14,7 +14,7 @@ const dom = () => {
 
     const confirmProjectDeletionModal = document.querySelector('.confirm-project-deletion-modal');
     const CPDmodalContent = document.querySelector('.confirm-project-deletion-modal .modal-content');
-    const delConfirmationMessage = document.querySelector('.del-confirmation-msg');
+    const delConfirmationMessage = document.querySelector('.confirm-project-deletion-modal .del-confirmation-msg');
     const cancelProjectDeletionButton = document.querySelector('.confirm-project-deletion-modal .cancel-button');
     const confirmProjectDeletionButton = document.querySelector('.confirm-project-deletion-modal .confirm-deletion-button');
 
@@ -31,6 +31,12 @@ const dom = () => {
     const cancelTaskButton = document.querySelector('.add-task-modal .cancel-button');
     const confirmTaskButton = document.querySelector('.confirm-task-button');
 
+    const confirmTaskDeletionModal = document.querySelector('.confirm-task-deletion-modal');
+    const CTDmodalContent = document.querySelector('.confirm-task-deletion-modal .modal-content');
+    const delTaskConfirmationMessage = document.querySelector('.confirm-task-deletion-modal .del-confirmation-msg');
+    const cancelTaskDeletionButton = document.querySelector('.confirm-task-deletion-modal .cancel-button');
+    const confirmTaskDeletionButton = document.querySelector('.confirm-task-deletion-modal .confirm-deletion-button');
+
     return {
         projectList, taskList,
         addProjectButton, cancelProjectButton, confirmProjectButton,
@@ -39,7 +45,9 @@ const dom = () => {
         cancelTaskButton, confirmTaskButton, taskTitleInput, taskTitleFormSection,
         taskDescInput, taskDueDateInput, taskPriorityInput, taskDueDateFormSection,
         taskToggleDueDate, confirmProjectDeletionModal, CPDmodalContent, delConfirmationMessage,
-        cancelProjectDeletionButton, confirmProjectDeletionButton
+        cancelProjectDeletionButton, confirmProjectDeletionButton,
+        confirmTaskDeletionButton, cancelTaskDeletionButton, delTaskConfirmationMessage,
+        CTDmodalContent, confirmTaskDeletionModal
     }
 }
 

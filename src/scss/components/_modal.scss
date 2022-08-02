@@ -4,7 +4,6 @@
 @use '../base/breakpoints' as b;
 
 .modal {
-    display: block;
     opacity: 0;
     pointer-events: none;
     position: fixed;
@@ -211,27 +210,87 @@
 }
 
 .confirm-project-deletion-modal {
-    height: 100%;
+    height: 0;
+    width: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     pointer-events: none;
 
+    &.active {
+        height: 100%;
+        width: 100%;
+    }
+
     .modal-content {
         width: min(f.rem(550), 80%);
-        height: f.rem(250);
+        height: f.rem(300);
         background-color: white;
         border-radius: f.rem(10);
         padding: f.rem(50) f.rem(40);
+        text-align: center;
 
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
+        gap: f.rem(25);
 
         .modal-buttons {
-            align-self: flex-end;
+            align-self: center;
+
+            display: flex;
+            flex-direction: column;
+            gap: f.rem(15);
+
+            @include b.breakpoints-up(medium) {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+.confirm-task-deletion-modal {
+    height: 0;
+    width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+
+    &.active {
+        height: 100%;
+        width: 100%;
+    }
+
+    .modal-content {
+        width: min(f.rem(550), 80%);
+        height: f.rem(300);
+        background-color: white;
+        border-radius: f.rem(10);
+        padding: f.rem(50) f.rem(40);
+        text-align: center;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        gap: f.rem(25);
+
+        .modal-buttons {
+            align-self: center;
+
+            display: flex;
+            flex-direction: column;
+            gap: f.rem(15);
+
+            @include b.breakpoints-up(medium) {
+                flex-direction: row;
+                justify-content: center;
+            }
         }
     }
 }

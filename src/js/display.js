@@ -6,8 +6,14 @@ import {format, isPast, isToday, isTomorrow, isThisWeek, isThisYear} from 'date-
 import project from './project.js';
 
 const displayController = () => {
-
     // methods
+    const displayModal = () => {
+        dom.modal.classList.add('active');
+    }
+    const removeModal = () => {
+        dom.modal.classList.remove('active');
+    }
+
     const displayProject = (project) => {
         const projectList = dom.projectList;
         const projectDiv = document.createElement('div');
@@ -47,7 +53,7 @@ const displayController = () => {
         projects.forEach(displayProject);
     }
 
-    const deleteProject = (confirmButton) => {
+    const removeProject = (confirmButton) => {
         account.removeProject(confirmButton.target.projectDiv.project);
         refreshProjects();
         refreshTasks();
@@ -68,13 +74,39 @@ const displayController = () => {
         confirmButton.projectDiv = projectDiv;
 
         // remove any previous event listeners so multiple projects do not get deleted
-        confirmButton.removeEventListener('click', deleteProject);
-        confirmButton.addEventListener('click', deleteProject);
+        confirmButton.removeEventListener('click', removeProject);
+        confirmButton.addEventListener('click', removeProject);
     }
 
     const removeConfirmProjectDeletion = () => {
         removeModal();
         dom.confirmProjectDeletionModal.classList.remove('active');
+    }
+
+    const displayAddProject = () => {
+        displayModal();
+        dom.addProjectModal.classList.add('active')
+    }
+
+    const removeAddProject = () => {
+        removeModal();
+        dom.addProjectForm.reset();
+        dom.addProjectModal.classList.remove('active');
+        if (document.querySelector('.error')){
+            dom.taskTitleInput.classList.remove('invalid');
+            document.querySelector('.error').remove();
+        }
+    }
+
+    const displayProjectTitleError = () => {
+        const projectTitleInput = dom.projectTitleInput;
+        projectTitleInput.classList.add('invalid');
+        if (!document.querySelector('.error')){
+            const error = document.createElement('div');
+            error.classList.add('error');
+            error.textContent = 'Please enter a title';
+            dom.projectTitleFormSection.appendChild(error);
+        }
     }
 
     const displayTask = (task) => {
@@ -118,7 +150,19 @@ const displayController = () => {
             details.appendChild(dueDate);
         }        
 
+        //add a div for the delete button
+        const deleteButton = document.createElement('div');
+        deleteButton.classList.add('delete-task-button')
+        deleteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>';
+
+        newTask.task = task;
+
+        deleteButton.addEventListener('click', () => {
+            displayConfirmTaskDeletion(newTask);
+        });
+
         newTask.appendChild(details);
+        newTask.appendChild(deleteButton);
         taskList.appendChild(newTask);
     }
 
@@ -145,39 +189,6 @@ const displayController = () => {
             addNewTask.appendChild(addTaskText);
             addNewTask.addEventListener('click', displayAddTask);
             taskList.appendChild(addNewTask);
-        }
-    }
-
-    const displayModal = () => {
-        dom.modal.classList.add('active');
-    }
-    const removeModal = () => {
-        dom.modal.classList.remove('active');
-    }
-
-    const displayAddProject = () => {
-        displayModal();
-        dom.addProjectModal.classList.add('active')
-    }
-
-    const removeAddProject = () => {
-        removeModal();
-        dom.addProjectForm.reset();
-        dom.addProjectModal.classList.remove('active');
-        if (document.querySelector('.error')){
-            dom.taskTitleInput.classList.remove('invalid');
-            document.querySelector('.error').remove();
-        }
-    }
-
-    const displayProjectTitleError = () => {
-        const projectTitleInput = dom.projectTitleInput;
-        projectTitleInput.classList.add('invalid');
-        if (!document.querySelector('.error')){
-            const error = document.createElement('div');
-            error.classList.add('error');
-            error.textContent = 'Please enter a title';
-            dom.projectTitleFormSection.appendChild(error);
         }
     }
 
@@ -235,11 +246,40 @@ const displayController = () => {
         dom.taskDueDateInput.classList.remove('inactive')
     }
 
+    const removeTask = (confirmButton) => {
+        account.getCurrProject().removeTask(confirmButton.target.task);
+        refreshTasks();
+        removeConfirmTaskDeletion();
+    }
+
+    const displayConfirmTaskDeletion = (taskDiv) => {
+        displayModal();
+        const taskDeletionModal = dom.confirmTaskDeletionModal;
+        taskDeletionModal.classList.add('active');
+        const message = dom.delTaskConfirmationMessage;
+
+        // edit the message to say the project name
+        message.textContent = `Are you sure you want to delete the task "${taskDiv.task.getTitle()}"`;
+        const confirmButton = dom.confirmTaskDeletionButton;
+
+        //save the projectDiv in the button
+        confirmButton.task = taskDiv.task;
+
+        // remove any previous event listeners so multiple projects do not get deleted
+        confirmButton.removeEventListener('click', removeTask);
+        confirmButton.addEventListener('click', removeTask);
+    }
+
+    const removeConfirmTaskDeletion = () => {
+        removeModal();
+        dom.confirmTaskDeletionModal.classList.remove('active');
+    }
+
     return {
         refreshProjects, refreshTasks,
         displayAddProject, removeAddProject, displayProjectTitleError,
         displayAddTask, removeAddTask, displayTaskTitleError, displayTaskDateError,
-        removeTaskDateError, removeTaskTitleError, removeConfirmProjectDeletion
+        removeTaskDateError, removeTaskTitleError, removeConfirmProjectDeletion, removeConfirmTaskDeletion
     }
 }
 

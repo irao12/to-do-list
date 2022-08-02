@@ -27,6 +27,7 @@
             padding-top: f.rem(2.5);
         }
 
+
         &:hover {
             background-color: colors.$light-gray;
             border-radius: f.rem(8);
@@ -45,10 +46,44 @@
         border-bottom: f.rem(2) solid colors.$lighter-underline-color;
         margin-bottom: f.rem(10);
 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
         cursor: pointer;
 
         h3 {
             color: rgb(136, 136, 136);
+        }
+
+        .delete-task-button {
+            opacity: 0;
+            pointer-events: none;
+            width: f.rem(35);
+            height: f.rem(35);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: f.rem(4);
+
+            margin-right: f.rem(10);
+        }
+
+        &:hover{
+            .delete-task-button {
+                opacity: 1;
+                pointer-events: all;
+
+                &:hover {
+                    background-color: colors.$light-gray;
+                    border-radius: f.rem(4);
+                    
+                    svg{
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
         }
     }
 }

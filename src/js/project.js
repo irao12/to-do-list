@@ -10,6 +10,10 @@ const project = (title) => {
     const setTitle = (title) => {_title = title;};
     const getList = () => {return _list;};
     const addTask = (task) => {_list.push(task)};
+    const removeTask = (task) => {
+        const taskIndex = _list.indexOf(task);
+        _list.splice(taskIndex, 1);
+    }
 
     const sortTasks = () => {
         _list.sort((taskA, taskB)=>{
@@ -38,7 +42,7 @@ const project = (title) => {
     return {
         getTitle, setTitle,
         getList,
-        addTask,
+        addTask, removeTask,
         sortTasks
     };
 }

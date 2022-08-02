@@ -128,6 +128,7 @@ const controller = () => {
     });
 
     dom.cancelProjectDeletionButton.addEventListener('click', displayController.removeConfirmProjectDeletion);
+    dom.cancelTaskDeletionButton.addEventListener('click', displayController.removeConfirmTaskDeletion)
 }
 
 export default controller();
