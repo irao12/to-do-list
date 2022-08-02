@@ -4,6 +4,7 @@ import task from './task.js';
 
 import {format, isPast, isToday, isTomorrow, isThisWeek, isThisYear} from 'date-fns';
 import project from './project.js';
+import { el } from 'date-fns/locale';
 
 const displayController = () => {
     // methods
@@ -109,6 +110,60 @@ const displayController = () => {
         }
     }
 
+    const displayTaskDetails = (task) => {
+        displayModal();
+        const taskDetailsDiv = document.createElement('div');
+        taskDetailsDiv.classList.add('task-details-modal');
+        const taskDetailsContent = document.createElement('div');
+        taskDetailsContent.classList.add('modal-content');
+        // task title
+        const taskTitle = document.createElement('h1');
+        taskTitle.classList.add('task-title');
+        taskTitle.textContent = "Title: " + task.getTitle();
+        // task description
+        const taskDesc = document.createElement('p');
+        taskDesc.classList.add('task-desc');
+        taskDesc.textContent = "Description: " + task.getDesc();
+        // task due date
+        const taskDueDate = document.createElement('p');
+        taskDueDate.classList.add('task-due-date');
+        if (task.getDueDate()){
+            taskDueDate.textContent = "Due: " + format(task.getDueDate(), 'MMM dd yyyy');
+        }
+        else {
+            taskDueDate.textContent = "No Due Date";
+        }
+        // task priority
+        const taskPriority = document.createElement('p');
+        taskPriority.classList.add('task-priority');
+        const priority = task.getPriority();
+        if (priority === '0') taskPriority.textContent = "Priority: Low";
+        else if (priority === '1') taskPriority.textContent = "Priority: Medium";
+        else if (priority === '2') taskPriority.textContent = "Priority: High";
+
+
+        const closeButton = document.createElement('div');
+        closeButton.classList.add('task-close-button');
+        closeButton.textContent = "X";
+        closeButton.addEventListener('click', removeTaskDetails);
+
+        taskDetailsContent.appendChild(closeButton)
+        taskDetailsContent.appendChild(taskTitle);
+        taskDetailsContent.appendChild(taskDesc);
+        if (task.getDueDate())
+            taskDetailsContent.appendChild(taskDueDate);
+        taskDetailsContent.appendChild(taskPriority);
+        
+        taskDetailsDiv.appendChild(taskDetailsContent);
+
+        dom.modal.appendChild(taskDetailsDiv);
+    };
+
+    const removeTaskDetails = () => {
+        document.querySelector('.task-details-modal').remove();
+        removeModal();
+    }
+
     const displayTask = (task) => {
         const taskList = dom.taskList;
         const newTask = document.createElement('div');
@@ -159,6 +214,10 @@ const displayController = () => {
 
         deleteButton.addEventListener('click', () => {
             displayConfirmTaskDeletion(newTask);
+        });
+
+        details.addEventListener('click', ()=>{
+            displayTaskDetails(task);
         });
 
         newTask.appendChild(details);

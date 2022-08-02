@@ -52,13 +52,21 @@
 
         cursor: pointer;
 
+        .task-details {
+            &:hover {
+                background-color: colors.$light-gray;
+                border-radius: f.rem(4);
+            }
+        }
+
         h3 {
             color: rgb(136, 136, 136);
         }
 
+        .deta
+
         .delete-task-button {
-            opacity: 0;
-            pointer-events: none;
+            opacity: 1;
             width: f.rem(35);
             height: f.rem(35);
             display: flex;
@@ -67,22 +75,14 @@
             padding: f.rem(4);
 
             margin-right: f.rem(10);
-        }
 
-        &:hover{
-            .delete-task-button {
-                opacity: 1;
-                pointer-events: all;
+            @include b.breakpoints-up(large) {
+                opacity: 0;
+            }
 
-                &:hover {
-                    background-color: colors.$light-gray;
-                    border-radius: f.rem(4);
-                    
-                    svg{
-                        width: 100%;
-                        height: 100%;
-                    }
-                }
+            &:hover {
+                background-color: colors.$light-gray;
+                border-radius: f.rem(4);
             }
         }
     }
