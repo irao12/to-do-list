@@ -3,7 +3,6 @@
 @use '../base/breakpoints' as b;
 
 .task-list {
-    margin-top: f.rem(10);
     .add-new-task {
         padding: f.rem(10) f.rem(5) f.rem(10);
         width: 100%;
@@ -41,10 +40,9 @@
     }
 
     .task-div {
-        padding: f.rem(10);
-
+        padding: f.rem(10) f.rem(5);
+        height: f.rem(90);
         border-bottom: f.rem(2) solid colors.$lighter-underline-color;
-        margin-bottom: f.rem(10);
 
         display: flex;
         justify-content: space-between;
@@ -53,6 +51,7 @@
         cursor: pointer;
 
         .task-details {
+            padding: f.rem(10);
             &:hover {
                 background-color: colors.$light-gray;
                 border-radius: f.rem(4);
@@ -62,8 +61,6 @@
         h3 {
             color: rgb(136, 136, 136);
         }
-
-        .deta
 
         .delete-task-button {
             opacity: 1;
