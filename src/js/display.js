@@ -1,345 +1,363 @@
-import dom from './dom.js'
-import account from './account.js'
-import task from './task.js';
+import dom from "./dom.js";
+import account from "./account.js";
+import task from "./task.js";
 
-import {format, isPast, isToday, isTomorrow, isThisWeek, isThisYear} from 'date-fns';
-import project from './project.js';
-import { el } from 'date-fns/locale';
+import {
+	format,
+	isPast,
+	isToday,
+	isTomorrow,
+	isThisWeek,
+	isThisYear,
+} from "date-fns";
+import project from "./project.js";
+import { el } from "date-fns/locale";
 
 const displayController = () => {
-    // methods
-    const displayModal = () => {
-        dom.modal.classList.add('active');
-    }
-    const removeModal = () => {
-        dom.modal.classList.remove('active');
-    }
+	// methods
+	const displayModal = () => {
+		dom.modal.classList.add("active");
+	};
+	const removeModal = () => {
+		dom.modal.classList.remove("active");
+	};
 
-    const displayProject = (project) => {
-        const projectList = dom.projectList;
-        const projectDiv = document.createElement('div');
-        projectDiv.project = project;
-        projectDiv.classList.add('project-div');
+	const displayProject = (project) => {
+		const projectList = dom.projectList;
+		const projectDiv = document.createElement("div");
+		projectDiv.project = project;
+		projectDiv.classList.add("project-div");
 
-        const projectTitleSection = document.createElement('div');
-        projectTitleSection.classList.add('project-title-section');
-        const projectTitle = document.createElement('h2');
-        projectTitle.textContent = project.getTitle();
+		const projectTitleSection = document.createElement("div");
+		projectTitleSection.classList.add("project-title-section");
+		const projectTitle = document.createElement("h2");
+		projectTitle.textContent = project.getTitle();
 
-        projectTitleSection.appendChild(projectTitle);
+		projectTitleSection.appendChild(projectTitle);
 
-        projectDiv.appendChild(projectTitleSection);
+		projectDiv.appendChild(projectTitleSection);
 
-        projectTitleSection.addEventListener('click', ()=>{
-            account.setCurrProject(project)
-            refreshTasks();
-        });
-        
-        //add a div for the delete button
-        const deleteButton = document.createElement('div');
-        deleteButton.classList.add('delete-project-button')
-        deleteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>';
-        deleteButton.addEventListener('click', () => {
-            displayConfirmProjectDeletion(projectDiv);
-        });
-        projectDiv.appendChild(deleteButton);
+		projectTitleSection.addEventListener("click", () => {
+			account.setCurrProject(project);
+			refreshTasks();
+		});
 
-        projectList.appendChild(projectDiv);
-    }
+		//add a div for the delete button
+		const deleteButton = document.createElement("div");
+		deleteButton.classList.add("delete-project-button");
+		deleteButton.innerHTML =
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>';
+		deleteButton.addEventListener("click", () => {
+			displayConfirmProjectDeletion(projectDiv);
+		});
+		projectDiv.appendChild(deleteButton);
 
-    const refreshProjects = () => {
-        const projects = account._myProjects;
-        const projectList = dom.projectList;
-        projectList.innerHTML = '';
-        projects.forEach(displayProject);
-    }
+		projectList.appendChild(projectDiv);
+	};
 
-    const removeProject = (confirmButton) => {
-        account.removeProject(confirmButton.target.projectDiv.project);
-        refreshProjects();
-        refreshTasks();
-        removeConfirmProjectDeletion();
-    }
+	const refreshProjects = () => {
+		const projects = account._myProjects;
+		const projectList = dom.projectList;
+		projectList.innerHTML = "";
+		projects.forEach(displayProject);
+	};
 
-    const displayConfirmProjectDeletion = (projectDiv) => {
-        displayModal();
-        const projectDeletionModal = dom.confirmProjectDeletionModal;
-        projectDeletionModal.classList.add('active');
-        const message = dom.delConfirmationMessage;
+	const removeProject = (confirmButton) => {
+		account.removeProject(confirmButton.target.projectDiv.project);
+		refreshProjects();
+		refreshTasks();
+		removeConfirmProjectDeletion();
+	};
 
-        // edit the message to say the project name
-        message.textContent = `Are you sure you want to delete the project "${projectDiv.project.getTitle()}"`;
-        const confirmButton = dom.confirmProjectDeletionButton;
+	const displayConfirmProjectDeletion = (projectDiv) => {
+		displayModal();
+		const projectDeletionModal = dom.confirmProjectDeletionModal;
+		projectDeletionModal.classList.add("active");
+		const message = dom.delConfirmationMessage;
 
-        //save the projectDiv in the button
-        confirmButton.projectDiv = projectDiv;
+		// edit the message to say the project name
+		message.textContent = `Are you sure you want to delete the project "${projectDiv.project.getTitle()}"`;
+		const confirmButton = dom.confirmProjectDeletionButton;
 
-        // remove any previous event listeners so multiple projects do not get deleted
-        confirmButton.removeEventListener('click', removeProject);
-        confirmButton.addEventListener('click', removeProject);
-    }
+		//save the projectDiv in the button
+		confirmButton.projectDiv = projectDiv;
 
-    const removeConfirmProjectDeletion = () => {
-        removeModal();
-        dom.confirmProjectDeletionModal.classList.remove('active');
-    }
+		// remove any previous event listeners so multiple projects do not get deleted
+		confirmButton.removeEventListener("click", removeProject);
+		confirmButton.addEventListener("click", removeProject);
+	};
 
-    const displayAddProject = () => {
-        displayModal();
-        dom.addProjectModal.classList.add('active')
-    }
+	const removeConfirmProjectDeletion = () => {
+		removeModal();
+		dom.confirmProjectDeletionModal.classList.remove("active");
+	};
 
-    const removeAddProject = () => {
-        removeModal();
-        dom.addProjectForm.reset();
-        dom.addProjectModal.classList.remove('active');
-        if (document.querySelector('.error')){
-            dom.taskTitleInput.classList.remove('invalid');
-            document.querySelector('.error').remove();
-        }
-    }
+	const displayAddProject = () => {
+		displayModal();
+		dom.addProjectModal.classList.add("active");
+	};
 
-    const displayProjectTitleError = () => {
-        const projectTitleInput = dom.projectTitleInput;
-        projectTitleInput.classList.add('invalid');
-        if (!document.querySelector('.error')){
-            const error = document.createElement('div');
-            error.classList.add('error');
-            error.textContent = 'Please enter a title';
-            dom.projectTitleFormSection.appendChild(error);
-        }
-    }
+	const removeAddProject = () => {
+		removeModal();
+		dom.addProjectForm.reset();
+		dom.addProjectModal.classList.remove("active");
+		if (document.querySelector(".error")) {
+			dom.taskTitleInput.classList.remove("invalid");
+			document.querySelector(".error").remove();
+		}
+	};
 
-    const displayTaskDetails = (task) => {
-        displayModal();
-        const taskDetailsDiv = document.createElement('div');
-        taskDetailsDiv.classList.add('task-details-modal');
-        const taskDetailsContent = document.createElement('div');
-        taskDetailsContent.classList.add('modal-content');
-        // task title
-        const taskTitle = document.createElement('h1');
-        taskTitle.classList.add('task-title');
-        taskTitle.textContent = "Title: " + task.getTitle();
-        // task description
-        const taskDesc = document.createElement('p');
-        taskDesc.classList.add('task-desc');
-        taskDesc.textContent = "Description: " + task.getDesc();
-        // task due date
-        const taskDueDate = document.createElement('p');
-        taskDueDate.classList.add('task-due-date');
-        if (task.getDueDate()){
-            taskDueDate.textContent = "Due: " + format(task.getDueDate(), 'MMM dd yyyy');
-        }
-        else {
-            taskDueDate.textContent = "No Due Date";
-        }
-        // task priority
-        const taskPriority = document.createElement('p');
-        taskPriority.classList.add('task-priority');
-        const priority = task.getPriority();
-        if (priority === '0') taskPriority.textContent = "Priority: Low";
-        else if (priority === '1') taskPriority.textContent = "Priority: Medium";
-        else if (priority === '2') taskPriority.textContent = "Priority: High";
+	const displayProjectTitleError = () => {
+		const projectTitleInput = dom.projectTitleInput;
+		projectTitleInput.classList.add("invalid");
+		if (!document.querySelector(".error")) {
+			const error = document.createElement("div");
+			error.classList.add("error");
+			error.textContent = "Please enter a title";
+			dom.projectTitleFormSection.appendChild(error);
+		}
+	};
 
+	const displayTaskDetails = (task) => {
+		displayModal();
+		const taskDetailsDiv = document.createElement("div");
+		taskDetailsDiv.classList.add("task-details-modal");
+		const taskDetailsContent = document.createElement("div");
+		taskDetailsContent.classList.add("modal-content");
+		// task title
+		const taskTitle = document.createElement("h1");
+		taskTitle.classList.add("task-title");
+		taskTitle.textContent = "Title: " + task.getTitle();
+		// task description
+		const taskDesc = document.createElement("p");
+		taskDesc.classList.add("task-desc");
+		taskDesc.textContent = "Description: " + task.getDesc();
+		// task due date
+		const taskDueDate = document.createElement("p");
+		taskDueDate.classList.add("task-due-date");
+		if (task.getDueDate()) {
+			taskDueDate.textContent =
+				"Due: " + format(task.getDueDate(), "MMM dd yyyy");
+		} else {
+			taskDueDate.textContent = "No Due Date";
+		}
+		// task priority
+		const taskPriority = document.createElement("p");
+		taskPriority.classList.add("task-priority");
+		const priority = task.getPriority();
+		if (priority === "0") taskPriority.textContent = "Priority: Low";
+		else if (priority === "1")
+			taskPriority.textContent = "Priority: Medium";
+		else if (priority === "2") taskPriority.textContent = "Priority: High";
 
-        const closeButton = document.createElement('div');
-        closeButton.classList.add('task-close-button');
-        closeButton.textContent = "X";
-        closeButton.addEventListener('click', removeTaskDetails);
+		const closeButton = document.createElement("div");
+		closeButton.classList.add("task-close-button");
+		closeButton.textContent = "X";
+		closeButton.addEventListener("click", removeTaskDetails);
 
-        taskDetailsContent.appendChild(closeButton)
-        taskDetailsContent.appendChild(taskTitle);
-        taskDetailsContent.appendChild(taskDesc);
-        if (task.getDueDate())
-            taskDetailsContent.appendChild(taskDueDate);
-        taskDetailsContent.appendChild(taskPriority);
-        
-        taskDetailsDiv.appendChild(taskDetailsContent);
+		taskDetailsContent.appendChild(closeButton);
+		taskDetailsContent.appendChild(taskTitle);
+		taskDetailsContent.appendChild(taskDesc);
+		if (task.getDueDate()) taskDetailsContent.appendChild(taskDueDate);
+		taskDetailsContent.appendChild(taskPriority);
 
-        dom.modal.appendChild(taskDetailsDiv);
-    };
+		taskDetailsDiv.appendChild(taskDetailsContent);
 
-    const removeTaskDetails = () => {
-        document.querySelector('.task-details-modal').remove();
-        removeModal();
-    }
+		dom.modal.appendChild(taskDetailsDiv);
+	};
 
-    const displayTask = (task) => {
-        const taskList = dom.taskList;
-        const newTask = document.createElement('div');
-        newTask.classList.add('task-div');
-        const taskTitle = document.createElement('h2');
-        taskTitle.textContent = task.getTitle();
+	const removeTaskDetails = () => {
+		document.querySelector(".task-details-modal").remove();
+		removeModal();
+	};
 
-        const details = document.createElement('div');
-        details.classList.add('task-details');
+	const displayTask = (task) => {
+		const taskList = dom.taskList;
+		const newTask = document.createElement("div");
+		newTask.classList.add("task-div");
+		const taskTitle = document.createElement("h2");
+		taskTitle.textContent = task.getTitle();
 
-        details.appendChild(taskTitle);
+		const details = document.createElement("div");
+		details.classList.add("task-details");
 
-        if (task.getDueDate()){
-            const taskDueDate = task.getDueDate();
-            let taskDueDateText;
-            
-            // If the date is in the past, show overdue
-            if (isPast(taskDueDate)) {
-                taskDueDateText = "Overdue";
-            }
-            // if the date is today, show today
-            else if (isToday(taskDueDate)) 
-                taskDueDateText = "Today";
-            else if (isTomorrow(taskDueDate)) 
-                taskDueDateText = "Tomorrow";
-            // if the date is in the current week, show the weekday
-            else if (isThisWeek(taskDueDate))
-                taskDueDateText = format(task.getDueDate(), 'EEEE');
-            // if the date is in the current year, show the month and day
-            else if (isThisYear(taskDueDate))
-                taskDueDateText = format(task.getDueDate(), 'MMM dd');
-            // otherwise, show the full date
-            else {
-                taskDueDateText = format(task.getDueDate(), 'MMM dd yyyy');
-            }
+		details.appendChild(taskTitle);
 
-            const dueDate = document.createElement('h3');
-            dueDate.textContent = taskDueDateText;
-            details.appendChild(dueDate);
-        }        
+		if (task.getDueDate()) {
+			const taskDueDate = task.getDueDate();
+			let taskDueDateText;
 
-        //add a div for the delete button
-        const deleteButton = document.createElement('div');
-        deleteButton.classList.add('delete-task-button')
-        deleteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>';
+			// If the date is in the past, show overdue
+			if (isPast(taskDueDate)) {
+				taskDueDateText = "Overdue";
+			}
+			// if the date is today, show today
+			else if (isToday(taskDueDate)) taskDueDateText = "Today";
+			else if (isTomorrow(taskDueDate)) taskDueDateText = "Tomorrow";
+			// if the date is in the current week, show the weekday
+			else if (isThisWeek(taskDueDate))
+				taskDueDateText = format(task.getDueDate(), "EEEE");
+			// if the date is in the current year, show the month and day
+			else if (isThisYear(taskDueDate))
+				taskDueDateText = format(task.getDueDate(), "MMM dd");
+			// otherwise, show the full date
+			else {
+				taskDueDateText = format(task.getDueDate(), "MMM dd yyyy");
+			}
 
-        newTask.task = task;
+			const dueDate = document.createElement("h3");
+			dueDate.textContent = taskDueDateText;
+			details.appendChild(dueDate);
+		}
 
-        deleteButton.addEventListener('click', () => {
-            displayConfirmTaskDeletion(newTask);
-        });
+		//add a div for the delete button
+		const deleteButton = document.createElement("div");
+		deleteButton.classList.add("delete-task-button");
+		deleteButton.innerHTML =
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>';
 
-        details.addEventListener('click', ()=>{
-            displayTaskDetails(task);
-        });
+		newTask.task = task;
 
-        newTask.appendChild(details);
-        newTask.appendChild(deleteButton);
-        taskList.appendChild(newTask);
-    }
+		deleteButton.addEventListener("click", () => {
+			displayConfirmTaskDeletion(newTask);
+		});
 
-    const refreshTasks = () => {
-        const currProject = account.getCurrProject();
-        const taskList = dom.taskList;
-        taskList.textContent = '';
+		details.addEventListener("click", () => {
+			displayTaskDetails(task);
+		});
 
-        if (currProject) {
-            const currtaskList = currProject.getList();
-            currtaskList.forEach(displayTask);
+		newTask.appendChild(details);
+		newTask.appendChild(deleteButton);
+		taskList.appendChild(newTask);
+	};
 
-            const addNewTask = document.createElement('div');
-            addNewTask.classList.add('add-new-task');
+	const refreshTasks = () => {
+		const currProject = account.getCurrProject();
+		const taskList = dom.taskList;
+		taskList.textContent = "";
 
-            const addTaskText = document.createElement('h2');
-            addTaskText.textContent = 'Add task';
-            addTaskText.classList.add('add-task-text');
-            const addTaskButton = document.createElement('div');
-            addTaskButton.classList.add('add-task-button');
-            addTaskButton.textContent ='+';
-            
-            addNewTask.appendChild(addTaskButton);
-            addNewTask.appendChild(addTaskText);
-            addNewTask.addEventListener('click', displayAddTask);
-            taskList.appendChild(addNewTask);
-        }
-    }
+		if (currProject) {
+			const currtaskList = currProject.getList();
+			currtaskList.forEach(displayTask);
 
-    const displayTaskTitleError = () => {
-        const taskTitleInput = dom.taskTitleInput;
-        taskTitleInput.classList.add('invalid');
-        if (!document.querySelector('.task-title-section .error')){
-            const error = document.createElement('div');
-            error.classList.add('error');
-            error.textContent = 'Please enter a title';
-            dom.taskTitleFormSection.appendChild(error);
-        }
-    }
+			const addNewTask = document.createElement("div");
+			addNewTask.classList.add("add-new-task");
 
-    const removeTaskTitleError = () => {
-        if (document.querySelector('.task-title-section .error')){
-            dom.taskTitleInput.classList.remove('invalid');
-            document.querySelector('.task-title-section .error').remove();
-        }
-    }
+			const addTaskText = document.createElement("h2");
+			addTaskText.textContent = "Add task";
+			addTaskText.classList.add("add-task-text");
+			const addTaskButton = document.createElement("div");
+			addTaskButton.classList.add("add-task-button");
+			addTaskButton.textContent = "+";
 
-    const displayTaskDateError = () => {
-        const taskDateInput = dom.taskDueDateInput;
-        taskDateInput.classList.add('invalid');
-        if (!document.querySelector('.task-due-date-section .error')){
-            const error = document.createElement('div');
-            error.classList.add('error');
-            error.textContent = 'Please enter a valid date';
+			addNewTask.appendChild(addTaskButton);
+			addNewTask.appendChild(addTaskText);
+			addNewTask.addEventListener("click", displayAddTask);
+			taskList.appendChild(addNewTask);
+		}
+	};
 
-            dom.taskDueDateFormSection.insertBefore(error, dom.taskToggleDueDate);
-        }
-    }
+	const displayTaskTitleError = () => {
+		const taskTitleInput = dom.taskTitleInput;
+		taskTitleInput.classList.add("invalid");
+		if (!document.querySelector(".task-title-section .error")) {
+			const error = document.createElement("div");
+			error.classList.add("error");
+			error.textContent = "Please enter a title";
+			dom.taskTitleFormSection.appendChild(error);
+		}
+	};
 
-    const removeTaskDateError = () => {
-        if (document.querySelector('.task-due-date-section .error')){
-            dom.taskDueDateInput.classList.remove('invalid');
-            document.querySelector('.task-due-date-section .error').remove();
-        }
-    }
+	const removeTaskTitleError = () => {
+		if (document.querySelector(".task-title-section .error")) {
+			dom.taskTitleInput.classList.remove("invalid");
+			document.querySelector(".task-title-section .error").remove();
+		}
+	};
 
-    const displayAddTask = () => {
-        displayModal();
-        dom.addTaskModal.classList.add('active');
-    }
+	const displayTaskDateError = () => {
+		const taskDateInput = dom.taskDueDateInput;
+		taskDateInput.classList.add("invalid");
+		if (!document.querySelector(".task-due-date-section .error")) {
+			const error = document.createElement("div");
+			error.classList.add("error");
+			error.textContent = "Please enter a valid date";
 
-    const removeAddTask = () => {
-        removeModal();
-        dom.addTaskForm.reset();
-        dom.addTaskModal.classList.remove('active');
-        
-        removeTaskTitleError();
-        removeTaskDateError();
+			dom.taskDueDateFormSection.insertBefore(
+				error,
+				dom.taskToggleDueDate
+			);
+		}
+	};
 
-        dom.taskToggleDueDate.textContent = "Remove Due Date";
-        dom.taskDueDateInput.classList.remove('inactive')
-    }
+	const removeTaskDateError = () => {
+		if (document.querySelector(".task-due-date-section .error")) {
+			dom.taskDueDateInput.classList.remove("invalid");
+			document.querySelector(".task-due-date-section .error").remove();
+		}
+	};
 
-    const removeTask = (confirmButton) => {
-        account.getCurrProject().removeTask(confirmButton.target.task);
-        refreshTasks();
-        removeConfirmTaskDeletion();
-    }
+	const displayAddTask = () => {
+		displayModal();
+		dom.addTaskModal.classList.add("active");
+	};
 
-    const displayConfirmTaskDeletion = (taskDiv) => {
-        displayModal();
-        const taskDeletionModal = dom.confirmTaskDeletionModal;
-        taskDeletionModal.classList.add('active');
-        const message = dom.delTaskConfirmationMessage;
+	const removeAddTask = () => {
+		removeModal();
+		dom.addTaskForm.reset();
+		dom.addTaskModal.classList.remove("active");
 
-        // edit the message to say the project name
-        message.textContent = `Are you sure you want to delete the task "${taskDiv.task.getTitle()}"`;
-        const confirmButton = dom.confirmTaskDeletionButton;
+		removeTaskTitleError();
+		removeTaskDateError();
 
-        //save the projectDiv in the button
-        confirmButton.task = taskDiv.task;
+		dom.taskToggleDueDate.textContent = "Remove Due Date";
+		dom.taskDueDateInput.classList.remove("inactive");
+	};
 
-        // remove any previous event listeners so multiple projects do not get deleted
-        confirmButton.removeEventListener('click', removeTask);
-        confirmButton.addEventListener('click', removeTask);
-    }
+	const removeTask = (confirmButton) => {
+		account.getCurrProject().removeTask(confirmButton.target.task);
+		refreshTasks();
+		removeConfirmTaskDeletion();
+	};
 
-    const removeConfirmTaskDeletion = () => {
-        removeModal();
-        dom.confirmTaskDeletionModal.classList.remove('active');
-    }
+	const displayConfirmTaskDeletion = (taskDiv) => {
+		displayModal();
+		const taskDeletionModal = dom.confirmTaskDeletionModal;
+		taskDeletionModal.classList.add("active");
+		const message = dom.delTaskConfirmationMessage;
 
-    return {
-        refreshProjects, refreshTasks,
-        displayAddProject, removeAddProject, displayProjectTitleError,
-        displayAddTask, removeAddTask, displayTaskTitleError, displayTaskDateError,
-        removeTaskDateError, removeTaskTitleError, removeConfirmProjectDeletion, removeConfirmTaskDeletion
-    }
-}
+		// edit the message to say the project name
+		message.textContent = `Are you sure you want to delete the task "${taskDiv.task.getTitle()}"`;
+		const confirmButton = dom.confirmTaskDeletionButton;
+
+		//save the projectDiv in the button
+		confirmButton.task = taskDiv.task;
+
+		// remove any previous event listeners so multiple projects do not get deleted
+		confirmButton.removeEventListener("click", removeTask);
+		confirmButton.addEventListener("click", removeTask);
+	};
+
+	const removeConfirmTaskDeletion = () => {
+		removeModal();
+		dom.confirmTaskDeletionModal.classList.remove("active");
+	};
+
+	return {
+		refreshProjects,
+		refreshTasks,
+		displayAddProject,
+		removeAddProject,
+		displayProjectTitleError,
+		displayAddTask,
+		removeAddTask,
+		displayTaskTitleError,
+		displayTaskDateError,
+		removeTaskDateError,
+		removeTaskTitleError,
+		removeConfirmProjectDeletion,
+		removeConfirmTaskDeletion,
+	};
+};
 
 export default displayController();
