@@ -40,6 +40,9 @@ const displayController = () => {
 		projectTitleSection.addEventListener("click", () => {
 			account.setCurrProject(project);
 			refreshTasks();
+			const projectSection = dom.projectSection;
+			if (projectSection.classList.contains("open"))
+				projectSection.classList.remove("open");
 		});
 
 		//add a div for the delete button
