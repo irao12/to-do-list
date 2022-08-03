@@ -114,7 +114,7 @@ const controller = () => {
 
 	dom.taskToggleDueDate.addEventListener("click", () => {
 		const toggleButton = dom.taskToggleDueDate;
-
+		console.log(toggleButton.textContent);
 		if (toggleButton.textContent === "Remove Due Date") {
 			toggleButton.textContent = "Add Due Date";
 			dom.taskDueDateInput.value = "";
