@@ -3,7 +3,7 @@ import task from "./task.js";
 import dom from "./dom.js";
 import account from "./account.js";
 import displayController from "./display.js";
-import { endOfDay } from "date-fns";
+import { compareAsc, endOfDay } from "date-fns";
 
 const controller = () => {
 	const formatDate = (date) => {
@@ -62,10 +62,9 @@ const controller = () => {
 		}
 	});
 
-	dom.cancelTaskButton.addEventListener(
-		"click",
-		displayController.removeAddTask
-	);
+	dom.cancelTaskButton.addEventListener("click", () => {
+		displayController.removeAddTask();
+	});
 
 	dom.confirmTaskButton.addEventListener("click", () => {
 		if (isValidTaskTitle() && isValidTaskDate()) {
@@ -114,7 +113,6 @@ const controller = () => {
 
 	dom.taskToggleDueDate.addEventListener("click", () => {
 		const toggleButton = dom.taskToggleDueDate;
-		console.log(toggleButton.textContent);
 		if (toggleButton.textContent === "Remove Due Date") {
 			toggleButton.textContent = "Add Due Date";
 			dom.taskDueDateInput.value = "";
@@ -148,6 +146,237 @@ const controller = () => {
 			dom.projectSection.classList.add("open");
 			dom.projectToggle.classList.add("open");
 		}
+	});
+
+	dom.editTaskToggleDueDate.addEventListener("click", () => {
+		const toggleButton = dom.editTaskToggleDueDate;
+		console.log(dom.editTaskDueDateInput);
+		if (toggleButton.textContent === "Remove Due Date") {
+			toggleButton.textContent = "Add Due Date";
+			dom.editTaskDueDateInput.value = "";
+			dom.editTaskDueDateInput.classList.add("inactive");
+			if (dom.editTaskDueDateInput.classList.contains("invalid")) {
+				dom.editTaskDueDateInput.classList.remove("invalid");
+				document
+					.querySelector(
+						".view-task-section.task-due-date-section .error"
+					)
+					.remove();
+			}
+		} else if (toggleButton.textContent === "Add Due Date") {
+			toggleButton.textContent = "Remove Due Date";
+			dom.editTaskDueDateInput.classList.remove("inactive");
+		}
+	});
+
+	dom.closeViewTaskButton.addEventListener("click", () => {
+		displayController.removeViewTaskModal();
+	});
+
+	dom.editTaskTitleButton.addEventListener("click", () => {
+		const taskSection = document.querySelector(
+			".view-task-modal .task-title-section"
+		);
+
+		dom.removeClass(dom.editTaskTitleButton, "active-block");
+
+		const heading = taskSection.querySelector(".task-specific-detail h2");
+		dom.removeClass(heading, "active-block");
+
+		const input = taskSection.querySelector("input");
+		input.value = dom.viewTaskModal.task.getTitle();
+		dom.addClass(input, "active-block");
+
+		const confirmButton = taskSection.querySelector(".confirm-edit-button");
+		confirmButton.addEventListener("click", () => {
+			if (input.value) {
+				if (input.classList.contains("invalid")) {
+					dom.removeClass(input, "invalid");
+					taskSection.querySelector(".error").remove();
+				}
+				const currTask = dom.viewTaskModal.task;
+				currTask.setTitle(input.value);
+				dom.addClass(heading, "active-block");
+				dom.addClass(dom.editTaskTitleButton, "active-block");
+				dom.removeClass(input, "active-block");
+				dom.removeClass(confirmButton, "active-block");
+				dom.removeClass(cancelButton, "active-block");
+				displayController.refreshTaskDetails();
+			} else {
+				if (!input.classList.contains("invalid")) {
+					dom.addClass(input, "invalid");
+					const error = document.createElement("h3");
+					error.classList.add("error");
+					error.textContent = "Please enter a valid title";
+					input.parentNode.appendChild(error);
+				}
+			}
+		});
+
+		const cancelButton = taskSection.querySelector(".cancel-edit-button");
+		cancelButton.addEventListener("click", () => {
+			if (input.classList.contains("invalid")) {
+				dom.removeClass(input, "invalid");
+				taskSection.querySelector(".error").remove();
+			}
+			dom.addClass(heading, "active-block");
+			dom.addClass(dom.editTaskTitleButton, "active-block");
+			dom.removeClass(input, "active-block");
+			dom.removeClass(confirmButton, "active-block");
+			dom.removeClass(cancelButton, "active-block");
+		});
+
+		dom.addClass(confirmButton, "active-block");
+		dom.addClass(cancelButton, "active-block");
+	});
+
+	dom.editTaskDescButton.addEventListener("click", () => {
+		const taskSection = document.querySelector(
+			".view-task-modal .task-desc-section"
+		);
+
+		dom.removeClass(dom.editTaskDescButton, "active-block");
+
+		const heading = taskSection.querySelector(".task-specific-detail p");
+		dom.removeClass(heading, "active-block");
+
+		const textarea = taskSection.querySelector("textarea");
+		textarea.textContent = dom.viewTaskModal.task.getDesc();
+		dom.addClass(textarea, "active-block");
+
+		const confirmButton = taskSection.querySelector(".confirm-edit-button");
+		confirmButton.addEventListener("click", () => {
+			const currTask = dom.viewTaskModal.task;
+			currTask.setDesc(textarea.value);
+			dom.addClass(heading, "active-block");
+			dom.addClass(dom.editTaskDescButton, "active-block");
+			dom.removeClass(textarea, "active-block");
+			dom.removeClass(confirmButton, "active-block");
+			dom.removeClass(cancelButton, "active-block");
+			displayController.refreshTaskDetails();
+		});
+
+		const cancelButton = taskSection.querySelector(".cancel-edit-button");
+		cancelButton.addEventListener("click", () => {
+			dom.addClass(heading, "active-block");
+			dom.addClass(dom.editTaskDescButton, "active-block");
+			dom.removeClass(textarea, "active-block");
+			dom.removeClass(confirmButton, "active-block");
+			dom.removeClass(cancelButton, "active-block");
+		});
+
+		dom.addClass(confirmButton, "active-block");
+		dom.addClass(cancelButton, "active-block");
+	});
+
+	dom.editTaskDueDateButton.addEventListener("click", () => {
+		const taskSection = document.querySelector(
+			".view-task-modal .task-due-date-section"
+		);
+
+		dom.removeClass(dom.editTaskDueDateButton, "active-block");
+
+		const heading = taskSection.querySelector(".task-specific-detail h2");
+		dom.removeClass(heading, "active-block");
+
+		const input = taskSection.querySelector(".form-due-date-div");
+		dom.addClass(input, "active-flex");
+
+		const confirmButton = taskSection.querySelector(".confirm-edit-button");
+		confirmButton.addEventListener("click", () => {
+			if (
+				!dom.editTaskDueDateInput.value &&
+				!dom.editTaskDueDateInput.classList.contains("inactive")
+			) {
+				const taskDateInput = dom.editTaskDueDateInput;
+				taskDateInput.classList.add("invalid");
+				if (!document.querySelector(".task-due-date-section .error")) {
+					const error = document.createElement("div");
+					error.classList.add("error");
+					error.textContent = "Please enter a valid date";
+
+					document
+						.querySelector(
+							".task-due-date-section .form-due-date-div"
+						)
+						.insertBefore(error, dom.editTaskToggleDueDate);
+				}
+			} else {
+				if (document.querySelector(".form-due-date-div .error")) {
+					dom.editTaskDueDateInput.classList.remove("invalid");
+					document
+						.querySelector(".form-due-date-div .error")
+						.remove();
+				}
+
+				const taskDueDate = dom.editTaskDueDateInput.value
+					? endOfDay(
+							new Date(formatDate(dom.editTaskDueDateInput.value))
+					  )
+					: "";
+
+				dom.viewTaskModal.task.setDueDate(taskDueDate);
+				dom.addClass(heading, "active-block");
+				dom.addClass(dom.editTaskDueDateButton, "active-block");
+				dom.removeClass(input, "active-flex");
+				dom.removeClass(confirmButton, "active-block");
+				dom.removeClass(cancelButton, "active-block");
+				displayController.refreshTaskDetails();
+			}
+		});
+
+		const cancelButton = taskSection.querySelector(".cancel-edit-button");
+		cancelButton.addEventListener("click", () => {
+			if (document.querySelector(".form-due-date-div .error")) {
+				dom.editTaskDueDateInput.classList.remove("invalid");
+				document.querySelector(".form-due-date-div .error").remove();
+			}
+
+			dom.addClass(heading, "active-block");
+			dom.addClass(dom.editTaskDueDateButton, "active-block");
+			dom.removeClass(input, "active-flex");
+			dom.removeClass(confirmButton, "active-block");
+			dom.removeClass(cancelButton, "active-block");
+		});
+		dom.addClass(confirmButton, "active-block");
+		dom.addClass(cancelButton, "active-block");
+	});
+
+	dom.editTaskPriorityButton.addEventListener("click", () => {
+		const taskSection = document.querySelector(
+			".view-task-modal .task-priority-section"
+		);
+
+		dom.removeClass(dom.editTaskPriorityButton, "active-block");
+
+		const heading = taskSection.querySelector(".task-specific-detail h2");
+		dom.removeClass(heading, "active-block");
+
+		const input = taskSection.querySelector("select");
+		dom.addClass(input, "active-block");
+
+		const confirmButton = taskSection.querySelector(".confirm-edit-button");
+		confirmButton.addEventListener("click", () => {
+			const currTask = dom.viewTaskModal.task;
+			currTask.setPriority(input.value);
+			dom.addClass(heading, "active-block");
+			dom.addClass(dom.editTaskPriorityButton, "active-block");
+			dom.removeClass(input, "active-block");
+			dom.removeClass(confirmButton, "active-block");
+			dom.removeClass(cancelButton, "active-block");
+			displayController.refreshTaskDetails();
+		});
+
+		const cancelButton = taskSection.querySelector(".cancel-edit-button");
+		cancelButton.addEventListener("click", () => {
+			dom.addClass(heading, "active-block");
+			dom.addClass(dom.editTaskPriorityButton, "active-block");
+			dom.removeClass(input, "active-block");
+			dom.removeClass(confirmButton, "active-block");
+			dom.removeClass(cancelButton, "active-block");
+		});
+		dom.addClass(confirmButton, "active-block");
+		dom.addClass(cancelButton, "active-block");
 	});
 };
 

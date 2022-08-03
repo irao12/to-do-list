@@ -141,3 +141,24 @@ button.due-date-toggle {
 		}
 	}
 }
+
+.edit-buttons {
+	display: flex;
+}
+
+.edit-task-button,
+.confirm-edit-button,
+.cancel-edit-button {
+	width: f.rem(25);
+	display: none;
+
+	cursor: pointer;
+	&:hover {
+		background-color: colors.$light-gray;
+		border-radius: f.rem(4);
+	}
+}
+
+.active-block {
+	display: block;
+}

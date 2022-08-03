@@ -15,11 +15,17 @@ import { el } from "date-fns/locale";
 
 const displayController = () => {
 	// methods
+	const addActive = (element) => {
+		element.classList.add("active");
+	};
+	const removeActive = (element) => {
+		element.classList.remove("active");
+	};
 	const displayModal = () => {
-		dom.modal.classList.add("active");
+		addActive(dom.modal);
 	};
 	const removeModal = () => {
-		dom.modal.classList.remove("active");
+		removeActive(dom.modal);
 	};
 
 	const displayProject = (project) => {
@@ -76,7 +82,7 @@ const displayController = () => {
 	const displayConfirmProjectDeletion = (projectDiv) => {
 		displayModal();
 		const projectDeletionModal = dom.confirmProjectDeletionModal;
-		projectDeletionModal.classList.add("active");
+		addActive(projectDeletionModal);
 		const message = dom.delConfirmationMessage;
 
 		// edit the message to say the project name
@@ -93,20 +99,20 @@ const displayController = () => {
 
 	const removeConfirmProjectDeletion = () => {
 		removeModal();
-		dom.confirmProjectDeletionModal.classList.remove("active");
+		removeActive(dom.confirmProjectDeletionModal);
 	};
 
 	const displayAddProject = () => {
 		displayModal();
-		dom.addProjectModal.classList.add("active");
+		addActive(dom.addProjectModal);
 	};
 
 	const removeAddProject = () => {
 		removeModal();
 		dom.addProjectForm.reset();
-		dom.addProjectModal.classList.remove("active");
+		removeActive(dom.addProjectModal);
 		if (document.querySelector(".error")) {
-			dom.taskTitleInput.classList.remove("invalid");
+			dom.projectTitleInput.classList.remove("invalid");
 			document.querySelector(".error").remove();
 		}
 	};
@@ -120,59 +126,6 @@ const displayController = () => {
 			error.textContent = "Please enter a title";
 			dom.projectTitleFormSection.appendChild(error);
 		}
-	};
-
-	const displayTaskDetails = (task) => {
-		displayModal();
-		const taskDetailsDiv = document.createElement("div");
-		taskDetailsDiv.classList.add("task-details-modal");
-		const taskDetailsContent = document.createElement("div");
-		taskDetailsContent.classList.add("modal-content");
-		// task title
-		const taskTitle = document.createElement("h1");
-		taskTitle.classList.add("task-title");
-		taskTitle.textContent = "Title: " + task.getTitle();
-		// task description
-		const taskDesc = document.createElement("p");
-		taskDesc.classList.add("task-desc");
-		taskDesc.textContent = "Description: " + task.getDesc();
-		// task due date
-		const taskDueDate = document.createElement("p");
-		taskDueDate.classList.add("task-due-date");
-		if (task.getDueDate()) {
-			taskDueDate.textContent =
-				"Due: " + format(task.getDueDate(), "MMM dd yyyy");
-		} else {
-			taskDueDate.textContent = "No Due Date";
-		}
-		// task priority
-		const taskPriority = document.createElement("p");
-		taskPriority.classList.add("task-priority");
-		const priority = task.getPriority();
-		if (priority === "0") taskPriority.textContent = "Priority: Low";
-		else if (priority === "1")
-			taskPriority.textContent = "Priority: Medium";
-		else if (priority === "2") taskPriority.textContent = "Priority: High";
-
-		const closeButton = document.createElement("div");
-		closeButton.classList.add("task-close-button");
-		closeButton.textContent = "X";
-		closeButton.addEventListener("click", removeTaskDetails);
-
-		taskDetailsContent.appendChild(closeButton);
-		taskDetailsContent.appendChild(taskTitle);
-		taskDetailsContent.appendChild(taskDesc);
-		if (task.getDueDate()) taskDetailsContent.appendChild(taskDueDate);
-		taskDetailsContent.appendChild(taskPriority);
-
-		taskDetailsDiv.appendChild(taskDetailsContent);
-
-		dom.modal.appendChild(taskDetailsDiv);
-	};
-
-	const removeTaskDetails = () => {
-		document.querySelector(".task-details-modal").remove();
-		removeModal();
 	};
 
 	const displayTask = (task) => {
@@ -223,6 +176,10 @@ const displayController = () => {
 			details.appendChild(dueDate);
 		}
 
+		details.addEventListener("click", () => {
+			displayViewTaskModal(task);
+		});
+
 		//add a div for the delete button
 		const deleteButton = document.createElement("div");
 		deleteButton.classList.add("delete-task-button");
@@ -233,10 +190,6 @@ const displayController = () => {
 
 		deleteButton.addEventListener("click", () => {
 			displayConfirmTaskDeletion(newTask);
-		});
-
-		details.addEventListener("click", () => {
-			displayTaskDetails(task);
 		});
 
 		newTask.appendChild(details);
@@ -336,7 +289,7 @@ const displayController = () => {
 	const displayConfirmTaskDeletion = (taskDiv) => {
 		displayModal();
 		const taskDeletionModal = dom.confirmTaskDeletionModal;
-		taskDeletionModal.classList.add("active");
+		addActive(taskDeletionModal);
 		const message = dom.delTaskConfirmationMessage;
 
 		// edit the message to say the project name
@@ -353,10 +306,112 @@ const displayController = () => {
 
 	const removeConfirmTaskDeletion = () => {
 		removeModal();
-		dom.confirmTaskDeletionModal.classList.remove("active");
+		removeActive(dom.confirmTaskDeletionModal);
+	};
+
+	const refreshTaskDetails = () => {
+		const task = dom.viewTaskModal.task;
+		dom.viewTaskTitleHeading.textContent = task.getTitle();
+		dom.viewTaskDescHeading.textContent = task.getDesc();
+		dom.viewTaskDueDateHeading.textContent = task.getDueDate()
+			? format(task.getDueDate(), "MMM dd yyyy")
+			: "No Due Date";
+		dom.viewTaskPriorityHeading.textContent =
+			task.getPriority() == 0
+				? "Low"
+				: task.getPriority() == 1
+				? "Medium"
+				: "High";
+	};
+
+	const displayViewTaskModal = (task) => {
+		displayModal();
+		addActive(dom.viewTaskModal);
+		dom.viewTaskModal.task = task;
+		refreshTaskDetails(task);
+	};
+
+	const removeViewTaskModal = () => {
+		removeModal();
+		removeActive(dom.viewTaskModal);
+		const editTaskButtons = document.querySelectorAll(".edit-task-button");
+		editTaskButtons.forEach((button) => {
+			dom.addClass(button, "active-block");
+		});
+
+		const confirmEditButtons = document.querySelectorAll(
+			".confirm-edit-button"
+		);
+		confirmEditButtons.forEach((button) => {
+			dom.removeClass(button, "active-block");
+		});
+
+		const cancelEditButtons = document.querySelectorAll(
+			".cancel-edit-button"
+		);
+		cancelEditButtons.forEach((button) => {
+			dom.removeClass(button, "active-block");
+		});
+
+		// reset the title
+		const titleText = document.querySelector(
+			".task-title-section .task-specific-detail h2"
+		);
+		if (!titleText.classList.contains("active-block")) {
+			dom.addClass(titleText, "active-block");
+			const input = document.querySelector("#edit-task-title");
+			if (input.classList.contains("invalid")) {
+				dom.removeClass(input, "invalid");
+				document.querySelector(".task-title-section .error").remove();
+			}
+			dom.removeClass(input, "active-block");
+		}
+
+		// reset the description
+		const descText = document.querySelector(".task-specific-detail p");
+		if (!descText.classList.contains("active-block")) {
+			dom.addClass(descText, "active-block");
+			const textarea = document.querySelector(
+				".view-task-modal .task-desc-section textarea"
+			);
+			dom.removeClass(textarea, "active-block");
+		}
+
+		// reset the due date
+		const dueDateText = document.querySelector(
+			".task-due-date-section .task-specific-detail h2"
+		);
+		if (!dueDateText.classList.contains("active-block")) {
+			dom.addClass(dueDateText, "active-block");
+			const input = document.querySelector(
+				".task-specific-detail .form-due-date-div"
+			);
+			dom.removeClass(input.querySelector("input"), "invalid");
+			dom.removeClass(input.querySelector("input"), "inactive");
+			input.querySelector("button").textContent = "Remove Due Date";
+			if (document.querySelector(".error"))
+				document.querySelector(".error").remove();
+			dom.removeClass(input, "active-flex");
+		}
+
+		// reset the priority
+		const priorityText = document.querySelector(
+			".task-priority-section .task-specific-detail h2"
+		);
+		if (!priorityText.classList.contains("active-block")) {
+			dom.addClass(priorityText, "active-block");
+			const input = document.querySelector("#view-form-priority");
+			dom.removeClass(input, "active-block");
+		}
+
+		// sort the tasks after any changes and refresh the tasks
+		account.getCurrProject().sortTasks();
+		refreshTasks();
 	};
 
 	return {
+		addActive,
+		removeActive,
 		refreshProjects,
 		refreshTasks,
 		displayAddProject,
@@ -370,6 +425,8 @@ const displayController = () => {
 		removeTaskTitleError,
 		removeConfirmProjectDeletion,
 		removeConfirmTaskDeletion,
+		removeViewTaskModal,
+		refreshTaskDetails,
 	};
 };
 

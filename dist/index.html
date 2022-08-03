@@ -173,7 +173,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="confirm-task-deletion-modal">
 				<div class="modal-content">
 					<h2 class="del-confirmation-msg"></h2>
@@ -184,6 +183,183 @@
 						<button type="button" class="confirm-deletion-button">
 							Confirm
 						</button>
+					</div>
+				</div>
+			</div>
+			<div class="view-task-modal">
+				<div class="modal-content">
+					<div class="close-view-task-button">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							class="close"
+						>
+							<path
+								d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+							/>
+						</svg>
+					</div>
+					<div class="details-div">
+						<div class="view-task-section task-title-section">
+							<h2>Title:</h2>
+							<div class="task-specific-detail">
+								<h2 class="task-title-heading active-block"></h2>
+								<div>
+									<input type="text" id="edit-task-title" name="form-task-title" class="form-task-title" maxlength="20" />
+								</div>
+								<div class="edit-buttons">
+									<svg
+										class="edit-task-button active-block"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+									>
+										<path
+											d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+										/>
+									</svg>
+									<svg
+										class="confirm-edit-button"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+									>
+										<path
+											d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+										/>
+									</svg>
+									<svg
+										class="cancel-edit-button"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+										class="close"
+									>
+										<path
+											d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+										/>
+									</svg>
+								</div>
+							</div>
+							
+						</div>
+						<div class="view-task-section task-desc-section">
+							<h2>Description:</h2>
+							<div class="task-specific-detail">
+								<p class="task-desc-heading active-block"></p>
+								<textarea name="form-task-desc" id="form-task-desc" class="form-task-desc" maxlength="300"></textarea>
+								<div class="edit-buttons">
+									<svg
+										class="edit-task-button active-block"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+									>
+										<path
+											d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+										/>
+									</svg>
+									<svg
+										class="confirm-edit-button"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+									>
+										<path
+											d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+										/>
+									</svg>
+									<svg
+										class="cancel-edit-button"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+										class="close"
+									>
+										<path
+											d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+										/>
+									</svg>
+								</div>
+							</div>
+							
+						</div>
+						<div class="view-task-section task-due-date-section">
+							<h2>Due Date:</h2>
+							<div class="task-specific-detail">
+								<h2 class="task-due-date-heading active-block"></h2>
+								<div class="form-due-date-div">
+									<input type="date" id="form-due-date" name="form-due-date" />
+									<button class="due-date-toggle" type="button">Remove Due Date</button>
+								</div>
+								<div class="edit-buttons">
+									<svg
+										class="edit-task-button active-block"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+									>
+										<path
+											d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+										/>
+									</svg>
+									<svg
+										class="confirm-edit-button"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+									>
+										<path
+											d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+										/>
+									</svg>
+									<svg
+										class="cancel-edit-button"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+										class="close"
+									>
+										<path
+											d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+										/>
+									</svg>
+								</div>
+							</div>
+							
+						</div>
+						<div class="view-task-section task-priority-section">
+							<h2>Priority:</h2>
+							<div class="task-specific-detail">
+								<h2 class="task-priority-heading active-block"></h2>
+								<select name="form-priority" id="view-form-priority">
+									<option value="0">Low</option>
+									<option value="1">Medium</option>
+									<option value="2">High</option>
+								</select>
+								<div class="edit-buttons">
+									<svg
+										class="edit-task-button active-block"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+									>
+										<path
+											d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+										/>
+									</svg>
+									<svg
+										class="confirm-edit-button"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+									>
+										<path
+											d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+										/>
+									</svg>
+									<svg
+										class="cancel-edit-button"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+										class="close"
+									>
+										<path
+											d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+										/>
+									</svg>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

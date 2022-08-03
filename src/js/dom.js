@@ -1,4 +1,14 @@
 const dom = () => {
+	// methods
+	const addClass = (element, classToAdd) => {
+		if (!element.classList.contains(classToAdd))
+			element.classList.add(classToAdd);
+	};
+	const removeClass = (element, classToRemove) => {
+		if (element.classList.contains(classToRemove))
+			element.classList.remove(classToRemove);
+	};
+
 	const projectToggle = document.querySelector(".project-toggle");
 	const projectSection = document.querySelector(".main__projects");
 	const projectList = document.querySelector(".project-list");
@@ -39,19 +49,33 @@ const dom = () => {
 	const addTaskModal = document.querySelector(".add-task-modal");
 	const addTaskForm = document.querySelector(".add-task-form");
 
-	const taskTitleInput = document.querySelector("#form-task-title");
-	const taskTitleFormSection = document.querySelector(".task-title-section");
-	const taskDescInput = document.querySelector("#form-task-desc");
-	const taskDueDateInput = document.querySelector("#form-due-date");
-	const taskDueDateFormSection = document.querySelector(
-		".task-due-date-section"
+	const taskTitleInput = document.querySelector(
+		".add-task-modal #form-task-title"
 	);
-	const taskToggleDueDate = document.querySelector(".due-date-toggle");
-	const taskPriorityInput = document.querySelector("#form-priority");
+	const taskTitleFormSection = document.querySelector(
+		".add-task-modal .task-title-section"
+	);
+	const taskDescInput = document.querySelector(
+		".add-task-modal #form-task-desc"
+	);
+	const taskDueDateInput = document.querySelector(
+		".add-task-modal #form-due-date"
+	);
+	const taskDueDateFormSection = document.querySelector(
+		".add-task-modal .task-due-date-section"
+	);
+	const taskToggleDueDate = document.querySelector(
+		".add-task-modal .due-date-toggle"
+	);
+	const taskPriorityInput = document.querySelector(
+		".add-task-modal #form-priority"
+	);
 	const cancelTaskButton = document.querySelector(
 		".add-task-modal .cancel-button"
 	);
-	const confirmTaskButton = document.querySelector(".confirm-task-button");
+	const confirmTaskButton = document.querySelector(
+		".add-task-modal .confirm-task-button"
+	);
 
 	const confirmTaskDeletionModal = document.querySelector(
 		".confirm-task-deletion-modal"
@@ -67,6 +91,41 @@ const dom = () => {
 	);
 	const confirmTaskDeletionButton = document.querySelector(
 		".confirm-task-deletion-modal .confirm-deletion-button"
+	);
+
+	const viewTaskModal = document.querySelector(".view-task-modal");
+	const viewTaskTitleHeading = document.querySelector(".task-title-heading");
+	const viewTaskDescHeading = document.querySelector(".task-desc-heading");
+	const viewTaskDueDateHeading = document.querySelector(
+		".task-due-date-heading"
+	);
+	const viewTaskPriorityHeading = document.querySelector(
+		".task-priority-heading"
+	);
+
+	const closeViewTaskButton = document.querySelector(
+		".close-view-task-button"
+	);
+	const editTaskTitleButton = document.querySelector(
+		".task-title-section .edit-task-button"
+	);
+	const editTaskDescButton = document.querySelector(
+		".task-desc-section .edit-task-button"
+	);
+	const editTaskDueDateButton = document.querySelector(
+		".task-due-date-section .edit-task-button"
+	);
+
+	const editTaskDueDateInput = document.querySelector(
+		".view-task-section.task-due-date-section input"
+	);
+
+	const editTaskToggleDueDate = document.querySelector(
+		".view-task-modal .due-date-toggle"
+	);
+
+	const editTaskPriorityButton = document.querySelector(
+		".task-priority-section .edit-task-button"
 	);
 
 	return {
@@ -103,6 +162,21 @@ const dom = () => {
 		delTaskConfirmationMessage,
 		CTDmodalContent,
 		confirmTaskDeletionModal,
+		closeViewTaskButton,
+		viewTaskModal,
+		viewTaskTitleHeading,
+		viewTaskDescHeading,
+		viewTaskDueDateHeading,
+		viewTaskPriorityHeading,
+		editTaskTitleButton,
+		editTaskDescButton,
+		editTaskDueDateButton,
+		editTaskPriorityButton,
+		editTaskToggleDueDate,
+		editTaskDueDateInput,
+
+		addClass,
+		removeClass,
 	};
 };
 
