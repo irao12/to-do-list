@@ -4,6 +4,7 @@
 
 .task-list {
 	.add-new-task {
+		margin-top: f.rem(10);
 		padding: f.rem(10) f.rem(5) f.rem(10);
 		width: 100%;
 		display: flex;
@@ -55,10 +56,23 @@
 				background-color: colors.$light-gray;
 				border-radius: f.rem(4);
 			}
+			width: 80%;
+
+			@include b.breakpoints-up(medium) {
+				width: 90%;
+			}
 		}
 
 		h3 {
 			color: rgb(136, 136, 136);
+
+			&.important {
+				color: colors.$important-color;
+			}
+
+			&.take-note {
+				color: colors.$take-note-color;
+			}
 		}
 
 		.delete-task-button {
@@ -71,10 +85,6 @@
 			padding: f.rem(4);
 
 			margin-right: f.rem(10);
-
-			@include b.breakpoints-up(large) {
-				opacity: 0;
-			}
 
 			&:hover {
 				background-color: colors.$light-gray;

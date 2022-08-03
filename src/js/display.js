@@ -187,16 +187,26 @@ const displayController = () => {
 			const taskDueDate = task.getDueDate();
 			let taskDueDateText;
 
+			const dueDate = document.createElement("h3");
 			// If the date is in the past, show overdue
 			if (isPast(taskDueDate)) {
 				taskDueDateText = "Overdue";
+				dueDate.classList.add("important");
 			}
 			// if the date is today, show today
-			else if (isToday(taskDueDate)) taskDueDateText = "Today";
-			else if (isTomorrow(taskDueDate)) taskDueDateText = "Tomorrow";
+			else if (isToday(taskDueDate)) {
+				taskDueDateText = "Today";
+				dueDate.classList.add("important");
+			} else if (isTomorrow(taskDueDate)) {
+				taskDueDateText = "Tomorrow";
+				dueDate.classList.add("take-note");
+			}
 			// if the date is in the current week, show the weekday
-			else if (isThisWeek(taskDueDate))
+			else if (isThisWeek(taskDueDate)) {
 				taskDueDateText = format(task.getDueDate(), "EEEE");
+				dueDate.classList.add("take-note");
+			}
+
 			// if the date is in the current year, show the month and day
 			else if (isThisYear(taskDueDate))
 				taskDueDateText = format(task.getDueDate(), "MMM dd");
@@ -205,7 +215,6 @@ const displayController = () => {
 				taskDueDateText = format(task.getDueDate(), "MMM dd yyyy");
 			}
 
-			const dueDate = document.createElement("h3");
 			dueDate.textContent = taskDueDateText;
 			details.appendChild(dueDate);
 		}
