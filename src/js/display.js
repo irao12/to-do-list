@@ -43,6 +43,7 @@ const displayController = () => {
 			const projectSection = dom.projectSection;
 			if (projectSection.classList.contains("open"))
 				projectSection.classList.remove("open");
+			dom.projectToggle.classList.remove("open");
 		});
 
 		//add a div for the delete button
