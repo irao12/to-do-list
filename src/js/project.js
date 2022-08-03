@@ -28,8 +28,8 @@ const project = (title) => {
 			const taskAPriority = taskA.getPriority();
 			const taskBPriority = taskB.getPriority();
 
-			if (taskAPriority < taskBPriority) return -1;
-			else if (taskAPriority > taskBPriority) return 1;
+			if (taskAPriority > taskBPriority) return -1;
+			else if (taskAPriority < taskBPriority) return 1;
 			else {
 				// if priorities are equal, sort based on the due date
 				const taskADueDate = taskA.getDueDate();
