@@ -165,7 +165,7 @@
 
 			textarea.form-task-desc {
 				height: f.rem(100);
-				overflow: scroll;
+				overflow: auto;
 				-webkit-overflow-scrolling: touch;
 				resize: none;
 			}
@@ -386,7 +386,7 @@
 
 			textarea.form-task-desc {
 				height: f.rem(120);
-				overflow: scroll;
+				overflow: auto;
 				-webkit-overflow-scrolling: touch;
 				resize: none;
 			}
