@@ -1,7 +1,5 @@
 import dom from "./dom.js";
 import account from "./account.js";
-import task from "./task.js";
-
 import {
 	format,
 	isPast,
@@ -12,6 +10,7 @@ import {
 } from "date-fns";
 import project from "./project.js";
 import { el } from "date-fns/locale";
+import storage from "./storage.js";
 
 const displayController = () => {
 	// methods
@@ -45,6 +44,7 @@ const displayController = () => {
 
 		projectTitleSection.addEventListener("click", () => {
 			account.setCurrProject(project);
+			storage.saveAccount(account);
 			refreshTasks();
 			const projectSection = dom.projectSection;
 			if (projectSection.classList.contains("open"))
@@ -66,7 +66,7 @@ const displayController = () => {
 	};
 
 	const refreshProjects = () => {
-		const projects = account._myProjects;
+		const projects = account.getProjects();
 		const projectList = dom.projectList;
 		projectList.innerHTML = "";
 		projects.forEach(displayProject);
@@ -76,6 +76,7 @@ const displayController = () => {
 		account.removeProject(confirmButton.target.projectDiv.project);
 		refreshProjects();
 		refreshTasks();
+		storage.saveAccount(account);
 		removeConfirmProjectDeletion();
 	};
 
@@ -283,6 +284,7 @@ const displayController = () => {
 	const removeTask = (confirmButton) => {
 		account.getCurrProject().removeTask(confirmButton.target.task);
 		refreshTasks();
+		storage.saveAccount(account);
 		removeConfirmTaskDeletion();
 	};
 

@@ -1,24 +1,44 @@
 const account = () => {
-    const _myProjects = [];
-    let _currProject;
+	let projects = [];
+	let currProject;
 
-    const addProject = (project) => {_myProjects.push(project);}
+	const addProject = (project) => {
+		projects.push(project);
+	};
 
-    const getCurrProject = () =>{return _currProject;}
+	const getCurrProject = () => {
+		return currProject;
+	};
 
-    const setCurrProject = (newProject) => {_currProject = newProject;}
+	const setCurrProject = (newProject) => {
+		currProject = newProject;
+	};
 
-    const removeProject = (project) => {
-        const projectIndex = _myProjects.indexOf(project);
-        if (_currProject === project) {
-            _currProject = undefined;
-        }
-        _myProjects.splice(projectIndex, 1);
-    }
-    
-    return {
-        getCurrProject, setCurrProject, addProject, removeProject, _myProjects
-    }
-}
+	const getProjects = () => {
+		return projects;
+	};
+
+	const setProjects = (newProjects) => {
+		projects = newProjects;
+	};
+
+	const removeProject = (project) => {
+		const projectIndex = projects.indexOf(project);
+		if (currProject === project) {
+			currProject = undefined;
+		}
+		projects.splice(projectIndex, 1);
+	};
+
+	return {
+		projects: projects,
+		getCurrProject,
+		setCurrProject,
+		getProjects,
+		setProjects,
+		addProject,
+		removeProject,
+	};
+};
 
 export default account();

@@ -4,8 +4,13 @@ import dom from "./dom.js";
 import account from "./account.js";
 import displayController from "./display.js";
 import { compareAsc, endOfDay } from "date-fns";
+import storage from "./storage.js";
 
 const controller = () => {
+	storage.loadAccount(account);
+	displayController.refreshProjects();
+	displayController.refreshTasks();
+
 	const formatDate = (date) => {
 		// date is originally in YYYY-MM-DD format
 		const dateArray = date.split("-");
@@ -57,6 +62,7 @@ const controller = () => {
 			// if the account does not have a project selected yet,
 			// set the new project as the selecte done
 			if (!currAccProject) account.setCurrProject(currProject);
+			storage.saveAccount(account);
 		} else {
 			displayController.displayProjectTitleError();
 		}
@@ -97,6 +103,7 @@ const controller = () => {
 			currProject.sortTasks();
 			displayController.removeAddTask();
 			displayController.refreshTasks();
+			storage.saveAccount(account);
 		} else {
 			if (!isValidTaskTitle()) displayController.displayTaskTitleError();
 			else {
@@ -150,7 +157,7 @@ const controller = () => {
 
 	dom.editTaskToggleDueDate.addEventListener("click", () => {
 		const toggleButton = dom.editTaskToggleDueDate;
-		console.log(dom.editTaskDueDateInput);
+
 		if (toggleButton.textContent === "Remove Due Date") {
 			toggleButton.textContent = "Add Due Date";
 			dom.editTaskDueDateInput.value = "";
@@ -202,6 +209,7 @@ const controller = () => {
 				dom.removeClass(confirmButton, "active-block");
 				dom.removeClass(cancelButton, "active-block");
 				displayController.refreshTaskDetails();
+				storage.saveAccount(account);
 			} else {
 				if (!input.classList.contains("invalid")) {
 					dom.addClass(input, "invalid");
@@ -254,6 +262,7 @@ const controller = () => {
 			dom.removeClass(confirmButton, "active-block");
 			dom.removeClass(cancelButton, "active-block");
 			displayController.refreshTaskDetails();
+			storage.saveAccount(account);
 		});
 
 		const cancelButton = taskSection.querySelector(".cancel-edit-button");
@@ -322,6 +331,7 @@ const controller = () => {
 				dom.removeClass(confirmButton, "active-block");
 				dom.removeClass(cancelButton, "active-block");
 				displayController.refreshTaskDetails();
+				storage.saveAccount(account);
 			}
 		});
 
@@ -365,6 +375,7 @@ const controller = () => {
 			dom.removeClass(confirmButton, "active-block");
 			dom.removeClass(cancelButton, "active-block");
 			displayController.refreshTaskDetails();
+			storage.saveAccount(account);
 		});
 
 		const cancelButton = taskSection.querySelector(".cancel-edit-button");

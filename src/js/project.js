@@ -1,30 +1,28 @@
 import task from "./task";
 import { compareAsc } from "date-fns";
 
-const project = (title) => {
-	// private
-	let _title = title;
-	const _list = [];
-	// public
-	const getTitle = () => {
-		return _title;
-	};
-	const setTitle = (title) => {
-		_title = title;
-	};
-	const getList = () => {
-		return _list;
-	};
-	const addTask = (task) => {
-		_list.push(task);
-	};
-	const removeTask = (task) => {
-		const taskIndex = _list.indexOf(task);
-		_list.splice(taskIndex, 1);
-	};
-
-	const sortTasks = () => {
-		_list.sort((taskA, taskB) => {
+let projectProto = {
+	getTitle() {
+		return this.title;
+	},
+	setTitle(title) {
+		this.title = title;
+	},
+	getList() {
+		return this.list;
+	},
+	setList(newList) {
+		this.list = newList;
+	},
+	addTask(task) {
+		this.list.push(task);
+	},
+	removeTask(task) {
+		const taskIndex = this.list.indexOf(task);
+		this.list.splice(taskIndex, 1);
+	},
+	sortTasks() {
+		this.list.sort((taskA, taskB) => {
 			const taskAPriority = taskA.getPriority();
 			const taskBPriority = taskB.getPriority();
 
@@ -45,16 +43,18 @@ const project = (title) => {
 				}
 			}
 		});
-	};
+	},
+};
 
-	return {
-		getTitle,
-		setTitle,
-		getList,
-		addTask,
-		removeTask,
-		sortTasks,
-	};
+const project = (titleInput) => {
+	// private
+	let list = [];
+	let title = titleInput;
+	// public
+	const project = Object.create(projectProto);
+	project.list = list;
+	project.title = title;
+	return project;
 };
 
 export default project;
