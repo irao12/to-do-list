@@ -8,6 +8,7 @@
 	pointer-events: none;
 	position: fixed;
 	height: 100vh;
+	height: -webkit-fill-available;
 	width: 100vw;
 	top: 0;
 	transition: opacity 200ms ease-in-out;
@@ -27,14 +28,15 @@
 	pointer-events: none;
 
 	&.active {
-		height: 100%;
+		height: -webkit-fill-available;
 		width: 100%;
 	}
 
 	.modal-content {
 		font-family: fonts.$main-font;
 		width: min(80%, f.rem(550));
-		height: f.rem(350);
+		height: min(95%, f.rem(350));
+		overflow: auto;
 		background-color: white;
 		padding: f.rem(30);
 		font-weight: normal;
