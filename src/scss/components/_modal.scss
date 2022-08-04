@@ -138,6 +138,9 @@
 			input,
 			textarea,
 			select {
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
 				width: 100%;
 				font-size: f.rem(16);
 				font-family: fonts.$main-font;
@@ -350,6 +353,9 @@
 			input,
 			textarea,
 			select {
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
 				width: min(f.rem(500), 80%);
 				font-size: f.rem(16);
 				font-family: fonts.$main-font;
