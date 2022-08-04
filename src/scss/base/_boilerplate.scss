@@ -1,18 +1,18 @@
-@use 'fonts' as fonts;
+@use "fonts" as fonts;
 
 html {
-    box-sizing: border-box;
-    font-size: 100%;
+	box-sizing: border-box;
+	font-size: 100%;
 }
 
 * {
-    box-sizing: inherit;
-    margin: 0;
-    padding: 0;
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    font-family: fonts.$main-font;
-    width: 100%;
-    height: 100%;
+	font-family: fonts.$main-font;
+	width: 100%;
+	height: 100%;
 }
