@@ -37,7 +37,8 @@
 		}
 
 		&.open {
-			position: relative;
+			position: absolute;
+			top: f.rem(100);
 			width: 100%;
 			height: 100vh;
 			transform: translateX(0);
