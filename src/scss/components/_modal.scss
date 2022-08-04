@@ -361,9 +361,8 @@
 			input,
 			textarea,
 			select {
-				-webkit-appearance: none;
-				-moz-appearance: none;
-				appearance: none;
+				min-height: f.rem(30);
+				color: black;
 				width: min(f.rem(500), 80%);
 				font-size: f.rem(16);
 				font-family: fonts.$main-font;
