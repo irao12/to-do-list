@@ -3,6 +3,10 @@
 @use "../base/fonts" as fonts;
 @use "../base/breakpoints" as b;
 
+button {
+	color: black;
+}
+
 .project-toggle {
 	display: flex;
 	justify-content: center;
