@@ -38,7 +38,7 @@
 		width: min(80%, f.rem(550));
 		height: min(95%, f.rem(350));
 		max-height: -webkit-fill-available;
-		overflow: auto;
+		overflow: scroll;
 		background-color: white;
 		padding: f.rem(30);
 		font-weight: normal;
@@ -165,7 +165,8 @@
 
 			textarea.form-task-desc {
 				height: f.rem(100);
-				overflow: auto;
+				overflow: scroll;
+				-webkit-overflow-scrolling: touch;
 				resize: none;
 			}
 		}
@@ -236,7 +237,8 @@
 	.modal-content {
 		position: relative;
 
-		overflow: auto;
+		overflow: scroll;
+		-webkit-overflow-scrolling: touch;
 
 		font-family: fonts.$main-font;
 		width: min(80%, f.rem(550));
@@ -304,7 +306,8 @@
 					p {
 						width: min(f.rem(500), 80%);
 						max-height: f.rem(120);
-						overflow: auto;
+						overflow: scroll;
+						-webkit-overflow-scrolling: touch;
 						word-wrap: break-word;
 					}
 				}
@@ -383,7 +386,8 @@
 
 			textarea.form-task-desc {
 				height: f.rem(120);
-				overflow: auto;
+				overflow: scroll;
+				-webkit-overflow-scrolling: touch;
 				resize: none;
 			}
 		}
