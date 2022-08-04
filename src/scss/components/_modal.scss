@@ -147,10 +147,9 @@
 			input,
 			textarea,
 			select {
-				-webkit-appearance: none;
-				-moz-appearance: none;
-				appearance: none;
+				color: black;
 				width: 100%;
+				min-height: f.rem(30);
 				font-size: f.rem(16);
 				font-family: fonts.$main-font;
 				padding: f.rem(8);
