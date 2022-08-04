@@ -136,6 +136,7 @@
 			input,
 			textarea,
 			select {
+				width: 100%;
 				font-size: f.rem(16);
 				font-family: fonts.$main-font;
 				padding: f.rem(8);
@@ -150,7 +151,7 @@
 			}
 
 			textarea.form-task-desc {
-				height: f.rem(120);
+				height: f.rem(100);
 				overflow: auto;
 				resize: none;
 			}
