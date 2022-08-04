@@ -31,6 +31,8 @@
 		width: 100%;
 	}
 
+	max-height: -webkit-fill-available;
+
 	.modal-content {
 		font-family: fonts.$main-font;
 		width: min(80%, f.rem(550));
@@ -209,6 +211,7 @@
 
 .view-task-modal {
 	height: 100%;
+	max-height: -webkit-fill-available;
 	width: 100%;
 
 	display: flex;
