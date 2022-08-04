@@ -25,7 +25,8 @@ const storage = () => {
 		const taskList = project.getList();
 		const newTaskList = taskList.map((oldTask) => {
 			const result = Object.assign(task(), oldTask);
-			result.setDueDate(new Date(result.getDueDate()));
+			if (result.getDueDate())
+				result.setDueDate(new Date(result.getDueDate()));
 			return result;
 		});
 		project.setList(newTaskList);
