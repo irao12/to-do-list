@@ -86,6 +86,11 @@
 
 			margin-right: f.rem(10);
 
+			svg {
+				width: f.rem(25);
+				height: f.rem(25);
+			}
+
 			&:hover {
 				background-color: colors.$light-gray;
 				border-radius: f.rem(4);

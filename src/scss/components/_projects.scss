@@ -33,6 +33,10 @@
 			background-color: colors.$light-gray;
 			border-radius: f.rem(4);
 		}
+		svg {
+			width: f.rem(25);
+			height: f.rem(25);
+		}
 	}
 
 	&:hover {
