@@ -8,7 +8,6 @@
 	pointer-events: none;
 	position: fixed;
 	height: 100vh;
-	height: -webkit-fill-available;
 	width: 100vw;
 	top: 0;
 	transition: opacity 200ms ease-in-out;
@@ -28,7 +27,7 @@
 	pointer-events: none;
 
 	&.active {
-		height: -webkit-fill-available;
+		height: 100%;
 		width: 100%;
 	}
 
@@ -36,6 +35,7 @@
 		font-family: fonts.$main-font;
 		width: min(80%, f.rem(550));
 		height: min(95%, f.rem(350));
+		max-height: -webkit-fill-available;
 		overflow: auto;
 		background-color: white;
 		padding: f.rem(30);
@@ -269,6 +269,7 @@
 		font-family: fonts.$main-font;
 		width: min(80%, f.rem(550));
 		height: min(f.rem(700), 95%);
+		max-height: -webkit-fill-available;
 		background-color: white;
 		padding: f.rem(30);
 		font-weight: normal;
