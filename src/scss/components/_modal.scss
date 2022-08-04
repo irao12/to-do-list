@@ -28,6 +28,7 @@
 
 	&.active {
 		height: 100%;
+		height: -webkit-fill-available;
 		width: 100%;
 	}
 
@@ -38,7 +39,7 @@
 		width: min(80%, f.rem(550));
 		height: min(95%, f.rem(350));
 		max-height: -webkit-fill-available;
-		overflow: scroll;
+		overflow: auto;
 		background-color: white;
 		padding: f.rem(30);
 		font-weight: normal;
@@ -107,7 +108,7 @@
 
 .add-task-modal {
 	.modal-content {
-		height: f.rem(650);
+		height: f.rem(750);
 	}
 
 	.modal-body {
@@ -237,7 +238,7 @@
 	.modal-content {
 		position: relative;
 
-		overflow: scroll;
+		overflow: auto;
 		-webkit-overflow-scrolling: touch;
 
 		font-family: fonts.$main-font;
@@ -306,7 +307,7 @@
 					p {
 						width: min(f.rem(500), 80%);
 						max-height: f.rem(120);
-						overflow: scroll;
+						overflow: auto;
 						-webkit-overflow-scrolling: touch;
 						word-wrap: break-word;
 					}
