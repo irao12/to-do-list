@@ -256,20 +256,6 @@
 		align-items: center;
 		justify-content: center;
 
-		.close-view-task-button {
-			position: absolute;
-			right: f.rem(5);
-			top: f.rem(5);
-			width: f.rem(35);
-			height: f.rem(35);
-
-			cursor: pointer;
-			&:hover {
-				background-color: colors.$light-gray;
-				border-radius: f.rem(8);
-			}
-		}
-
 		.details-div {
 			width: 90%;
 
@@ -291,10 +277,10 @@
 				border-bottom: f.rem(2) solid colors.$darker-gray;
 
 				.task-specific-detail {
+					width: 95%;
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
-
 					margin-left: f.rem(20);
 
 					h2,
@@ -329,12 +315,9 @@
 				.form-due-date-div,
 				#view-form-priority {
 					display: none;
-				}
-
-				.active-block,
-				#view-form-priority.active-block,
-				input[type="text"].active-block {
-					display: block;
+					&.active-block {
+						display: block;
+					}
 				}
 
 				.active-flex {

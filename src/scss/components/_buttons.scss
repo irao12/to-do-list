@@ -146,6 +146,20 @@ button.due-date-toggle {
 	}
 }
 
+.close-view-task-button {
+	position: absolute;
+	right: f.rem(5);
+	top: f.rem(5);
+	width: f.rem(35);
+	height: f.rem(35);
+
+	cursor: pointer;
+	&:hover {
+		background-color: colors.$light-gray;
+		border-radius: f.rem(8);
+	}
+}
+
 .edit-buttons {
 	display: flex;
 }
