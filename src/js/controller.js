@@ -3,7 +3,7 @@ import task from "./task.js";
 import dom from "./dom.js";
 import account from "./account.js";
 import displayController from "./display.js";
-import { compareAsc, endOfDay } from "date-fns";
+import { endOfDay } from "date-fns";
 import storage from "./storage.js";
 
 const controller = () => {
@@ -35,8 +35,8 @@ const controller = () => {
 		// if the user opted to not include a due date, return true
 		if (dom.taskDueDateInput.classList.contains("inactive")) return true;
 
-		const dueDate = new Date(dom.taskDueDateInput.value);
-		if (dueDate != "Invalid Date") return true;
+		const dueDate = Date.parse(dom.taskDueDateInput.value + "T00:00:00");
+		if (!Number.isNaN(dueDate)) return true;
 		return false;
 	};
 
@@ -77,15 +77,10 @@ const controller = () => {
 			const taskTitle = dom.taskTitleInput.value;
 			const taskDesc = dom.taskDescInput.value;
 
-			let formattedDate;
-			// if the user inputted a date, format it
-			if (dom.taskDueDateInput.value) {
-				formattedDate = formatDate(dom.taskDueDateInput.value);
-			}
 			// set the due date as a Date Object referring to the end of the day
 			// set the due date as "" if no due date was inputted
 			const taskDueDate = dom.taskDueDateInput.value
-				? endOfDay(new Date(formattedDate))
+				? endOfDay(Date.parse(dom.taskDueDateInput.value + "T00:00:00"))
 				: "";
 
 			const taskPriority = dom.taskPriorityInput.value;
@@ -320,7 +315,9 @@ const controller = () => {
 
 				const taskDueDate = dom.editTaskDueDateInput.value
 					? endOfDay(
-							new Date(formatDate(dom.editTaskDueDateInput.value))
+							Date.parse(
+								dom.editTaskDueDateInput.value + "T00:00:00"
+							)
 					  )
 					: "";
 
