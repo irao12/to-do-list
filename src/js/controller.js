@@ -11,16 +11,6 @@ const controller = () => {
 	displayController.refreshProjects();
 	displayController.refreshTasks();
 
-	const formatDate = (date) => {
-		// date is originally in YYYY-MM-DD format
-		const dateArray = date.split("-");
-		// dateArray = ['YYYY', 'MM', 'DD]
-		// move the YYYY to the end and join the elements
-		// to create the formatted date
-		dateArray.push(dateArray.shift());
-		return dateArray.join("-");
-	};
-
 	const isValidProjectTitle = () => {
 		// if title is empty, thje result will be "" which is not truthy
 		return dom.projectTitleInput.value;
