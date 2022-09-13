@@ -22,9 +22,10 @@ export default function ConfirmDeleteProject(props) {
 		// remove the project from the projects state
 		setProjects((prevProjects) => {
 			const index = prevProjects.indexOf(target);
-			return prevProjects
-				.slice(0, index)
-				.concat(prevProjects.slice(index + 1));
+			const firstHalf = prevProjects.slice(0, index);
+			const secondHalf = prevProjects.slice(index + 1);
+
+			return firstHalf.concat(secondHalf);
 		});
 
 		// if the current project was the target, change the currProject state
