@@ -1,8 +1,18 @@
 import React from "react";
 import AddProject from "./AddProject";
+import ConfirmDeleteProject from "./ConfirmDeleteProject";
 
 export default function Modal(props) {
-	const { modal, setModal, projects, setProjects } = props;
+	const {
+		modal,
+		setModal,
+		projects,
+		setProjects,
+		currProject,
+		setCurrProject,
+		target,
+		setTarget,
+	} = props;
 
 	return (
 		<div className={modal ? "modal active" : "modal"}>
@@ -11,6 +21,17 @@ export default function Modal(props) {
 					setModal={setModal}
 					projects={projects}
 					setProjects={setProjects}
+				/>
+			)}
+
+			{modal === "delete-project" && (
+				<ConfirmDeleteProject
+					setModal={setModal}
+					currProject={currProject}
+					setCurrProject={setCurrProject}
+					setProjects={setProjects}
+					target={target}
+					setTarget={setTarget}
 				/>
 			)}
 		</div>

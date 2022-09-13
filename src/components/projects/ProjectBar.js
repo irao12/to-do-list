@@ -2,7 +2,8 @@ import React from "react";
 import Project from "./Project";
 
 export default function Projects(props) {
-	const { projectList, setModal } = props;
+	const { projects, setProjects, setCurrProject, setModal, setTarget } =
+		props;
 
 	const showAddProject = () => {
 		setModal("add-project");
@@ -20,8 +21,15 @@ export default function Projects(props) {
 				</button>
 			</div>
 			<div className="project-list">
-				{projectList.map((currProject, index) => (
-					<Project key={index} project={currProject} />
+				{projects.map((project, index) => (
+					<Project
+						key={index}
+						project={project}
+						setProjects={setProjects}
+						setCurrProject={setCurrProject}
+						setModal={setModal}
+						setTarget={setTarget}
+					/>
 				))}
 			</div>
 		</div>
