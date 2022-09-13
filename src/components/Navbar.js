@@ -8,6 +8,7 @@ export default function Navbar() {
 				<img src={checkbox} alt="checkbox" />
 				<div className="logo-text">To-Do-List</div>
 			</div>
+
 			<div className="project-toggle">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
