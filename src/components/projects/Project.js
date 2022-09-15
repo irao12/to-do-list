@@ -2,10 +2,10 @@ import React from "react";
 import DeleteButton from "../buttons/DeleteButton";
 
 export default function Project(props) {
-	const { project, setCurrProject, setModal, setTarget } = props;
+	const { project, projects, setCurrProject, setModal, setTarget } = props;
 
 	const handleClick = () => {
-		setCurrProject(project);
+		setCurrProject(projects.indexOf(project));
 	};
 
 	const confirmDelete = () => {

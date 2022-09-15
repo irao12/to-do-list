@@ -19,7 +19,7 @@ export default function ConfirmDeleteProject(props) {
 		// do not do anything if there isn't a target
 		if (target === null) return;
 
-		// remove the project from the projects state
+		// remove the project froms the projects state
 		setProjects((prevProjects) => {
 			const index = prevProjects.indexOf(target);
 			const firstHalf = prevProjects.slice(0, index);
@@ -29,7 +29,7 @@ export default function ConfirmDeleteProject(props) {
 		});
 
 		// if the current project was the target, change the currProject state
-		if (currProject === target) setCurrProject(null);
+		if (currProject === target) setCurrProject(-1);
 
 		setTarget(null);
 

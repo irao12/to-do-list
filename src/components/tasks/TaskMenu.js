@@ -11,7 +11,7 @@ export default function Tasks(props) {
 					<h1>Tasks</h1>
 				</div>
 				<div className="task-list">
-					{currProject && (
+					{currProject !== -1 && (
 						<AddTaskButton setCurrProject={setCurrProject} />
 					)}
 				</div>

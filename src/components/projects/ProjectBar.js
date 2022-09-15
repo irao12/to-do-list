@@ -25,6 +25,7 @@ export default function Projects(props) {
 					<Project
 						key={index}
 						project={project}
+						projects={projects}
 						setProjects={setProjects}
 						setCurrProject={setCurrProject}
 						setModal={setModal}

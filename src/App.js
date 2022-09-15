@@ -7,7 +7,7 @@ function App() {
 	// array of the projects
 	const [projects, setProjects] = useState([]);
 	// keeps track of which project's tasks is displayed
-	const [currProject, setCurrProject] = useState(null);
+	const [currProject, setCurrProject] = useState(-1);
 	// keeps track of which modal is active
 	const [modal, setModal] = useState("");
 	// keeps track of which project or task is targeted for a delete or edit
