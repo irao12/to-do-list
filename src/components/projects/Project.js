@@ -18,7 +18,7 @@ export default function Project(props) {
 			<div onClick={handleClick} className="project-title-section">
 				<h2>{project.title}</h2>
 			</div>
-			<DeleteButton handleClick={confirmDelete} />
+			<DeleteButton handleClick={confirmDelete} role="project" />
 		</div>
 	);
 }

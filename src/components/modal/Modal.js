@@ -30,6 +30,7 @@ export default function Modal(props) {
 					setModal={setModal}
 					currProject={currProject}
 					setCurrProject={setCurrProject}
+					projects={projects}
 					setProjects={setProjects}
 					target={target}
 					setTarget={setTarget}

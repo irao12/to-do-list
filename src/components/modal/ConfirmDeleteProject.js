@@ -7,6 +7,7 @@ export default function ConfirmDeleteProject(props) {
 		setCurrProject,
 		target,
 		setTarget,
+		projects,
 		setProjects,
 	} = props;
 
@@ -29,7 +30,7 @@ export default function ConfirmDeleteProject(props) {
 		});
 
 		// if the current project was the target, change the currProject state
-		if (currProject === target) setCurrProject(-1);
+		if (currProject === projects.indexOf(target)) setCurrProject(-1);
 
 		setTarget(null);
 

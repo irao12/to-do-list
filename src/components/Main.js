@@ -22,7 +22,9 @@ export default function Main(props) {
 				setTarget={setTarget}
 			/>
 			<TaskMenu
+				projects={projects}
 				currProject={currProject}
+				setModal={setModal}
 				setCurrProject={setCurrProject}
 			/>
 		</main>
