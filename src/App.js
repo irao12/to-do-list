@@ -13,11 +13,12 @@ function App() {
 	const [modal, setModal] = useState("");
 	// keeps track of which project or task is targeted for a delete or edit
 	const [target, setTarget] = useState(null);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	return (
 		<>
 			<div className="flex">
-				<Navbar />
+				<Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 				<Main
 					projects={projects}
 					setProjects={setProjects}
@@ -26,6 +27,8 @@ function App() {
 					setModal={setModal}
 					target={target}
 					setTarget={setTarget}
+					isMenuOpen={isMenuOpen}
+					setIsMenuOpen={setIsMenuOpen}
 				/>
 			</div>
 			<Modal

@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import checkbox from "../images/checkbox-outline.png";
 
-export default function Navbar() {
+export default function Navbar(props) {
+	const { isMenuOpen, setIsMenuOpen } = props;
+
+	const toggleMenu = () => {
+		setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen);
+	};
+
 	return (
 		<nav className="flex__navbar">
 			<div className="flex__navbar flex__navbar--logo">
@@ -9,7 +15,10 @@ export default function Navbar() {
 				<div className="logo-text">To-Do-List</div>
 			</div>
 
-			<div className="project-toggle">
+			<div
+				onClick={toggleMenu}
+				className={"project-toggle" + (isMenuOpen ? " open" : "")}
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"

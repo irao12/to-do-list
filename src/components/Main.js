@@ -10,6 +10,8 @@ export default function Main(props) {
 		setCurrProject,
 		setModal,
 		setTarget,
+		isMenuOpen,
+		setIsMenuOpen,
 	} = props;
 
 	return (
@@ -20,6 +22,8 @@ export default function Main(props) {
 				setCurrProject={setCurrProject}
 				setModal={setModal}
 				setTarget={setTarget}
+				isMenuOpen={isMenuOpen}
+				setIsMenuOpen={setIsMenuOpen}
 			/>
 			<TaskMenu
 				projects={projects}

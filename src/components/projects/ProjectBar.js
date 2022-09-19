@@ -2,15 +2,22 @@ import React from "react";
 import Project from "./Project";
 
 export default function Projects(props) {
-	const { projects, setProjects, setCurrProject, setModal, setTarget } =
-		props;
+	const {
+		projects,
+		setProjects,
+		setCurrProject,
+		setModal,
+		setTarget,
+		isMenuOpen,
+		setIsMenuOpen,
+	} = props;
 
 	const showAddProject = () => {
 		setModal("add-project");
 	};
 
 	return (
-		<div className="main__projects">
+		<div className={"main__projects" + (isMenuOpen ? " open" : "")}>
 			<div className="project-header">
 				<h1>Projects</h1>
 				<button
@@ -30,6 +37,7 @@ export default function Projects(props) {
 						setCurrProject={setCurrProject}
 						setModal={setModal}
 						setTarget={setTarget}
+						setIsMenuOpen={setIsMenuOpen}
 					/>
 				))}
 			</div>
