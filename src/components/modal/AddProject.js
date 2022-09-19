@@ -11,6 +11,11 @@ export default function AddProject(props) {
 		if (isValidTitle(titleInput)) setShowTitleError(false);
 	};
 
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		addProject();
+	};
+
 	const isValidTitle = (title) => {
 		return titleInput.trim();
 	};
@@ -35,7 +40,7 @@ export default function AddProject(props) {
 					<h1>Add a project</h1>
 				</div>
 				<div className="modal-body">
-					<form className="add-project-form" onSubmit={() => false}>
+					<form className="add-project-form" onSubmit={handleSubmit}>
 						<div className="form-div">
 							<div className="form-section project-title-section">
 								<label htmlFor="project-title-input">

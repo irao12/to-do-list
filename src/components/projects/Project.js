@@ -9,7 +9,7 @@ export default function Project(props) {
 	};
 
 	const confirmDelete = () => {
-		setTarget(project);
+		setTarget(projects.indexOf(project));
 		setModal("delete-project");
 	};
 

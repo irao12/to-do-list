@@ -3,7 +3,8 @@ import AddTaskButton from "../buttons/AddTaskButton";
 import Task from "./Task";
 
 export default function Tasks(props) {
-	const { projects, currProject, setModal, setCurrProject } = props;
+	const { projects, currProject, setModal, setCurrProject, setTarget } =
+		props;
 
 	return (
 		<div className="main__tasks-section">
@@ -14,7 +15,16 @@ export default function Tasks(props) {
 				<div className="task-list">
 					{currProject > -1 &&
 						projects[currProject].tasks.map((task, index) => {
-							return <Task task={task} key={index} />;
+							return (
+								<Task
+									task={task}
+									key={index}
+									projects={projects}
+									currProject={currProject}
+									setTarget={setTarget}
+									setModal={setModal}
+								/>
+							);
 						})}
 
 					{currProject !== -1 && (

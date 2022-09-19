@@ -20,12 +20,16 @@ each task: {
 */
 
 export default function Task(props) {
-	const { task } = props;
+	const { projects, currProject, task, setTarget, setModal } = props;
 	const [dateMessageCategory, setDateMessageCategory] = useState("");
 	const [dateMessage, setDateMessage] = useState("");
 
 	const getDateMessage = () => {
-		if (task.dueDate === "") return "";
+		if (task.dueDate === "") {
+			setDateMessage("");
+			setDateMessage("");
+			return;
+		}
 
 		const dueDate = new Date(task.dueDate);
 
@@ -56,7 +60,10 @@ export default function Task(props) {
 		}
 	};
 
-	const confirmDelete = () => {};
+	const confirmDelete = () => {
+		setTarget(projects[currProject].tasks.indexOf(task));
+		setModal("delete-task");
+	};
 
 	useEffect(getDateMessage, [task]);
 

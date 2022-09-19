@@ -13,26 +13,25 @@ export default function ConfirmDeleteProject(props) {
 
 	const closeModal = () => {
 		setModal("");
+		setTarget(null);
 	};
 
 	// deletes the targeted project
 	const deleteProject = () => {
 		// do not do anything if there isn't a target
-		if (target === null) return;
+		if (target === -1) return;
 
 		// remove the project froms the projects state
 		setProjects((prevProjects) => {
-			const index = prevProjects.indexOf(target);
-			const firstHalf = prevProjects.slice(0, index);
-			const secondHalf = prevProjects.slice(index + 1);
+			const firstHalf = prevProjects.slice(0, target);
+			const secondHalf = prevProjects.slice(target + 1);
+			console.log(secondHalf);
 
 			return firstHalf.concat(secondHalf);
 		});
 
 		// if the current project was the target, change the currProject state
-		if (currProject === projects.indexOf(target)) setCurrProject(-1);
-
-		setTarget(null);
+		if (currProject === target) setCurrProject(-1);
 
 		closeModal();
 	};
@@ -41,7 +40,7 @@ export default function ConfirmDeleteProject(props) {
 		<div className="confirm-project-deletion-modal active">
 			<div className="modal-content">
 				<h2 className="del-confirmation-msg">
-					{`Are you sure you want to delete the project`}
+					{`Are you sure you want to delete the project "${projects[target].title}"`}
 				</h2>
 				<div className="modal-buttons">
 					<button

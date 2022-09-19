@@ -26,6 +26,7 @@ export default function Main(props) {
 				currProject={currProject}
 				setModal={setModal}
 				setCurrProject={setCurrProject}
+				setTarget={setTarget}
 			/>
 		</main>
 	);
