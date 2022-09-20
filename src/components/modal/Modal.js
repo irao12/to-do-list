@@ -3,6 +3,7 @@ import AddProject from "./AddProject";
 import ConfirmDeleteProject from "./ConfirmDeleteProject";
 import AddTask from "./AddTask";
 import ConfirmDeleteTask from "./ConfirmDeleteTask";
+import ViewTask from "./ViewTask";
 
 export default function Modal(props) {
 	const {
@@ -58,6 +59,17 @@ export default function Modal(props) {
 					setProjects={setProjects}
 					target={target}
 					setTarget={setTarget}
+				/>
+			)}
+
+			{modal === "view-task" && (
+				<ViewTask
+					projects={projects}
+					setProjects={setProjects}
+					currProject={currProject}
+					target={target}
+					setTarget={setTarget}
+					setModal={setModal}
 				/>
 			)}
 		</div>

@@ -10,7 +10,7 @@ export default function AddTask(props) {
 		title: "",
 		desc: "",
 		dueDate: "",
-		priority: "",
+		priority: "0",
 	});
 
 	const [showTitleError, setShowTitleError] = useState(false);
@@ -158,6 +158,7 @@ export default function AddTask(props) {
 									onChange={handleChange}
 									name="priority"
 									id="form-priority"
+									value={formData.priority}
 								>
 									<option value="0">Low</option>
 									<option value="1">Medium</option>

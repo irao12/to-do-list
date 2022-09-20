@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DeleteButton from "../buttons/DeleteButton";
 import {
+	endOfDay,
 	isPast,
 	isToday,
 	isTomorrow,
@@ -31,7 +32,7 @@ export default function Task(props) {
 			return;
 		}
 
-		const dueDate = new Date(task.dueDate);
+		const dueDate = endOfDay(Date.parse(task.dueDate));
 
 		// If the date is in the past, show overdue
 		if (isPast(dueDate)) {
@@ -65,11 +66,16 @@ export default function Task(props) {
 		setModal("delete-task");
 	};
 
+	const viewTask = () => {
+		setTarget(projects[currProject].tasks.indexOf(task));
+		setModal("view-task");
+	};
+
 	useEffect(getDateMessage, [task]);
 
 	return (
 		<div className="task-div">
-			<div className="task-details">
+			<div onClick={viewTask} className="task-details">
 				<h2>{task.title}</h2>
 				{task.dueDate !== "" && (
 					<h3 className={dateMessageCategory}>{dateMessage}</h3>
