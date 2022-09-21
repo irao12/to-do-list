@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { isValid } from "date-fns";
+import { isValid, compareAsc } from "date-fns";
 
 export default function AddTask(props) {
-	const { setModal, setProjects, currProject } = props;
+	const { setModal, setProjects, currProject, sortTasks } = props;
 
 	const [isDateAdded, setIsDateAdded] = useState(true);
 
@@ -74,6 +74,7 @@ export default function AddTask(props) {
 		// add the new task to the current project
 		setProjects((prevProjects) => {
 			prevProjects[currProject].tasks.push(newTask);
+			sortTasks(prevProjects);
 			return prevProjects;
 		});
 

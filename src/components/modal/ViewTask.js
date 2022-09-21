@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import { isValid } from "date-fns";
 
 export default function ViewTask(props) {
-	const { projects, currProject, target, setTarget, setModal } = props;
+	const {
+		projects,
+		setProjects,
+		currProject,
+		target,
+		setTarget,
+		setModal,
+		sortTasks,
+	} = props;
 
 	const currTask = projects[currProject].tasks[target];
 
@@ -42,6 +50,10 @@ export default function ViewTask(props) {
 		}
 
 		currTask.dueDate = dateInput + (isDateAdded ? "T00:00:00" : "");
+		setProjects((prevProjects) => {
+			sortTasks(prevProjects);
+			return prevProjects;
+		});
 		if (!isValidDate) setIsValidDate(true);
 		setIsEditingDate(false);
 	};
@@ -51,6 +63,10 @@ export default function ViewTask(props) {
 	const changePriority = () => {
 		currTask.priority = priorityInput;
 		setIsEditingPriority(false);
+		setProjects((prevProjects) => {
+			sortTasks(prevProjects);
+			return prevProjects;
+		});
 	};
 
 	const closeModal = () => {

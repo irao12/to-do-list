@@ -4,6 +4,7 @@ import ConfirmDeleteProject from "./ConfirmDeleteProject";
 import AddTask from "./AddTask";
 import ConfirmDeleteTask from "./ConfirmDeleteTask";
 import ViewTask from "./ViewTask";
+import { compareAsc } from "date-fns";
 
 export default function Modal(props) {
 	const {
@@ -16,6 +17,24 @@ export default function Modal(props) {
 		target,
 		setTarget,
 	} = props;
+
+	const sortTasks = (prevProjects) => {
+		prevProjects[currProject].tasks.sort((taskA, taskB) => {
+			if (taskA.priority > taskB.priority) return -1;
+			else if (taskA.priority < taskB.priority) return 1;
+			else {
+				// if priorities are equal, sort based on the due date
+				// tasks with no due dates should be at the end
+				if (!taskA.dueDate && taskB.dueDate) return 1;
+				else if (!taskB.dueDate && taskA.dueDate) return -1;
+				else if (!taskA.dueDate && !taskB.dueDate) return 0;
+				else {
+					// if both dates are valid, the earlier one is first
+					return compareAsc(taskA.dueDate, taskB.dueDate);
+				}
+			}
+		});
+	};
 
 	return (
 		<div className={modal ? "modal active" : "modal"}>
@@ -48,6 +67,7 @@ export default function Modal(props) {
 					setProjects={setProjects}
 					target={target}
 					setTarget={setTarget}
+					sortTasks={sortTasks}
 				/>
 			)}
 
@@ -70,6 +90,7 @@ export default function Modal(props) {
 					target={target}
 					setTarget={setTarget}
 					setModal={setModal}
+					sortTasks={sortTasks}
 				/>
 			)}
 		</div>
