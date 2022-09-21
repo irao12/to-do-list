@@ -28,12 +28,10 @@ export default function Task(props) {
 	const getDateMessage = () => {
 		if (task.dueDate === "") {
 			setDateMessage("");
-			setDateMessage("");
 			return;
 		}
 
 		const dueDate = endOfDay(Date.parse(task.dueDate));
-
 		// If the date is in the past, show overdue
 		if (isPast(dueDate)) {
 			setDateMessageCategory("important");
@@ -71,7 +69,7 @@ export default function Task(props) {
 		setModal("view-task");
 	};
 
-	useEffect(getDateMessage, [task]);
+	useEffect(getDateMessage, [task.dueDate]);
 
 	return (
 		<div className="task-div">

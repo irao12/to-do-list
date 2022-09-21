@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { isValid } from "date-fns";
 
 export default function ViewTask(props) {
-	const { projects, setProjects, currProject, target, setTarget, setModal } =
-		props;
+	const { projects, currProject, target, setTarget, setModal } = props;
 
 	const currTask = projects[currProject].tasks[target];
 
@@ -32,6 +32,19 @@ export default function ViewTask(props) {
 	const [isDateAdded, setIsDateAdded] = useState(
 		currTask.dueDate === "" ? false : true
 	);
+	const changeDueDate = () => {
+		if (
+			isDateAdded &&
+			!isValid(new Date(dateInput + (isDateAdded ? "T00:00:00" : "")))
+		) {
+			setIsValidDate(false);
+			return;
+		}
+
+		currTask.dueDate = dateInput + (isDateAdded ? "T00:00:00" : "");
+		if (!isValidDate) setIsValidDate(true);
+		setIsEditingDate(false);
+	};
 
 	const [isEditingPriority, setIsEditingPriority] = useState(false);
 
@@ -76,7 +89,7 @@ export default function ViewTask(props) {
 								maxLength="20"
 								value={titleInput}
 							/>
-							<div class="edit-buttons">
+							<div className="edit-buttons">
 								<svg
 									onClick={() => setIsEditingTitle(true)}
 									className={`edit-task-button ${
@@ -181,41 +194,84 @@ export default function ViewTask(props) {
 					<div className="view-task-section task-due-date-section">
 						<h2>Due Date:</h2>
 						<div className="task-specific-detail">
-							<h2 className="task-due-date-heading active-block">
+							<h2
+								className={`task-due-date-heading ${
+									!isEditingDate && "active-block"
+								}`}
+							>
 								{currTask.dueDate === ""
 									? "No Due Date"
 									: currTask.dueDate.slice(0, 10)}
 							</h2>
-							<div className="form-due-date-div">
+							<div
+								className={`form-due-date-div ${
+									isEditingDate && "active-flex"
+								}`}
+							>
 								<input
 									type="date"
 									id="form-due-date"
 									name="dueDate"
+									value={dateInput}
+									onChange={(e) => {
+										setDateInput(e.target.value);
+									}}
+									className={`${!isValidDate && "invalid"} ${
+										!isDateAdded && "inactive"
+									}`}
 								/>
+								{!isValidDate && (
+									<h3 className="error">
+										Please enter a valid title
+									</h3>
+								)}
 								<button
+									onClick={() => {
+										setIsDateAdded((prevIsDateAdded) => {
+											setDateInput("");
+											setIsValidDate(true);
+											return !prevIsDateAdded;
+										});
+									}}
 									className="due-date-toggle"
 									type="button"
 								>
-									Remove Due Date
+									{isDateAdded
+										? "Remove Due Date"
+										: "Add Due Date"}
 								</button>
 							</div>
 							<div className="edit-buttons">
 								<svg
-									className="edit-task-button active-block"
+									onClick={() => {
+										setIsEditingDate(true);
+									}}
+									className={`edit-task-button ${
+										!isEditingDate && "active-block"
+									}`}
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
 								>
 									<path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
 								</svg>
 								<svg
-									className="confirm-edit-button"
+									onClick={changeDueDate}
+									className={`confirm-edit-button ${
+										isEditingDate && "active-block"
+									}`}
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
 								>
 									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
 								</svg>
 								<svg
-									className="cancel-edit-button close"
+									onClick={() => {
+										setIsEditingDate(false);
+										setIsValidDate(true);
+									}}
+									className={`cancel-edit-button close ${
+										isEditingDate && "active-block"
+									}`}
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
 								>
