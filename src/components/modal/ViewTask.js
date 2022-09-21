@@ -47,6 +47,11 @@ export default function ViewTask(props) {
 	};
 
 	const [isEditingPriority, setIsEditingPriority] = useState(false);
+	const [priorityInput, setPriorityInput] = useState(currTask.priority);
+	const changePriority = () => {
+		currTask.priority = priorityInput;
+		setIsEditingPriority(false);
+	};
 
 	const closeModal = () => {
 		setTarget(-1);
@@ -283,33 +288,61 @@ export default function ViewTask(props) {
 					<div className="view-task-section task-priority-section">
 						<h2>Priority:</h2>
 						<div className="task-specific-detail">
-							<h2 className="task-priority-heading active-block">
+							<h2
+								className={`task-priority-heading ${
+									!isEditingPriority && "active-block"
+								}`}
+							>
 								{currTask.priority === "0" && "Low"}
 								{currTask.priority === "1" && "Medium"}
 								{currTask.priority === "2" && "High"}
 							</h2>
-							<select name="priority" id="view-form-priority">
+							<select
+								onChange={(event) => {
+									setPriorityInput(event.target.value);
+								}}
+								className={`${
+									isEditingPriority && "active-block"
+								}`}
+								name="priority"
+								id="view-form-priority"
+								value={priorityInput}
+							>
 								<option value="0">Low</option>
 								<option value="1">Medium</option>
 								<option value="2">High</option>
 							</select>
 							<div className="edit-buttons">
 								<svg
-									className="edit-task-button active-block"
+									onClick={() => {
+										setIsEditingPriority(true);
+									}}
+									className={`edit-task-button ${
+										!isEditingPriority && "active-block"
+									}`}
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
 								>
 									<path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
 								</svg>
 								<svg
-									className="confirm-edit-button"
+									onClick={changePriority}
+									className={`confirm-edit-button ${
+										isEditingPriority && "active-block"
+									}`}
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
 								>
 									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
 								</svg>
 								<svg
-									className="cancel-edit-button close"
+									onClick={() => {
+										setIsEditingPriority(false);
+										setPriorityInput(currTask.priority);
+									}}
+									className={`cancel-edit-button close ${
+										isEditingPriority && "active-block"
+									}`}
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
 								>
