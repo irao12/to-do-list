@@ -30,7 +30,10 @@ export default function Modal(props) {
 				else if (!taskA.dueDate && !taskB.dueDate) return 0;
 				else {
 					// if both dates are valid, the earlier one is first
-					return compareAsc(taskA.dueDate, taskB.dueDate);
+					return compareAsc(
+						Date.parse(taskA.dueDate),
+						Date.parse(taskB.dueDate)
+					);
 				}
 			}
 		});

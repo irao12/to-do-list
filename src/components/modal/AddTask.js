@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { isValid, compareAsc } from "date-fns";
+import { isValid } from "date-fns";
 
 export default function AddTask(props) {
 	const { setModal, setProjects, currProject, sortTasks } = props;

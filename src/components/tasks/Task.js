@@ -52,9 +52,13 @@ export default function Task(props) {
 		}
 
 		// if the date is in the current year, show the month and day
-		else if (isThisYear(dueDate)) setDateMessage(format(dueDate, "MMM dd"));
+		else if (isThisYear(dueDate)) {
+			setDateMessageCategory("");
+			setDateMessage(format(dueDate, "MMM dd"));
+		}
 		// otherwise, show the full date
 		else {
+			setDateMessageCategory("");
 			setDateMessage(format(dueDate, "MMM dd yyyy"));
 		}
 	};

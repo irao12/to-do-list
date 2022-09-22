@@ -5,18 +5,20 @@ export default function ConfirmDeleteTask(props) {
 		props;
 
 	const closeModal = () => {
-		setModal("");
 		setTarget(-1);
+		setModal("");
 	};
 
-	const deleteTask = () => {
+	const deleteTask = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		if (target < 0) return;
+
 		setProjects((prevProjects) => {
-			const firstHalf = prevProjects[currProject].tasks.slice(0, target);
-			const secondHalf = prevProjects[currProject].tasks.slice(
-				target + 1
-			);
-			prevProjects[currProject].tasks = firstHalf.concat(secondHalf);
-			return prevProjects;
+			const prevProjectsCopy = JSON.parse(JSON.stringify(prevProjects));
+			prevProjectsCopy[currProject].tasks.splice(target, 1);
+			console.log(prevProjectsCopy);
+			return prevProjectsCopy;
 		});
 
 		closeModal();
