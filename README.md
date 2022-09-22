@@ -6,11 +6,23 @@ live demo: https://irao12.github.io/to-do-list/
 
 # Made With
 
--   Pure HTML and Javascript
+-   HTML and Javascript
+-   ReactJS
 -   CSS with Sass
 -   Webpack
 
+# Note
+
+-   This project was originally done in pure Javascript, and for the sake of time, I did not
+    make the React components as small as they could be. This resulted in some components being clunkier and
+    not as reusable as they should be.
+
 # What I learned from this project
+
+## ReactJS
+
+-   Converted the original Javascript code into React
+-   Used props and state to create an interactive web application
 
 ## Module Pattern
 
