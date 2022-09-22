@@ -17,6 +17,9 @@
 		flex-grow: 1;
 		height: 100%;
 		padding: f.rem(10);
+		overflow: hidden;
+
+		overflow-wrap: break-word;
 	}
 
 	.delete-project-button {
